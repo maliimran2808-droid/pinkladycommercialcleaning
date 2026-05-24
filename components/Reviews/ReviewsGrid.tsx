@@ -25,7 +25,7 @@ export default function ReviewsGrid() {
 
 
       {/* 3x3 Grid */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+      <div className="grid grid-cols-1 grid-change md:grid-cols-3 gap-6 mb-12">
         {reviewsData.map((review) => (
           <ReviewCard key={review.id} data={review} />
         ))}

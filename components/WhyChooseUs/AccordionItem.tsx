@@ -13,9 +13,9 @@ export default function AccordionItem({ title, content, isOpen, onClick }: Accor
       {/* Clickable Header */}
       <button
         onClick={onClick}
-        className="w-full flex cursor-pointer items-center justify-between p-7 text-left bg-white transition-colors duration-200"
+        className="w-full flex cursor-pointer  items-center justify-between p-7 text-left bg-white transition-colors duration-200"
       >
-        <span className="font-parkinsans md:text-lg font-regular text-luxury-dark">{title}</span>
+        <span className="font-parkinsans  font-expand-size md:text-lg font-regular text-luxury-dark">{title}</span>
         <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-blacktransition-all duration-300">
           {isOpen ? <Minus size={20} /> : <Plus size={20} />}
         </span>

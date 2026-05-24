@@ -11,12 +11,12 @@ export default function ZigzagTimeline() {
       
       {/* Background SVG Image - Hidden on mobile */}
       <div 
-        className="absolute min-h-[90vh] inset-0 hidden md:block bg-no-repeat bg-center bg-contain z-0 pointer-events-none"
+        className="absolute min-h-[90vh] bg-image-zigzag inset-0 hidden md:block bg-no-repeat bg-center bg-contain z-0 pointer-events-none"
         style={{ backgroundImage: "url('/images/zigzag.svg')" }}
       />
 
       {/* STRICT 2 COLUMNS on Desktop, 1 Column on Mobile -> Creates 3 Rows */}
-      <div className="relative z-10 grid grid-cols-1 md:grid-cols-2 py-7 gap-y-5">
+      <div className="relative z-10 grid py-7 gap-y-5">
         {timelineStepsData.map((step) => (
           <TimelineStep key={step.id} data={step} />
         ))}

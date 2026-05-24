@@ -17,22 +17,22 @@ export default function ReviewsIntro() {
 
       {/* Right Side: Text & Logos */}
       <div className="flex flex-col items-end">
-        <div className='w-full md:w-[80%] ' style={{marginRight:'3rem'}}>
-       <span className="text-[13px] font-medium text-white uppercase tracking-widest font-parkinsans mb-5">
+        <div className='w-full md:w-[80%] size-adjust margin-set' style={{marginRight:'3rem'}}>
+       <span className="text-[13px] font-batch-size font-medium text-white uppercase tracking-widest font-parkinsans mb-5">
         Reviews
         </span>
 
       {/* Large Heading */}
-      <h2 className="text-3xl md:text-4xl lg:text-4xl text-white font-parkinsans font-regular mb-5">
+      <h2 className="text-3xl font-title-size md:text-4xl lg:text-4xl text-white font-parkinsans font-regular mb-5">
         Trusted by Thousands of People and Companies
       </h2>
 
       {/* Paragraph */}
-      <p className="text-white md:text-medium font-thin font-outfit mb-8">
+      <p className="text-white font-para-size md:text-medium font-thin font-outfit mb-8">
           Our dedicated customer service team is always here to provide prompt and helpful assistance with any question or concerns you might love.
         </p>
         {/* Logos */}
-        <div className="flex flex-wrap items-center justify-between opacity-50 gap-8">
+        <div className="flex flex-wrap items-center logo-size justify-between opacity-50 gap-8">
          <p><img src="/images/logo1.svg" width={'120'} alt="" /></p>
           <p><img src="/images/logo2.svg" width={'120'} alt="" /></p>
            <p><img src="/images/logo3.svg" width={'120'} alt="" /></p>

@@ -5,17 +5,17 @@ export default function EcoContent() {
   return (
 <div className="flex flex-col overflow-hidden justify-center h-full py-8">
       {/* Small Label */}
-        <span className="text-[13px] font-medium uppercase tracking-widest font-parkinsans mb-3">
+        <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Why us
       </span>
 
       {/* Large Heading */}
-      <h2 className="text-3xl md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
+      <h2 className="text-3xl font-title-size md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
         Green Commercial Cleaning Initiative by Pink Ladies
       </h2>
 
       {/* Paragraph */}
-      <p className="text-gray-500 w-[82%] md:text-medium font-thin font-outfit mb-4">
+      <p className="text-gray-500 font-para-size size-adjust w-[82%] md:text-medium font-thin font-outfit mb-4">
         At Pink Ladies Commercial Cleaning, we are committed to providing safe and non-toxic cleaning services. Clearing should not harm the environment but benefit it. All of the products and processes are chosen carefully to support a green clean in Flordia.</p>
 
 
@@ -29,7 +29,7 @@ export default function EcoContent() {
             <div className="w-6 h-6 rounded-full font-parkinsans bg-luxury-pink flex items-center justify-center flex-shrink-0">
               <Check size={14} className="text-white" strokeWidth={2} />
             </div>
-            <span className="text-black md:text-[20px] font-regular">{feature}</span>
+            <span className="text-black md:text-[20px] font-para-size font-regular">{feature}</span>
           </li>
         ))}
       </ul>

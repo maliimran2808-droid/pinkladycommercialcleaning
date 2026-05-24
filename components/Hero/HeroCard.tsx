@@ -3,7 +3,7 @@ import HeroForm from './HeroForm'
 
 export default function HeroCard() {
   return (
-    <div className="w-full max-w-[63vw] mx-auto px-4">
+    <div className="w-full hero-card max-w-[63vw] mx-auto px-4">
       <div 
         className="bg-white/80 backdrop-blur-lg box-clip border border-white/40 rounded-[3rem] p-8 md:p-10 transition-transform duration-700 hover:rotate-0"
         style={{ transform: 'rotate(0deg)' }}

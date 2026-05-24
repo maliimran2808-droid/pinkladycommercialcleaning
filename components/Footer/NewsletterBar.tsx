@@ -2,18 +2,18 @@
 
 export default function NewsletterBar() {
   return (
-    <div className="flex relative w-fit mx-auto rounded-b-4xl px-6 pb-3 bg-white flex-col md:flex-row items-center justify-between gap-2 mb-16">
+    <div className="flex flex-change relative w-fit mx-auto rounded-b-4xl px-6 pb-3 bg-white flex-col md:flex-row items-center justify-between gap-2 mb-16">
       <p> <img src="/images/c2.svg"
  alt="" 
  className='absolute top-[0px] -left-8 -scale-x-100'
  /> </p>
 <p> <img src="/images/c2.svg"
 
-alt="" className='absolute top-[0px] -right-8 scale-x-100'/> </p>
+alt="" className='absolute top-[0px]  -right-8 scale-x-100'/> </p>
       <h3 className="text-[15px] -ml-3 font-regular text-black whitespace-nowrap">
         Subscribe to our Newsletter
       </h3>
-      <div className="flex w-full gap-2 md:w-auto">
+      <div className="flex w-full flex-change items-center md:items-center gap-2 md:w-auto">
         <input
           type="email"
           placeholder="Enter your email address"

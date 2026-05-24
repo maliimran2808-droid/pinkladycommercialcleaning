@@ -3,7 +3,7 @@ import { pricingCardsData } from './howItWorksConfig'
 import { Check } from 'lucide-react'
 export default function PricingCards() {
   return (<>   
-    <div className="flex flex-col md:flex-row relative gap-6 md:gap-8 mb-20 max-w-4xl mx-auto items-start">
+    <div className="flex flex-col items-center md:flex-row relative gap-6 md:gap-8 mb-20 max-w-4xl mx-auto md:items-start">
     
       {pricingCardsData.map((card) => (
         <>

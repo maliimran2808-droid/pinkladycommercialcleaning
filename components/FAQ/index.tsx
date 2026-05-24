@@ -10,16 +10,16 @@ export default function FAQ() {
         
         {/* Center Header */}
         <div className="text-center mb-16">
-         <span className="text-[11px] font-medium uppercase tracking-widest font-parkinsans mb-6">
+         <span className="text-[11px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         FAQ
       </span>
-      <h2 className="text-3xl w-[40vw] text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-5">
+      <h2 className="text-3xl w-[40vw] font-title-size text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-5">
         Frequently Asked Questions
       </h2>
         </div>
 
         {/* 2-Column Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8">
+        <div className="grid grid-cols-1 grid-change md:grid-cols-2 gap-6 md:gap-8">
           {faqData.map((item) => (
             <FAQItem key={item.id} data={item} />
           ))}
@@ -32,10 +32,10 @@ export default function FAQ() {
     </section>
           <div>
              <div className="text-center mb-16">
-      <span className="text-[11px] font-medium uppercase tracking-widest font-parkinsans mb-6">
+      <span className="text-[11px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         From Our Blog
       </span>
-      <h2 className="text-3xl w-[40vw] text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-5">
+      <h2 className="text-3xl w-[40vw] font-title-size text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-5">
         Cleaning Tips & Hacks
       </h2>
       <Link href="/blog" className="text-black bg-pink-200 border-1 border-pink-600 py-3 rounded-full px-6 font-medium text-sm hover:underline">

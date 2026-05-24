@@ -25,12 +25,12 @@ export default function PricingCard({ data }: PricingCardProps) {
       
 
       {/* Small Text */}
-      <p className="text-lg font-mediummb-2 tracking-wide">
+      <p className="text-lg sm:text-sm font-mediummb-2 tracking-wide">
         {data.smallText}
       </p>
 
       {/* Large Text */}
-      <h3 className="text-2xl md:text-3xl text-luxury-dark">
+      <h3 className=" large-text text-2xl  text-luxury-dark">
         {data.largeText}
       </h3>
     </div>

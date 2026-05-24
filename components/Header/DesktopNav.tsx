@@ -22,12 +22,12 @@ export default function DesktopNav() {
           onMouseLeave={() => setActiveDropdown(null)}
         >
           {item.dropdown ? (
-            <Link href={item.href || '#'} className="flex items-center gap-1 text-[15px] font-medium text-gray-800 hover:text-luxury-pink transition-colors duration-300">
+            <Link href={item.href || '#'} className="flex nav-font items-center gap-1 text-[15px] font-medium text-gray-800 hover:text-luxury-pink transition-colors duration-300">
               {item.label}
-              <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
+              <ChevronDown className={`w-4 h-4 nav-font transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
             </Link>
           ) : (
-            <Link href={item.href || '#'} className="nav-link text-[15px] font-medium text-gray-800 hover:text-luxury-pink transition-colors duration-300">
+            <Link href={item.href || '#'} className="nav-link nav-font text-[15px] font-medium text-gray-800 hover:text-luxury-pink transition-colors duration-300">
               {item.label}
             </Link>
           )}
@@ -39,7 +39,7 @@ export default function DesktopNav() {
                   <Link
                     key={drop.label}
                     href={drop.href}
-                    className="block px-5 py-3 text-[14px] font-medium text-gray-700 hover:text-luxury-pink border-transparent hover:border-luxury-pink hover:bg-luxury-pink-soft transition-all duration-200"
+                    className="block px-5 py-3 text-[14px] nav-font font-medium text-gray-700 hover:text-luxury-pink border-transparent hover:border-luxury-pink hover:bg-luxury-pink-soft transition-all duration-200"
                   >
                     {drop.label}
                   </Link>

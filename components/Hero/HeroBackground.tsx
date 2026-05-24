@@ -2,7 +2,7 @@ import Image from 'next/image'
 
 export default function HeroBackground() {
   return (
-    <div className="absolute top-0 left-0 w-full h-[95%] z-0 overflow-hidden">
+    <div className="absolute top-0 left-0 w-full h-[95%] z-0">
       <Image
       src="/images/banner.webp"
         alt="Luxury Commercial Cleaning"

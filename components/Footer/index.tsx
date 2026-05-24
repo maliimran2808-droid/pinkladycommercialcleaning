@@ -15,7 +15,7 @@ export default function Footer() {
         <NewsletterBar />
 
         {/* Middle: 4 Cards Grid (35% | 15% | 15% | 35%) */}
-        <div className="grid grid-cols-1 md:grid-cols-12 gap-8 md:gap-6 mb-0">
+        <div className="grid grid-cols-1 grid-fix md:grid-cols-12 gap-8 md:gap-6 mb-0">
           {/* Card 1: 35% (4/12 cols) */}
           <div className="md:col-span-4">
             <FooterBrand />

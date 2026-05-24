@@ -24,12 +24,12 @@ export default function BookingForm() {
     <div className="bg-white p-8 md:p-12">
       <div className='w-full items-center justify-center flex flex-col text-center'>
       {/* Top Label */}
-      <span className="text-[13px] font-medium uppercase tracking-widest font-parkinsans mb-3">
+      <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Booking
       </span>
 
       {/* Large Heading */}
-      <h2 className="text-3xl md:max-w-[90%] md:text-[2.55rem] font-parkinsans font-regular mb-5">
+      <h2 className="text-3xl font-title-size md:max-w-[90%] md:text-[2.55rem] font-parkinsans font-regular mb-5">
         Get Your Estimate & Book Now
       </h2>
 </div>
@@ -40,7 +40,7 @@ export default function BookingForm() {
       <form onSubmit={(e) => e.preventDefault()} className="space-y-5 font-outfit">
         
         {/* Row 1: Name & Email */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
+        <div className="grid grid-cols-1 grid-change md:grid-cols-2 gap-5 ">
           <div>
             <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Your Name<span className='text-red-400 ml-1'>*</span></label>
             <input type="text" placeholder="John Doe" value={formData.name} onChange={handleChange('name')} className={inputClasses} />
@@ -52,7 +52,7 @@ export default function BookingForm() {
         </div>
 
         {/* Row 2: Phone & Select Services */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 grid-change md:grid-cols-2 gap-5">
           <div>
             <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Phone<span className='text-red-400 ml-1'>*</span></label>
             <input type="tel" placeholder="(321) 456-7890" value={formData.phone} onChange={handleChange('phone')} className={inputClasses} />

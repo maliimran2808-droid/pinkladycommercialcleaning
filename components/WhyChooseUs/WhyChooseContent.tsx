@@ -15,17 +15,17 @@ export default function WhyChooseContent() {
   return (
     <div className="flex flex-col overflow-hidden justify-center h-full py-8">
       {/* Small Label */}
-      <span className="text-[13px] font-medium uppercase tracking-widest font-parkinsans mb-3">
+      <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Why choose us
       </span>
 
       {/* Large Heading */}
-      <h2 className="text-3xl md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
+      <h2 className="text-2xl font-title-size md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
         Sparkling Commercial Cleaning Services in Florida
       </h2>
 
       {/* Paragraph */}
-      <p className="text-gray-500 md:text-medium font-thin font-outfit mb-8">
+      <p className="text-gray-500 font-para-size md:text-medium font-thin font-outfit mb-8">
         Do you want to step into an office that keeps your mood fresh all day? At Pink Ladies Commercial Cleaning Services, we create a comfortable environment in your commercial spaces by providing high grade cleaning services.
       </p>
 
@@ -47,7 +47,7 @@ export default function WhyChooseContent() {
         <Link
           href="/quote"
          
-        className="font-parkinsans w-[fit-content] text-sm px-7 py-3.5 rounded-full cursor-pointer text-white font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+        className="font-parkinsans w-[fit-content] button-font-size text-sm px-7 py-3.5 rounded-full cursor-pointer text-white font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
         style={{ backgroundColor: '#E10788' }}
         onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
         onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
