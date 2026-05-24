@@ -12,16 +12,16 @@ export default function FAQItem({ data }: FAQItemProps) {
   const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <div className="border border-gray-200 rounded-lg overflow-hidden transition-all duration-300 hover:border-gray-300 h-fit">
+    <div className="border border-gray-300 rounded-[30px] overflow-hidden transition-all duration-300">
       {/* Clickable Header */}
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="w-full flex items-center justify-between p-5 text-left bg-white hover:bg-gray-50 transition-colors duration-200"
+        className="w-full flex cursor-pointer items-center justify-between p-7 text-left bg-white transition-colors duration-200"
       >
-        <span className="text-base md:text-lg font-semibold text-luxury-dark pr-4">
+        <span className="font-parkinsans md:text-lg font-regular text-luxury-dark">
           {data.question}
         </span>
-        <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-md text-gray-600 transition-all duration-300">
+        <span className="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-gray-100 rounded-full text-blacktransition-all duration-300">
           {isOpen ? <Minus size={18} /> : <Plus size={18} />}
         </span>
       </button>
@@ -37,9 +37,9 @@ export default function FAQItem({ data }: FAQItemProps) {
         <div className="overflow-hidden">
           <div className="px-5 pb-5">
             {/* Pink Divider Line */}
-            <div className="w-full h-[2px] bg-luxury-pink mb-4" />
+            <div className="w-full h-[1px] bg-[#E10788] mb-4" />
             {/* Answer Paragraph */}
-            <p className="text-gray-600 text-base leading-relaxed">
+            <p className="text-gray-500 px-3 text-sm font-thin font-outfit">
               {data.answer}
             </p>
           </div>

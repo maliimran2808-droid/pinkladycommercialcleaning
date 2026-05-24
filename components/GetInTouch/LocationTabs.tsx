@@ -13,10 +13,10 @@ export default function LocationTabs({ locations, activeId, onSelect }: Location
         <button
           key={loc.id}
           onClick={() => onSelect(loc.id)}
-          className={`px-8 py-3.5 rounded-full font-semibold text-sm uppercase tracking-wider transition-all duration-300 shadow-md ${
+          className={`px-8 py-3.5 rounded-full outline-0 cursor-pointer font-regular text-sm font-parkinsans tracking-wider transition-all duration-300 ${
             activeId === loc.id
-              ? 'bg-luxury-pink text-white shadow-lg shadow-luxury-pink/30'
-              : 'bg-white text-luxury-dark hover:bg-gray-50'
+              ? 'bg-pink-200 text-black border-1 border-pink-600'
+              : 'bg-white text-black hover:border-pink-600 hover:border-1 hover:bg-pink-200'
           }`}
         >
           {loc.name}

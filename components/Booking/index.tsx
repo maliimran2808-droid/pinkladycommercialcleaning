@@ -16,18 +16,19 @@ export default function Booking() {
           quality={100}
         />
         {/* Dark overlay to ensure text readability */}
-        <div className="absolute inset-0 bg-black/50" />
+     
       </div>
 
       {/* Content Layer */}
-      <div className="relative z-10 max-w-[1280px] mx-auto px-6 md:px-12 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+      <div className="relative">
         
         {/* Left Container: Transparent with Glass Card */}
-        <LeftOverlay />
+        <div className='border-15 rounded-4xl border-white relative z-10 max-w-[1280px] mx-auto grid grid-cols-1 md:grid-cols-2 items-center'>
+        <LeftOverlay/>
         
         {/* Right Container: Booking Form */}
         <BookingForm />
-
+</div>
       </div>
     </section>
   )

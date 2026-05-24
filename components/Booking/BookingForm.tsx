@@ -21,29 +21,32 @@ export default function BookingForm() {
   const inputClasses = "w-full px-4 py-3.5 bg-white border border-gray-200 rounded-md text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:border-luxury-pink focus:ring-1 focus:ring-luxury-pink transition-all duration-300"
 
   return (
-    <div className="bg-white/95 backdrop-blur-sm rounded-[30px] p-8 md:p-12 shadow-2xl">
-      
+    <div className="bg-white p-8 md:p-12">
+      <div className='w-full items-center justify-center flex flex-col text-center'>
       {/* Top Label */}
-      <span className="text-sm font-medium text-luxury-pink uppercase tracking-widest mb-3 block">
+      <span className="text-[13px] font-medium uppercase tracking-widest font-parkinsans mb-3">
         Booking
       </span>
 
-      {/* Heading */}
-      <h2 className="text-3xl md:text-4xl font-bold text-luxury-dark leading-tight mb-8">
-        Get Your Estimate and Book Now
+      {/* Large Heading */}
+      <h2 className="text-3xl md:max-w-[90%] md:text-[2.55rem] font-parkinsans font-regular mb-5">
+        Get Your Estimate & Book Now
       </h2>
+</div>
+      {/* Paragraph */}
+      
 
       {/* Form */}
-      <form onSubmit={(e) => e.preventDefault()} className="space-y-5">
+      <form onSubmit={(e) => e.preventDefault()} className="space-y-5 font-outfit">
         
         {/* Row 1: Name & Email */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 ">
           <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Your Name</label>
+            <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Your Name<span className='text-red-400 ml-1'>*</span></label>
             <input type="text" placeholder="John Doe" value={formData.name} onChange={handleChange('name')} className={inputClasses} />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Email</label>
+            <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Email<span className='text-red-400 ml-1'>*</span></label>
             <input type="email" placeholder="john@example.com" value={formData.email} onChange={handleChange('email')} className={inputClasses} />
           </div>
         </div>
@@ -51,11 +54,11 @@ export default function BookingForm() {
         {/* Row 2: Phone & Select Services */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Phone</label>
+            <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Phone<span className='text-red-400 ml-1'>*</span></label>
             <input type="tel" placeholder="(321) 456-7890" value={formData.phone} onChange={handleChange('phone')} className={inputClasses} />
           </div>
           <div>
-            <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Select the Services</label>
+            <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Select the Services<span className='text-red-400 ml-1'>*</span></label>
             <select value={formData.service} onChange={handleChange('service')} className={`${inputClasses} appearance-none cursor-pointer`} style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E")`, backgroundRepeat: 'no-repeat', backgroundPosition: 'right 12px center' }}>
               <option value="" disabled>Choose a service</option>
               {serviceOptions.map((opt) => (
@@ -67,34 +70,34 @@ export default function BookingForm() {
 
         {/* Row 3: Address */}
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Your Address</label>
+          <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Your Address<span className='text-red-400 ml-1'>*</span></label>
           <input type="text" placeholder="123 Main St, Orlando, FL" value={formData.address} onChange={handleChange('address')} className={inputClasses} />
         </div>
 
         {/* Row 4: Additional Information */}
         <div>
-          <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Additional Information</label>
+          <label className="block text-[14px] font-regular text-gray-500  font-outfit mb-2">Additional Information<span className='text-red-400 ml-1'>*</span></label>
           <textarea rows={4} placeholder="Tell us more about your needs..." value={formData.info} onChange={handleChange('info')} className={`${inputClasses} resize-none`}></textarea>
         </div>
 
         {/* Submit Button */}
         <button
           type="submit"
-          className="w-full py-4 text-white font-semibold uppercase tracking-wider rounded-md transition-all duration-300 hover:shadow-lg transform hover:scale-[1.01]"
-          style={{ backgroundColor: '#1a1a1a' }}
-          onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E8A0B4')}
-          onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
+           className="font-parkinsans w-[fit-content] px-7 py-2.5 rounded-full cursor-pointer text-white font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+        style={{ backgroundColor: '#E10788' }}
+        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
+        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
         >
-          I would like a quote
+          I'd like a quote
         </button>
       </form>
 
       {/* Bottom Text & Phone */}
-      <div className="text-center mt-6">
-        <p className="text-gray-500 text-sm mb-3">If you have any questions, contact our office at</p>
+      <div className="text-center font-parkinsans mt-6">
+        <p className="text-gray-900 font-parkinsans text-sm mb-3">If you have any questions, contact our office at</p>
         <a href="tel:+13214567890" className="inline-flex items-center gap-2 text-luxury-dark font-semibold hover:text-luxury-pink transition-colors">
-          <Phone size={18} />
-          <span>(321) 456-7890</span>
+          <div className='bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center'><Phone  size={18} /></div>
+          <span>+ 1 (346) 565-3599</span>
         </a>
       </div>
     </div>

@@ -2,34 +2,39 @@ import { Star } from 'lucide-react'
 
 export default function LeftOverlay() {
   return (
-    <div className="border-2 border-white/30 rounded-[30px] p-8 flex items-end min-h-[550px] md:min-h-[650px]">
+    <div className=" rounded-[30px] h-[100%] flex justify-end items-end">
       
       {/* Glassmorphism Box at the Bottom */}
-      <div className="bg-white/20 backdrop-blur-md rounded-2xl p-6 md:p-8 flex items-center gap-8 w-full">
+      <div className="bg-white/20 h-[7rem] backdrop-blur-md gap-8  rounded-t-4xl flex items-center justify-center w-full">
         
         {/* Left Part: Image, 100+, 5 Stars */}
-        <div className="flex flex-col items-center text-center flex-1">
+        <div className="flex flex-col items-center -mt-14 text-center">
           {/* Branded/Chip Image Placeholder */}
-          <div className="w-16 h-16 rounded-full bg-white/30 flex items-center justify-center mb-3 backdrop-blur-sm">
-            {/* <img 
-              src="/images/badge-icon.svg" 
+          <div className="flex h-[80px] items-center justify-center">
+            <img 
+              src="/images/award1.webp" 
               alt="Badge" 
-              className="w-10 h-10"
-              onError={(e) => { (e.target as HTMLImageElement).style.display = 'none' }}
-            /> */}
+              className="w-14"
+
+            />
           </div>
-          <span className="text-3xl font-bold text-white mb-2">100+</span>
-          <div className="flex items-center gap-1">
-            {[1, 2, 3, 4, 5].map((i) => (
-              <Star key={i} size={16} className="fill-luxury-pink text-luxury-pink" />
-            ))}
-          </div>
+          <span className="text-3xl font-parkinsans font-regular text-white">100%</span>
+        <span className='text-sm font-parkinsans text-white'>Happy Customers</span>
         </div>
 
         {/* Right Part: Happy Customers, Bark Reviews */}
-        <div className="flex flex-col justify-center flex-1 text-left">
-          <h4 className="text-xl md:text-2xl font-bold text-white mb-1">Happy Customers</h4>
-          <p className="text-white/80 text-base font-medium">Bark Reviews</p>
+        <div className="flex flex-col items-center -mt-14 text-center">
+          {/* Branded/Chip Image Placeholder */}
+          <div className="flex h-[80px] items-center justify-center">
+            <img 
+              src="/images/award2.webp" 
+              alt="Badge" 
+              className="w-14"
+
+            />
+          </div>
+           <span className="text-3xl font-parkinsans font-regular text-white">5 Star</span>
+        <span className='text-sm font-parkinsans text-white'>Bark Reviews</span>
         </div>
 
       </div>

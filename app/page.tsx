@@ -15,8 +15,10 @@ export default function Home() {
     <>
       <Hero />
       <WhyChooseUs />
+      <div style={{background:'linear-gradient(to bottom, #f3f5f0 60%, #fff 100%)'}}>
       <Services />
       <HowItWorks />
+      </div>
       <EcoInitiative />
       <Reviews />
       <Booking />

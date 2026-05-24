@@ -18,7 +18,7 @@ export default function EcoImage() {
     const ctx = gsap.context(() => {
       // Leaf 1: Goes UP
       gsap.to(leaf1Ref.current, {
-        y: -80,
+        y: -120,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -30,9 +30,9 @@ export default function EcoImage() {
 
       // Leaf 2: ROTATES and shifts slightly
       gsap.to(leaf2Ref.current, {
-        rotation: 45,
+        rotation: -45,
         y: 20,
-        x: -10,
+        x: -20,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -44,7 +44,7 @@ export default function EcoImage() {
 
       // Leaf 3: Goes DOWN
       gsap.to(leaf3Ref.current, {
-        y: 80,
+        y: 90,
         ease: 'none',
         scrollTrigger: {
           trigger: containerRef.current,
@@ -59,31 +59,31 @@ export default function EcoImage() {
   }, [])
 
   return (
-    <div ref={containerRef} className="relative w-full h-[400px] md:h-[550px] lg:h-[650px] rounded-2xl overflow-hidden shadow-2xl group">
+    <div ref={containerRef} className="relative w-full h-[400px] md:h-[450px] lg:h-[450px]  group">
       <Image
        src="/images/whyus.webp"    alt="Green eco cleaning"
         fill
         priority
-        className="object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+        className="object-cover rounded-4xl transition-transform duration-700 ease-out"
         quality={100}
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent" />
-
+  
       {/* Floating Leaves - Top Left Corner */}
       <div className="absolute top-4 left-4 md:top-8 md:left-8 z-10 pointer-events-none">
         {/* Leaf 1 */}
-        <div ref={leaf1Ref} className="absolute -top-4 -left-2">
-          <Leaf1 />
+        <div ref={leaf1Ref} className="absolute w-[max-content] -top-15 -left-10">
+          <img src="/images/firstleaf.webp" width={'38px'} alt="Commercial Cleaning" />
         </div>
 
         {/* Leaf 2 */}
-        <div ref={leaf2Ref} className="absolute top-6 left-10">
-          <Leaf2 />
+        <div ref={leaf2Ref} className="absolute w-[max-content] -top-10 -left-20"
+        style={{transform:"rotate(30deg)"}}>
+         <img src="/images/midleaf.webp" width={'100px'} alt="Eco-Friendly Cleaning" />
         </div>
 
         {/* Leaf 3 */}
-        <div ref={leaf3Ref} className="absolute top-14 -left-6">
-          <Leaf3 />
+        <div ref={leaf3Ref} className="absolute w-[max-content] top-5 -left-6">
+         <img src="/images/lastleaf.webp" width={'70px'} alt="Sustainable Cleaning" />
         </div>
       </div>
     </div>

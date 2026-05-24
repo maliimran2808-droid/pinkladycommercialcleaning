@@ -13,7 +13,7 @@ export default function CopyrightBar() {
   return (
     <div className="mt-16">
       {/* Social Icons */}
-      <div className="flex items-center gap-3 mb-8">
+      <div className="flex items-center justify-end gap-3 mb-8">
         {socialIcons.map((social, index) => (
           <a
             key={index}
@@ -28,16 +28,16 @@ export default function CopyrightBar() {
       </div>
 
       {/* Pink Divider */}
-      <div className="w-full h-[2px] bg-luxury-pink mb-6" />
+      <div className="w-full h-[1px] bg-pink-400 mb-6" />
 
       {/* Copyright Text */}
-      <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-center md:text-left">
-        <div className="flex items-center gap-2 text-gray-500 text-sm">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-1 text-center md:text-left">
+        <div className="flex items-center gap-2 text-gray-500 text-[16px]">
           <Copyright size={16} />
-          <span>{currentYear} - Pink Ladies Commercial Cleaning Services</span>
+          <span>Copyright {currentYear} - Pink Ladies Commercial Cleaning Services</span>
         </div>
-        <div className="text-gray-500 text-sm">
-          Developed and marketing by Morgan with{' '}
+        <div className="text-gray-500 text-[16px]">
+          | Developed & Marketing by Morgan with{' '}
           <a 
             href="https://animakermedia.com" 
             target="_blank" 

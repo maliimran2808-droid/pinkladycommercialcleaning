@@ -8,7 +8,8 @@ import CopyrightBar from './CopyrightBar'
 export default function Footer() {
   return (
     <footer className="w-full bg-white pt-20 md:pt-28 pb-8">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12">
+      <div className="max-w-[1280px] rounded-t-4xl mx-auto px-12"
+        style={{background:'linear-gradient(to bottom, #f5f7f2 20%, #fff 100%)'}}>
         
         {/* Top: Newsletter */}
         <NewsletterBar />

@@ -4,7 +4,7 @@ import { servicesData } from './servicesConfig'
 
 export default function Services() {
   return (
-    <section className="w-full py-20 md:py-28 bg-[#f3f5f0]">
+    <section className="w-full py-20 md:py-28 ">
       <div className="max-w-[1280px] mx-auto">
         
         {/* Header */}

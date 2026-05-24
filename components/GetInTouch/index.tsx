@@ -12,8 +12,8 @@ export default function GetInTouch() {
   const activeLocation = locationsData.find((loc) => loc.id === activeLocationId) || locationsData[0]
 
   return (
-    <section className="w-full py-20 md:py-28 bg-gray-50/50 overflow-visible">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-12 relative">
+    <section className="w-full pt-20 pb-5 overflow-visible">
+      <div className="max-w-[1280px] mx-auto relative">
         
         {/* Floating Tabs (Positioned 50% above container) */}
         <LocationTabs 
@@ -23,7 +23,8 @@ export default function GetInTouch() {
         />
 
         {/* Main Container */}
-        <div className="bg-white rounded-2xl shadow-xl border border-gray-100 p-8 md:p-12 pt-16 md:pt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center">
+        <div className=" rounded-4xl p-8 md:p-12 pt-16 md:pt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"
+        style={{background:'linear-gradient(to bottom, #f5f7f2 20%, #fff 100%)'}}>
           
           {/* Left Side: Content */}
           <ContactInfo location={activeLocation} />

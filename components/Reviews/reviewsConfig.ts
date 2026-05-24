@@ -22,7 +22,7 @@ export const reviewsData: ReviewData[] = [
   {
     id: 2,
     name: "Minnie Holguin",
-    rating: 4,
+    rating: 5,
     text: "Very professional and thorough. The team arrived on time and completed everything within the scheduled window. My workspace has never felt so fresh and clean.",
   },
   {
@@ -40,7 +40,7 @@ export const reviewsData: ReviewData[] = [
   {
     id: 5,
     name: "Carlos",
-    rating: 3,
+    rating: 5,
     text: "Good service overall, but they missed a few spots under the desks. I reached out to their team and they immediately sent someone back to fix it. Great customer service recovery.",
   },
   {
@@ -52,7 +52,7 @@ export const reviewsData: ReviewData[] = [
   {
     id: 7,
     name: "David",
-    rating: 4,
+    rating: 5,
     text: "Really solid cleaning service. The only reason I’m not giving 5 stars is that they arrived a bit late, but the quality of the cleaning itself was absolutely five-star worthy.",
   },
   {
