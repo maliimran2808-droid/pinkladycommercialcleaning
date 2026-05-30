@@ -27,7 +27,8 @@ export async function POST(req: NextRequest) {
 
     if (dbError) {
       console.error('Lead save error:', dbError)
-      return NextResponse.json({ error: 'Failed to save lead' }, { status: 500 })
+      // Return the ACTUAL database error so we can see exactly what went wrong
+      return NextResponse.json({ error: `DB Error: ${dbError.message}` }, { status: 500 })
     }
 
     // 2. Send email notification
@@ -54,7 +55,6 @@ export async function POST(req: NextRequest) {
         })
       } catch (emailError) {
         console.error('Email send error:', emailError)
-        // Don't fail the request if email fails - lead is already saved
       }
     }
 
