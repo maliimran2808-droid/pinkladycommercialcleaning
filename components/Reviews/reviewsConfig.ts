@@ -4,5 +4,11 @@ export interface ReviewData {
   rating: number
   text: string
 }
+export const companyLogos = [
+  "SwiftLine",
+  "Eagle",
+  "Even Diet",
+  "Fabric",
+]
 
 // We removed the hardcoded reviewsData array! Goodbye! 👋
