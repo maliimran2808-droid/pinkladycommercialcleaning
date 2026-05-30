@@ -1,99 +1,66 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { z } from 'zod'
 import { supabaseAdmin } from '@/lib/supabase'
 import { resend } from '@/lib/resend'
 
-// 1. Strict Validation Schema
-const submissionSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  email: z.string().email('Invalid email address'),
-  phone: z.string().min(1, 'Phone is required'),
-  service: z.string().optional(),
-  address: z.string().optional(),
-  info: z.string().optional(),
-  source: z.enum(['hero', 'booking']), // Ensures only valid sources
-})
-
 export async function POST(req: NextRequest) {
   try {
-    // 2. Parse and Validate Body
     const body = await req.json()
-    const validatedData = submissionSchema.parse(body)
+    const { name, email, phone, service, address, message, source } = body
 
-    // 3. Save to Supabase
-    const { error: dbError } = await supabaseAdmin
-      .from('submissions')
-      .insert([validatedData])
-
-    if (dbError) {
-      console.error('Supabase Insert Error:', dbError)
-      return NextResponse.json(
-        { success: false, error: 'Failed to save submission. Please try again.' },
-        { status: 500 }
-      )
+    if (!name || !email || !phone || !service) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
-    // 4. Send Email Notification via Resend
+    // 1. Save to database
+    const { error: dbError } = await supabaseAdmin
+      .from('leads')
+      .insert([{
+        name,
+        email,
+        phone,
+        service,
+        address: address || '',
+        message: message || '',
+        source: source || 'website',
+        status: 'new',
+      }])
+
+    if (dbError) {
+      console.error('Lead save error:', dbError)
+      return NextResponse.json({ error: 'Failed to save lead' }, { status: 500 })
+    }
+
+    // 2. Send email notification
     if (resend) {
       try {
         await resend.emails.send({
-          from: 'Pink Ladies <onboarding@resend.dev>', // Update this later when you verify a custom domain
-          to: [process.env.NEXT_PUBLIC_EMAIL || 'fallback@example.com'],
-          subject: `New Lead: ${validatedData.name} - ${validatedData.service || 'General Inquiry'}`,
+          from: 'Pink Ladies <onboarding@resend.dev>',
+          to: [process.env.ADMIN_EMAIL || 'your-email@example.com'],
+          subject: `New Lead: ${name} - ${service}`,
           html: `
-            <div style="font-family: sans-serif; color: #333; max-width: 600px; margin: 0 auto;">
-              <h2 style="color: #1a1a1a;">New Quote Request 🧹</h2>
-              <p>You received a new lead from the <strong>${validatedData.source}</strong> form.</p>
-              
-              <table style="width: 100%; border-collapse: collapse; margin-top: 16px;">
-                <tr>
-                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Name</td>
-                  <td style="padding: 8px; border: 1px solid #ddd;">${validatedData.name}</td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Email</td>
-                  <td style="padding: 8px; border: 1px solid #ddd;"><a href="mailto:${validatedData.email}">${validatedData.email}</a></td>
-                </tr>
-                <tr>
-                  <td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Phone</td>
-                  <td style="padding: 8px; border: 1px solid #ddd;"><a href="tel:${validatedData.phone}">${validatedData.phone}</a></td>
-                </tr>
-                ${validatedData.service ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Service</td><td style="padding: 8px; border: 1px solid #ddd;">${validatedData.service}</td></tr>` : ''}
-                ${validatedData.address ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Address</td><td style="padding: 8px; border: 1px solid #ddd;">${validatedData.address}</td></tr>` : ''}
-                ${validatedData.info ? `<tr><td style="padding: 8px; border: 1px solid #ddd; font-weight: bold;">Additional Info</td><td style="padding: 8px; border: 1px solid #ddd;">${validatedData.info}</td></tr>` : ''}
+            <div style="font-family: sans-serif; max-width: 600px; margin: 0 auto;">
+              <h2 style="color: #0f172a;">New Lead Received!</h2>
+              <table style="width: 100%; border-collapse: collapse;">
+                <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: bold;">Name:</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${name}</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: bold;">Email:</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${email}</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: bold;">Phone:</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${phone}</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: bold;">Service:</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${service}</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: bold;">Address:</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${address || 'N/A'}</td></tr>
+                <tr><td style="padding: 8px; border-bottom: 1px solid #e5e7eb; font-weight: bold;">Source:</td><td style="padding: 8px; border-bottom: 1px solid #e5e7eb;">${source || 'website'}</td></tr>
               </table>
-              
-              <p style="margin-top: 20px; font-size: 14px; color: #888;">Check your admin dashboard for more details.</p>
+              ${message ? `<p style="margin-top: 16px;"><strong>Message:</strong><br/>${message}</p>` : ''}
             </div>
           `,
         })
       } catch (emailError) {
-        // Log email error but don't fail the request for the user
-        console.error('Resend Email Error:', emailError)
+        console.error('Email send error:', emailError)
+        // Don't fail the request if email fails - lead is already saved
       }
     }
 
-    // 5. Return Success
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Submission received successfully!' 
-    })
-
+    return NextResponse.json({ success: true })
   } catch (error) {
-    // Catch Zod validation errors or other crashes
-    // Catch Zod validation errors or other crashes
-    console.error('API Error:', error)
-    
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        { success: false, error: 'Invalid data provided.', details: error.issues },
-        { status: 400 }
-      )
-    }
-
-    return NextResponse.json(
-      { success: false, error: 'Something went wrong on the server.' },
-      { status: 500 }
-    )
+    console.error('Submit error:', error)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
 }

@@ -3,7 +3,6 @@ import { supabaseAdmin } from '@/lib/supabase'
 
 export async function GET() {
   try {
-    // Fetch all leads, newest first
     const { data, error } = await supabaseAdmin
       .from('leads')
       .select('*')
