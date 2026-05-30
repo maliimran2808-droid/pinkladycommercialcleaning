@@ -1,11 +1,11 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-// Force Next.js to skip pre-rendering this page
-export const dynamic = 'force-dynamic'
-export default function ResetPassword() {
+
+// ✅ Inner component uses useSearchParams
+function ResetPasswordForm() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -109,5 +109,18 @@ export default function ResetPassword() {
         )}
       </div>
     </div>
+  )
+}
+
+// ✅ Outer component wraps with Suspense
+export default function ResetPassword() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <p className="text-gray-400">Loading...</p>
+      </div>
+    }>
+      <ResetPasswordForm />
+    </Suspense>
   )
 }
