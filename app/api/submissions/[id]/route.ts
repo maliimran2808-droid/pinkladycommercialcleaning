@@ -4,7 +4,7 @@ import { supabaseAdmin } from '@/lib/supabase'
 // PUT: Update a lead (e.g., change status)
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const resolvedParams = await params
@@ -34,7 +34,7 @@ export async function PUT(
 // DELETE: Remove a lead
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }
 ) {
   try {
     const resolvedParams = await params
