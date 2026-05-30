@@ -5,25 +5,19 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
 
-    // 1. Get credentials specifically from our 'global' settings row
-    const { data: settings } = await supabaseAdmin
-      .from('settings')
-      .select('admin_email, admin_password')
-      .eq('key', 'global')
-      .single()
+    // Fetch email and password from key-value rows
+    const { data: emailData } = await supabaseAdmin.from('settings').select('value').eq('key', 'admin_email').single()
+    const { data: passData } = await supabaseAdmin.from('settings').select('value').eq('key', 'admin_password').single()
 
-    // 2. Use DB credentials, or fall back to Environment Variables
-    const validEmail = settings?.admin_email || process.env.ADMIN_EMAIL || ''
-    const validPassword = settings?.admin_password || process.env.ADMIN_PASSWORD || ''
+    const validEmail = emailData?.value || process.env.ADMIN_EMAIL
+    const validPassword = passData?.value || process.env.ADMIN_PASSWORD
 
     if (!validEmail || !validPassword) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
-    // 3. Check credentials
     if (email === validEmail && password === validPassword) {
       const response = NextResponse.json({ success: true })
-
       response.cookies.set('admin_session', 'authenticated', {
         httpOnly: true,
         secure: req.url.startsWith('https'),
@@ -31,7 +25,6 @@ export async function POST(req: NextRequest) {
         path: '/',
         maxAge: 60 * 60 * 24 * 7,
       })
-
       return response
     }
 

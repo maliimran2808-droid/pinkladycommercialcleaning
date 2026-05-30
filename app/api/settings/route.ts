@@ -5,16 +5,17 @@ export async function GET() {
   try {
     const { data, error } = await supabaseAdmin
       .from('settings')
-      .select('*')
-      .eq('key', 'global')
-      .single()
+      .select('key, value')
 
     if (error || !data) return NextResponse.json({})
-
-    // UNPACK: Flatten the JSONB 'value' column so your context gets a flat object
-    return NextResponse.json({
-      ...(data.value || {}),
+    
+    // Flatten rows into a single object: { site_name: '...', logo_url: '...' }
+    const settings: Record<string, string> = {}
+    data.forEach((item: { key: string; value: string }) => {
+      settings[item.key] = item.value
     })
+    
+    return NextResponse.json(settings)
   } catch (error) {
     console.error('GET Settings Error:', error)
     return NextResponse.json({})
@@ -24,44 +25,28 @@ export async function GET() {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json()
-
-    // 1. Remove temporary fields that don't go in the database
+    
+    // Remove temporary frontend fields
     delete body._newEmail
     delete body._newPassword
     delete body._currentPassword
     delete body.id
     delete body.created_at
-    delete body.admin_email
-    delete body.admin_password
 
-    // 2. PACK: Everything left goes into the 'value' JSONB column
-    const valueData = { ...body }
+    // Convert the object into an array of rows for Supabase
+    const rows = Object.entries(body).map(([key, value]) => ({
+      key,
+      value: String(value || '')
+    }))
 
-    // 3. Check if settings row exists
-    const { data: existing } = await supabaseAdmin
+    // Upsert all rows at once (creates them if they don't exist, updates if they do)
+    const { error } = await supabaseAdmin
       .from('settings')
-      .select('id')
-      .eq('key', 'global')
-      .single()
+      .upsert(rows, { onConflict: 'key' })
 
-    let dbError = null
-
-    if (existing) {
-      const { error } = await supabaseAdmin
-        .from('settings')
-        .update({ value: valueData })
-        .eq('id', existing.id)
-      dbError = error
-    } else {
-      const { error } = await supabaseAdmin
-        .from('settings')
-        .insert({ key: 'global', value: valueData })
-      dbError = error
-    }
-
-    if (dbError) {
-      console.error('PUT Settings Error:', dbError)
-      return NextResponse.json({ error: dbError.message }, { status: 500 })
+    if (error) {
+      console.error('PUT Settings Error:', error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
