@@ -25,9 +25,9 @@ export default function AdminLogin() {
 
       const data = await res.json()
 
-      if (res.ok) {
-        router.push('/admin/leads')
-      } else {
+    if (res.ok) {
+  window.location.href = '/admin/leads' // <-- Forces hard refresh with cookie
+}else {
         setError(data.error || 'Login failed.')
       }
     } catch (err) {

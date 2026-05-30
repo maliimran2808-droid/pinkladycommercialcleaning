@@ -14,11 +14,10 @@ export async function POST(req: NextRequest) {
     if (email === adminEmail && password === adminPassword) {
       const response = NextResponse.json({ success: true })
 
-      // Set the cookie securely
       response.cookies.set('admin_session', 'authenticated', {
         httpOnly: true,
-        secure: process.env.NODE_ENV === 'production', // True on Vercel, False locally
-        sameSite: 'strict',
+        secure: req.url.startsWith('https'), // Automatically true on Vercel, false locally
+        sameSite: 'lax', // Changed to 'lax' - prevents redirect cookie dropping
         path: '/',
         maxAge: 60 * 60 * 24 * 7, // 1 week
       })
