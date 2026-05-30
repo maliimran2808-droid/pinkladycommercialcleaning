@@ -6,14 +6,31 @@ export async function GET() {
     const { data, error } = await supabaseAdmin
       .from('settings')
       .select('*')
+      .eq('key', 'global')
       .single()
 
-    if (error && error.code !== 'PGRST116') throw error
+    // If no row exists yet, just return empty object (frontend handles defaults)
+    if (error && error.code === 'PGRST116') {
+      return NextResponse.json({})
+    }
     
-    return NextResponse.json(data || {})
+    if (error) {
+      console.error('GET Settings Error:', error)
+      return NextResponse.json({}) // Never crash the frontend
+    }
+
+    // Flatten the data: extract everything from the 'value' JSONB column
+    const flatSettings = {
+      ...(data.value || {}),
+      id: data.id,
+      admin_email: data.admin_email || '',
+      admin_password: data.admin_password ? '********' : '', // Mask password for security
+    }
+
+    return NextResponse.json(flatSettings)
   } catch (error) {
-    console.error('Fetch settings error:', error)
-    return NextResponse.json({ error: 'Failed to fetch settings' }, { status: 500 })
+    console.error('GET Settings Crash:', error)
+    return NextResponse.json({})
   }
 }
 
@@ -21,60 +38,50 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json()
 
-    // 1. Clean out temporary frontend fields
+    // 1. Remove internal/temporary fields
     delete body._newEmail
     delete body._newPassword
     delete body._currentPassword
     delete body.id
     delete body.created_at
-
-    // 2. Separate admin credentials (real columns) from general settings (go in 'value' JSONB)
-    const adminUpdates: Record<string, string> = {}
-    if (body.admin_email) adminUpdates.admin_email = body.admin_email
-    if (body.admin_password) adminUpdates.admin_password = body.admin_password
     delete body.admin_email
     delete body.admin_password
 
-    // The rest of the body goes into the `value` JSONB column
-    const valueUpdates = { ...body }
+    // 2. Everything left goes into the 'value' JSONB column
+    const valueData = { ...body }
 
-    // 3. Check if settings row exists
+    // 3. Check if the settings row exists
     const { data: existing } = await supabaseAdmin
       .from('settings')
       .select('id')
+      .eq('key', 'global')
       .single()
 
-    let error;
+    let dbError = null
+
     if (existing) {
       // Update existing row
-      const { error: updateError } = await supabaseAdmin
+      const { error } = await supabaseAdmin
         .from('settings')
-        .update({ 
-          value: valueUpdates, 
-          ...adminUpdates 
-        })
+        .update({ value: valueData })
         .eq('id', existing.id)
-      error = updateError
+      dbError = error
     } else {
-      // Create new row satisfying all constraints
-      const { error: insertError } = await supabaseAdmin
+      // Create row for the very first time
+      const { error } = await supabaseAdmin
         .from('settings')
-        .insert({ 
-          key: 'global', 
-          value: valueUpdates, 
-          ...adminUpdates 
-        })
-      error = insertError
+        .insert({ key: 'global', value: valueData })
+      dbError = error
     }
 
-    if (error) {
-      console.error('Settings save error:', error)
-      return NextResponse.json({ error: error.message }, { status: 500 })
+    if (dbError) {
+      console.error('PUT Settings Error:', dbError)
+      return NextResponse.json({ error: dbError.message }, { status: 500 })
     }
 
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Settings save crash:', error)
+    console.error('PUT Settings Crash:', error)
     return NextResponse.json({ error: 'Failed to save settings' }, { status: 500 })
   }
 }
