@@ -10,32 +10,14 @@ export async function POST(req: NextRequest) {
     }
 
     // 1. Fetch current credentials from DB
-    let { data: settings, error: dbError } = await supabaseAdmin
+    const { data: settings, error: dbError } = await supabaseAdmin
       .from('settings')
       .select('id, admin_email, admin_password')
       .single()
 
-    // If no settings row exists, create one first (satisfying all NOT NULL constraints)
-    if (dbError && dbError.code === 'PGRST116') {
-      const { data: newSettings, error: insertError } = await supabaseAdmin
-        .from('settings')
-        .insert({ 
-          key: 'global', 
-          value: {},         // <--- THE ROOT FIX: Satisfies the NOT NULL constraint
-          admin_email: process.env.ADMIN_EMAIL, 
-          admin_password: process.env.ADMIN_PASSWORD 
-        })
-        .select('id, admin_email, admin_password')
-        .single()
-
-      if (insertError) {
-        console.error('Failed to create settings row:', insertError)
-        return NextResponse.json({ error: `DB Error: ${insertError.message}` }, { status: 500 })
-      }
-      settings = newSettings
-    } else if (dbError) {
+    if (dbError) {
       console.error('DB Fetch Error:', dbError)
-      return NextResponse.json({ error: `DB Error: ${dbError.message}` }, { status: 500 })
+      return NextResponse.json({ error: 'Failed to fetch settings' }, { status: 500 })
     }
 
     // 2. Use DB credentials, or fall back to Environment Variables
