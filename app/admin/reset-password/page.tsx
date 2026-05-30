@@ -1,13 +1,13 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, Suspense } from 'react'
 import { useRouter, useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 
-// Force Next.js to skip pre-rendering this page (fixes Vercel build error)
 export const dynamic = 'force-dynamic'
 
-export default function ResetPassword() {
+// 1. The actual content wrapped in Suspense
+function ResetPasswordContent() {
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -111,5 +111,18 @@ export default function ResetPassword() {
         )}
       </div>
     </div>
+  )
+}
+
+// 2. Default export wraps the content in a Suspense boundary
+export default function ResetPasswordPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-luxury-pink"></div>
+      </div>
+    }>
+      <ResetPasswordContent />
+    </Suspense>
   )
 }
