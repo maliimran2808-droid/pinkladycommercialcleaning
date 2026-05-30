@@ -19,7 +19,10 @@ export async function POST(req: NextRequest) {
     if (dbError && dbError.code === 'PGRST116') {
       const { data: newSettings, error: insertError } = await supabaseAdmin
         .from('settings')
-        .insert({ admin_email: process.env.ADMIN_EMAIL, admin_password: process.env.ADMIN_PASSWORD })
+        .insert({ 
+          key : 'global',
+          admin_email: process.env.ADMIN_EMAIL, 
+          admin_password: process.env.ADMIN_PASSWORD })
         .select('id, admin_email, admin_password')
         .single()
 
