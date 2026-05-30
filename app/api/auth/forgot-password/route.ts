@@ -26,8 +26,12 @@ export async function POST(req: NextRequest) {
     await supabaseAdmin.from('password_resets').insert([{ user_id: user.id, token, expires_at: expiresAt }])
 
     // Send Email
-    const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000'
-    const resetLink = `${baseUrl}/admin/reset-password?token=${token}`
+// FIND THIS (or something similar):
+// const resetLink = `http://localhost:3000/admin/reset-password?token=${token}`
+
+// REPLACE WITH THIS:
+const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || `https://${req.headers.get('host')}`
+const resetLink = `${baseUrl}/admin/reset-password?token=${token}`
 
     if (resend) {
       await resend.emails.send({

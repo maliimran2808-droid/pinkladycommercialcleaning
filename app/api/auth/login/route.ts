@@ -1,45 +1,33 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { supabaseAdmin } from '@/lib/supabase'
-import bcrypt from 'bcryptjs'
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
 
-    if (!email || !password) {
-      return NextResponse.json({ error: 'Email and password are required' }, { status: 400 })
+    const adminEmail = process.env.ADMIN_EMAIL
+    const adminPassword = process.env.ADMIN_PASSWORD
+
+    if (!adminEmail || !adminPassword) {
+      return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
-    // 1. Find user by email
-    const { data: user, error: dbError } = await supabaseAdmin
-      .from('admin_users')
-      .select('id, email, password_hash')
-      .eq('email', email)
-      .single()
+    if (email === adminEmail && password === adminPassword) {
+      const response = NextResponse.json({ success: true })
 
-    if (dbError || !user) {
-      return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
+      // Set the cookie securely
+      response.cookies.set('admin_session', 'authenticated', {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production', // True on Vercel, False locally
+        sameSite: 'strict',
+        path: '/',
+        maxAge: 60 * 60 * 24 * 7, // 1 week
+      })
+
+      return response
     }
 
-    // 2. Check password
-    const isMatch = await bcrypt.compare(password, user.password_hash)
-    if (!isMatch) {
-      return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
-    }
-
-    // 3. Set secure session cookie
-    const response = NextResponse.json({ success: true })
-    response.cookies.set('admin_session', 'authenticated', {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      maxAge: 60 * 60 * 24 * 7, // 7 days
-      sameSite: 'strict',
-      path: '/',
-    })
-
-    return response
+    return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
   } catch (error) {
-    console.error('Login Error:', error)
-    return NextResponse.json({ error: 'Server error' }, { status: 500 })
+    return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
