@@ -1,12 +1,44 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import { ChevronDown } from 'lucide-react'
 import { navConfig } from './navConfig'
 
 export default function DesktopNav() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
+  const [dynamicNavConfig, setDynamicNavConfig] = useState(navConfig)
+
+  // Fetch dynamic services and inject into the "Services" dropdown
+  useEffect(() => {
+    const fetchServices = async () => {
+      try {
+        const res = await fetch('/api/services')
+        if (res.ok) {
+          const data = await res.json()
+          
+          // Map the services from the DB to match the dropdown format
+          const serviceDropdown = data.map((service: { label: string; value: string }) => ({
+            label: service.label,
+            href: `/services/${service.value}`
+          }))
+
+          // Update the navConfig by replacing only the 'Services' dropdown
+          setDynamicNavConfig(prevConfig => 
+            prevConfig.map(item => 
+              item.label === 'Services' 
+                ? { ...item, dropdown: serviceDropdown } 
+                : item
+            )
+          )
+        }
+      } catch (err) {
+        console.error('Failed to load services for nav:', err)
+      }
+    }
+
+    fetchServices()
+  }, [])
 
   return (
     <nav className="hidden md:flex items-center gap-6"
@@ -14,7 +46,7 @@ export default function DesktopNav() {
       width: 'fit-content',
       margin: '0px 0px 0px 6%'
     }}> 
-      {navConfig.map((item) => (
+      {dynamicNavConfig.map((item) => (
         <div
           key={item.label}
           className="relative"

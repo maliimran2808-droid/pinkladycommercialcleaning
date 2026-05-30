@@ -1,7 +1,8 @@
+@custom-variant dark (&:where(.dark, .dark *));
 @import "tailwindcss";
 
 @theme {
-  --color-luxury-pink: #E10788;
+  --color-luxury-pink: #17264a;
   --color-luxury-pink-soft: rgba(232, 160, 180, 0.1);
   --color-luxury-dark: #1a1a1a;
   --shadow-subtle: 0 2px 20px rgba(0, 0, 0, 0.06);

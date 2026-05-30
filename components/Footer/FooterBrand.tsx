@@ -1,8 +1,9 @@
 'use client';
 import Link from 'next/link'
 import { Phone, Mail } from 'lucide-react'
-
+import { useSettings } from '@/app/context/SettingsContext'
 export default function FooterBrand() {
+  const { phone, email } = useSettings()
   return (
     <div className="flex flex-col h-full">
       {/* Logo Image Placeholder */}
@@ -17,19 +18,15 @@ export default function FooterBrand() {
         Easy, no-fuss cleaning services for busy people.
       </p>
 <div className="space-y-4 mb-8">
-        <div className="flex items-center gap-4">
-            <Phone size={18} className="text-gray-900" />
-          
-          <a href="tel:+13214567890" className="text-[16px] text-gray-900 font-thin">(321) 456-7890</a>
-        </div>
-        <div className="flex items-center gap-4">
-      
-            <Mail size={18} className="text-gray-900" />
-      
-          <a href="mailto:info@pinkladies.com" className="text-[16px] text-gray-900 font-thin">info@pinkladies.com</a>
-        </div>
-      </div>
-
+  <div className="flex items-center gap-4">
+    <Phone size={18} className="text-gray-900" />
+    <a href={`tel:${phone}`} className="text-[16px] text-gray-900 font-thin">{phone || '(321) 456-7890'}</a>
+  </div>
+  <div className="flex items-center gap-4">
+    <Mail size={18} className="text-gray-900" />
+    <a href={`mailto:${email}`} className="text-[16px] text-gray-900 font-thin">{email || 'info@pinkladies.com'}</a>
+  </div>
+</div>
 
       <Link
         href="/contact"

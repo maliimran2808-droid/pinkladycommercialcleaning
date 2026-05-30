@@ -1,11 +1,13 @@
 import { Phone, Mail } from 'lucide-react'
 import { LocationData } from './locationsConfig'
-
+import { useSettings } from '@/app/context/SettingsContext'
 interface ContactInfoProps {
   location: LocationData
 }
 
 export default function ContactInfo({ location }: ContactInfoProps) {
+  const { phone, email, office_hours } = useSettings()
+
   return (
     <div className="flex flex-col justify-center h-full py-8">
       {/* Small Label */}
@@ -24,9 +26,9 @@ Ready to experience the cleansing difference? Book our service today, and we wil
 
       {/* Office Hours */}
       <div className="mb-2 font-outfit">
-        <h4 className="text-[16px] text-gray-500 font-para-size font-thin">Our office is open</h4>
-        <p className=" text-[16px] text-gray-500 font-para-size font-thin">Monday to Saturday, 9 AM to 4 PM</p>
-      </div>
+  <h4 className="text-[16px] text-gray-500 font-para-size font-thin">Our office is open</h4>
+  <p className="text-[16px] text-gray-500 font-para-size font-thin">{office_hours || 'Monday to Saturday, 9 AM to 4 PM'}</p>
+</div>
 
       {/* Dynamic Address */}
       <div className="mb-8">
@@ -35,19 +37,15 @@ Ready to experience the cleansing difference? Book our service today, and we wil
 
       {/* Phone & Email */}
       <div className="space-y-4 mb-8">
-        <div className="flex items-center gap-4">
-            <Phone size={18} className="text-gray-500" />
-          
-          <a href="tel:+13214567890" className="text-[16px] text-gray-500 font-para-size font-thin">(321) 456-7890</a>
-        </div>
-        <div className="flex items-center gap-4">
-      
-            <Mail size={18} className="text-gray-500" />
-      
-          <a href="mailto:info@pinkladies.com" className="text-[16px] text-gray-500 font-para-size font-thin">info@pinkladies.com</a>
-        </div>
-      </div>
-
+  <div className="flex items-center gap-4">
+    <Phone size={18} className="text-gray-500" />
+    <a href={`tel:${phone}`} className="text-[16px] text-gray-500 font-para-size font-thin">{phone || '(321) 456-7890'}</a>
+  </div>
+  <div className="flex items-center gap-4">
+    <Mail size={18} className="text-gray-500" />
+    <a href={`mailto:${email}`} className="text-[16px] text-gray-500 font-para-size font-thin">{email || 'info@pinkladies.com'}</a>
+  </div>
+</div>
       {/* Contact Button */}
       <div>
         <a

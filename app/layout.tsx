@@ -1,9 +1,9 @@
-// app/layout.tsx
 import type { Metadata } from 'next'
 import './globals.css'
-import { Parkinsans, Outfit} from 'next/font/google'
+import { Parkinsans, Outfit } from 'next/font/google'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import Providers from './Providers'
 
 const parkinsans = Parkinsans({
   subsets: ['latin'],
@@ -18,8 +18,6 @@ const outfit = Outfit({
   display: 'swap',
 })
 
-
-
 export const metadata: Metadata = {
   title: 'Pink Ladies | Luxury Commercial Cleaning',
   description: 'Premium cleaning services',
@@ -29,11 +27,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en" className={`${parkinsans.variable} ${outfit.variable} scroll-smooth`}>
       <body className={`${parkinsans.className} ${outfit.className} antialiased bg-white text-gray-900`}>
-        <Header />
-        <main>
-          {children} {/* <-- This was missing! */}
-        </main>
-         <Footer />
+          <Providers>
+       
+          <main>{children}</main>
+     
+        </Providers>
       </body>
     </html>
   )

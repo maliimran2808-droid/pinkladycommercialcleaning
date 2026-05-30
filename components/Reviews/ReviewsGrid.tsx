@@ -2,12 +2,39 @@
 
 import Link from 'next/link'
 import ReviewCard from './ReviewCard'
-import { reviewsData } from './reviewsConfig'
+import { useState, useEffect } from 'react'
+import { ReviewData } from './reviewsConfig'
 import ReviewSummary from './ReviewSummary'
 import ReviewTopAwards from './ReviewTopAwards'
 
 
 export default function ReviewsGrid() {
+  const [reviews, setReviews] = useState<ReviewData[]>([])
+  const [loading, setLoading] = useState(true)
+
+
+
+    useEffect(() => {
+    const fetchReviews = async () => {
+      try {
+        const res = await fetch('/api/testimonials')
+        if (res.ok) {
+          const data = await res.json()
+          setReviews(data)
+        }
+      } catch (err) {
+        console.error('Failed to load reviews:', err)
+      } finally {
+        setLoading(false)
+      }
+    }
+    fetchReviews()
+  }, [])
+
+  if (loading) {
+    return <div className="text-center py-12 text-gray-400">Loading reviews...</div>
+  }
+
   return (
     <div className="relative rounded-3xl pt-0 pb-12 px-6 md:px-12"
     style={
@@ -25,11 +52,11 @@ export default function ReviewsGrid() {
 
 
       {/* 3x3 Grid */}
-      <div className="grid grid-cols-1 grid-change md:grid-cols-3 gap-6 mb-12">
-        {reviewsData.map((review) => (
-          <ReviewCard key={review.id} data={review} />
-        ))}
-      </div>
+        <div className="grid grid-cols-1 grid-change md:grid-cols-3 gap-6 mb-12">
+      {reviews.map((review) => (
+        <ReviewCard key={review.id} data={review} />
+      ))}
+    </div>
 
       {/* Center Button */}
       <div className="flex justify-center">

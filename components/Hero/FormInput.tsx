@@ -1,23 +1,23 @@
-interface FormInputProps {
-  type?: string
-  placeholder: string
-  value: string
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+import React from 'react'
+
+interface FormInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   error?: string
 }
 
-export default function FormInput({ type = 'text', placeholder, value, onChange, error }: FormInputProps) {
-  return (
-    <div className="flex flex-col">
-      <input
-        style={{fontWeight:"400"}}
-        type={type}
-        placeholder={placeholder}
-        value={value}
-        onChange={onChange}
-        className="font-outfit w-full px-4 py-3.5 bg-white/90 border border-gray-300 rounded-md text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:border-luxury-pink focus:ring-1 focus:ring-luxury-pink transition-all duration-300"
-      />
-      {error && <span className="text-black text-xs mt-1.5 font-medium">{error}</span>}
-    </div>
-  )
-}
+const FormInput = React.forwardRef<HTMLInputElement, FormInputProps>(
+  ({ error, className = '', ...props }, ref) => {
+    return (
+      <div className="flex flex-col w-full">
+        <input
+          ref={ref}
+          className={`w-full px-4 py-3.5 bg-white border ${error ? 'border-red-400 focus:ring-red-300' : 'border-gray-200 focus:ring-luxury-pink'} rounded-md text-sm text-gray-800 placeholder-gray-400 focus:outline-none focus:ring-2 transition-all duration-200 ${className}`}
+          {...props}
+        />
+        {error && <span className="text-red-500 text-xs mt-1 pl-1">{error}</span>}
+      </div>
+    )
+  }
+)
+
+FormInput.displayName = 'FormInput'
+export default FormInput

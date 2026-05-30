@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { Phone } from 'lucide-react'
 import { serviceOptions } from './bookingConfig'
-
+import {useSettings} from '@/app/context/SettingsContext'
 export default function BookingForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -13,6 +13,8 @@ export default function BookingForm() {
     address: '',
     info: '',
   })
+
+  const { phone } = useSettings()
 
   const handleChange = (field: string) => (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [field]: e.target.value })
@@ -95,10 +97,10 @@ export default function BookingForm() {
       {/* Bottom Text & Phone */}
       <div className="text-center font-parkinsans mt-6">
         <p className="text-gray-900 font-parkinsans text-sm mb-3">If you have any questions, contact our office at</p>
-        <a href="tel:+13214567890" className="inline-flex items-center gap-2 text-luxury-dark font-semibold hover:text-luxury-pink transition-colors">
-          <div className='bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center'><Phone  size={18} /></div>
-          <span>+ 1 (346) 565-3599</span>
-        </a>
+      <a href={`tel:${phone}`} className="inline-flex items-center gap-2 text-luxury-dark font-semibold hover:text-luxury-pink transition-colors">
+  <div className='bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center'><Phone  size={18} /></div>
+  <span>{phone || '+ 1 (346) 565-3599'}</span>
+</a>
       </div>
     </div>
   )
