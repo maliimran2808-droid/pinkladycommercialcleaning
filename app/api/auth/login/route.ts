@@ -1,25 +1,34 @@
 import { NextRequest, NextResponse } from 'next/server'
+import { supabaseAdmin } from '@/lib/supabase'
 
 export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
 
-    const adminEmail = process.env.ADMIN_EMAIL
-    const adminPassword = process.env.ADMIN_PASSWORD
+    // 1. Try to get credentials from the database first
+    const { data: settings } = await supabaseAdmin
+      .from('settings')
+      .select('admin_email, admin_password')
+      .single()
 
-    if (!adminEmail || !adminPassword) {
+    // 2. Use DB credentials, or fall back to Environment Variables
+    const validEmail = settings?.admin_email || process.env.ADMIN_EMAIL
+    const validPassword = settings?.admin_password || process.env.ADMIN_PASSWORD
+
+    if (!validEmail || !validPassword) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
     }
 
-    if (email === adminEmail && password === adminPassword) {
+    // 3. Check credentials
+    if (email === validEmail && password === validPassword) {
       const response = NextResponse.json({ success: true })
 
       response.cookies.set('admin_session', 'authenticated', {
         httpOnly: true,
-        secure: req.url.startsWith('https'), // Automatically true on Vercel, false locally
-        sameSite: 'lax', // Changed to 'lax' - prevents redirect cookie dropping
+        secure: req.url.startsWith('https'),
+        sameSite: 'lax',
         path: '/',
-        maxAge: 60 * 60 * 24 * 7, // 1 week
+        maxAge: 60 * 60 * 24 * 7,
       })
 
       return response
@@ -27,6 +36,7 @@ export async function POST(req: NextRequest) {
 
     return NextResponse.json({ error: 'Invalid email or password' }, { status: 401 })
   } catch (error) {
+    console.error('Login error:', error)
     return NextResponse.json({ error: 'Internal server error' }, { status: 500 })
   }
 }
