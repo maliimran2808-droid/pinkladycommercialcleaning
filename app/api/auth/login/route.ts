@@ -5,15 +5,16 @@ export async function POST(req: NextRequest) {
   try {
     const { email, password } = await req.json()
 
-    // 1. Try to get credentials from the database first
+    // 1. Get credentials specifically from our 'global' settings row
     const { data: settings } = await supabaseAdmin
       .from('settings')
       .select('admin_email, admin_password')
+      .eq('key', 'global')
       .single()
 
     // 2. Use DB credentials, or fall back to Environment Variables
-    const validEmail = settings?.admin_email || process.env.ADMIN_EMAIL
-    const validPassword = settings?.admin_password || process.env.ADMIN_PASSWORD
+    const validEmail = settings?.admin_email || process.env.ADMIN_EMAIL || ''
+    const validPassword = settings?.admin_password || process.env.ADMIN_PASSWORD || ''
 
     if (!validEmail || !validPassword) {
       return NextResponse.json({ error: 'Server configuration error' }, { status: 500 })
