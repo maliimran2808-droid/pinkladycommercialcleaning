@@ -1,9 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
 
-// PUT - Update service (toggle active, etc)
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params // <-- UNWRAP THE PROMISE HERE
+  const { id } = await params
   
   try {
     const body = await req.json()
@@ -21,9 +20,8 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
   }
 }
 
-// DELETE - Remove service
 export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params // <-- UNWRAP THE PROMISE HERE
+  const { id } = await params
   
   try {
     const { error } = await supabaseAdmin

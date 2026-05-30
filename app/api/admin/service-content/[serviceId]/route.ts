@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
 
-// GET single service page content
 export async function GET(req: NextRequest, { params }: { params: Promise<{ serviceId: string }> }) {
   const { serviceId } = await params
   
@@ -13,7 +12,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ serv
       .single()
 
     if (error && error.code === 'PGRST116') {
-      // Not found, auto-create it
       const { data: newData, error: insertError } = await supabaseAdmin
         .from('service_page_contents')
         .insert([{ service_id: serviceId }])
@@ -32,7 +30,6 @@ export async function GET(req: NextRequest, { params }: { params: Promise<{ serv
   }
 }
 
-// PUT (Update) service page content
 export async function PUT(req: NextRequest, { params }: { params: Promise<{ serviceId: string }> }) {
   const { serviceId } = await params
   
