@@ -15,14 +15,16 @@ export async function POST(req: NextRequest) {
       .select('id, admin_email, admin_password')
       .single()
 
-    // If no settings row exists, create one first
+    // If no settings row exists, create one first (satisfying all NOT NULL constraints)
     if (dbError && dbError.code === 'PGRST116') {
       const { data: newSettings, error: insertError } = await supabaseAdmin
         .from('settings')
         .insert({ 
-          key : 'global',
+          key: 'global', 
+          value: {},         // <--- THE ROOT FIX: Satisfies the NOT NULL constraint
           admin_email: process.env.ADMIN_EMAIL, 
-          admin_password: process.env.ADMIN_PASSWORD })
+          admin_password: process.env.ADMIN_PASSWORD 
+        })
         .select('id, admin_email, admin_password')
         .single()
 

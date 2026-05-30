@@ -25,25 +25,54 @@ export async function GET() {
 }
 
 // PUT: Update settings
+// Inside your PUT handler in app/api/settings/route.ts
+
 export async function PUT(req: NextRequest) {
   try {
-    const body = await req.json() // Expects: { site_name: 'New Name', phone: '123', ... }
+    const body = await req.json()
 
-    // Convert the object back into an array of { key, value } for Supabase upsert
-    const updates = Object.entries(body).map(([key, value]) => ({
-      key,
-      value: value as string,
-    }))
+    // Remove internal fields if they exist
+    delete body._newEmail
+    delete body._newPassword
+    delete body._currentPassword
+    delete body.id
+    delete body.created_at
 
-    const { error } = await supabaseAdmin
+    // 1. Check if a settings row exists
+    const { data: existing } = await supabaseAdmin
       .from('settings')
-      .upsert(updates, { onConflict: 'key' })
+      .select('id')
+      .single()
 
-    if (error) throw error
+    let error;
+    
+    if (existing) {
+      // 2a. Row exists -> UPDATE
+      const result = await supabaseAdmin
+        .from('settings')
+        .update(body)
+        .eq('id', existing.id)
+      error = result.error
+    } else {
+      // 2b. Row doesn't exist -> INSERT (ensuring constraints are met)
+      const result = await supabaseAdmin
+        .from('settings')
+        .insert({ 
+          key: 'global', 
+          value: {}, 
+          ...body 
+        })
+      error = result.error
+    }
 
-    return NextResponse.json({ success: true, message: 'Settings updated successfully!' })
+    if (error) {
+      console.error('Settings save error:', error)
+      return NextResponse.json({ error: error.message }, { status: 500 })
+    }
+
+    return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error updating settings:', error)
-    return NextResponse.json({ error: 'Failed to update settings' }, { status: 500 })
+    console.error('Settings save crash:', error)
+    return NextResponse.json({ error: 'Failed to save settings' }, { status: 500 })
   }
 }
