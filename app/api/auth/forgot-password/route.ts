@@ -38,7 +38,7 @@ export async function POST(req: NextRequest) {
     // 5. Send Email (EXACTLY your working Resend setup)
     if (resend) {
       await resend.emails.send({
-        from: 'Pink Ladies <onboarding@resend.dev>',
+        from: 'Pink Ladies <support@pinkladies.com>',
         to: [adminEmail],
         subject: 'Password Reset Request',
         html: `<p>You requested a password reset.</p><p>Click <a href="${resetLink}">here</a> to set a new password. This link expires in 1 hour.</p><p>If you did not request this, ignore this email.</p>`,

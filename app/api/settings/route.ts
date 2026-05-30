@@ -9,27 +9,14 @@ export async function GET() {
       .eq('key', 'global')
       .single()
 
-    // If no row exists yet, just return empty object (frontend handles defaults)
-    if (error && error.code === 'PGRST116') {
-      return NextResponse.json({})
-    }
-    
-    if (error) {
-      console.error('GET Settings Error:', error)
-      return NextResponse.json({}) // Never crash the frontend
-    }
+    if (error || !data) return NextResponse.json({})
 
-    // Flatten the data: extract everything from the 'value' JSONB column
-    const flatSettings = {
+    // UNPACK: Flatten the JSONB 'value' column so your context gets a flat object
+    return NextResponse.json({
       ...(data.value || {}),
-      id: data.id,
-      admin_email: data.admin_email || '',
-      admin_password: data.admin_password ? '********' : '', // Mask password for security
-    }
-
-    return NextResponse.json(flatSettings)
+    })
   } catch (error) {
-    console.error('GET Settings Crash:', error)
+    console.error('GET Settings Error:', error)
     return NextResponse.json({})
   }
 }
@@ -38,7 +25,7 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json()
 
-    // 1. Remove internal/temporary fields
+    // 1. Remove temporary fields that don't go in the database
     delete body._newEmail
     delete body._newPassword
     delete body._currentPassword
@@ -47,10 +34,10 @@ export async function PUT(req: NextRequest) {
     delete body.admin_email
     delete body.admin_password
 
-    // 2. Everything left goes into the 'value' JSONB column
+    // 2. PACK: Everything left goes into the 'value' JSONB column
     const valueData = { ...body }
 
-    // 3. Check if the settings row exists
+    // 3. Check if settings row exists
     const { data: existing } = await supabaseAdmin
       .from('settings')
       .select('id')
@@ -60,14 +47,12 @@ export async function PUT(req: NextRequest) {
     let dbError = null
 
     if (existing) {
-      // Update existing row
       const { error } = await supabaseAdmin
         .from('settings')
         .update({ value: valueData })
         .eq('id', existing.id)
       dbError = error
     } else {
-      // Create row for the very first time
       const { error } = await supabaseAdmin
         .from('settings')
         .insert({ key: 'global', value: valueData })

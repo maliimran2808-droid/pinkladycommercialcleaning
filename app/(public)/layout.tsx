@@ -3,16 +3,15 @@ import { supabaseAdmin } from '@/lib/supabase'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 
-// 🔥 Dynamic SEO: Fetches from your database!
 export async function generateMetadata(): Promise<Metadata> {
   try {
-    const { data } = await supabaseAdmin.from('settings').select('key, value')
-    const settings: Record<string, string> = {}
-    if (data) {
-      data.forEach((item: { key: string; value: string }) => {
-        settings[item.key] = item.value
-      })
-    }
+    const { data } = await supabaseAdmin
+      .from('settings')
+      .select('value')
+      .eq('key', 'global')
+      .single()
+
+    const settings = (data?.value || {}) as Record<string, string>
 
     return {
       title: settings.meta_title || 'Pink Ladies | Luxury Commercial Cleaning',
@@ -29,10 +28,10 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
-    <>
+ <>
       <Header />
       <main>{children}</main>
       <Footer />
-    </>
+ </>
   )
 }
