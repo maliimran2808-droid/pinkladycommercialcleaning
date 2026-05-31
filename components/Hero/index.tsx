@@ -3,7 +3,7 @@ import HeroCard from './HeroCard'
 
 export default function Hero() {
   return (
-    <section className="relative w-full hero-position2 sm:h-auto h-screen flex items-end justify-center">
+    <section className="relative w-full hero-position2 h-screen flex items-end justify-center">
       {/* Background Layer (95% height, 100% width) */}
       <HeroBackground />
       

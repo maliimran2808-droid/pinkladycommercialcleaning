@@ -10,7 +10,7 @@ export default function HeroBackground() {
   const imageSrc = hero_image_url || '/images/banner.webp'
 
   return (
-    <div className="absolute top-0 left-0 w-full h-[95%] z-0">
+    <div className="absolute top-0 left-0 w-full h-[96%] z-0">
       <Image
         key={imageSrc} // Forces re-render when image changes
         src={imageSrc}
