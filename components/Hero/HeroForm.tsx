@@ -110,17 +110,19 @@ export default function HeroForm() {
           {apiError}
         </div>
       )}
+  {/* className=" w-[fit-content]      text-white bg-luxury-pink    transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]" */}
 
       {/* Submit Button */}
+      <div className='flex w-full items-center justify-center'>
       <button
         type="submit"
         disabled={isSubmitting}
-        className={`w-full py-4 text-white font-semibold uppercase tracking-widest rounded-md transition-all duration-300 transform hover:scale-[1.01] ${
+        className={`w-fit font-parkinsans nav-font px-7.5 mx-auto bg-luxury-pink py-3.5 text-sm text-luxury-lite font-medium tracking-normal rounded-full cursor-pointer transition-all duration-300 transform hover:scale-[1] ${
           isSubmitting ? 'bg-gray-400 cursor-not-allowed' : 'bg-luxury-dark hover:bg-luxury-pink hover:shadow-lg'
         }`}
       >
         {isSubmitting ? 'Sending...' : 'I Would Like A Quote'}
-      </button>
+      </button></div>
     </form>
   )
 }

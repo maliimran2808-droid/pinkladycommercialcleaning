@@ -64,11 +64,9 @@ const { phone } = useSettings()
             <Link
               href="/quote"
       
-        className="font-parkinsans w-[fit-content] text-sm px-7.5 nav-font py-3.5 rounded-full cursor-pointer text-white font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
-        style={{ backgroundColor: '#E10788' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
-            >
+        className="font-parkinsans w-[fit-content] text-sm px-7.5 nav-font py-3.5 rounded-full cursor-pointer text-white bg-luxury-pink font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+
+             >
               Book a Cleaning
             </Link>
           </div>

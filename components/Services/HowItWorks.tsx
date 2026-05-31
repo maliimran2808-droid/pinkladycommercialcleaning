@@ -9,23 +9,26 @@ interface Step {
 interface HowItWorksProps {
   subtitle: string
   heading: string
+  
   steps: Step[]
 }
 
 export default function HowItWorks({ subtitle, heading, steps }: HowItWorksProps) {
   return (
-    <section className="w-full py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4">
+    <section className="w-full"
+   >
+      <div className="max-w-[1280px] mx-auto py-14 px-4">
         
         {/* 🔹 SEO Optimized Header Block */}
-        <div className="text-center mb-12">
-          <p className="text-sm font-semibold text-luxury-pink uppercase tracking-widest mb-3 font-outfit">
-            {subtitle}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-parkinsans font-bold text-luxury-dark leading-tight">
-            {heading}
-          </h2>
-        </div>
+        <div className="text-center mb-5">
+           <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
+        {subtitle}
+      </span>
+           <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto md:text-5xl lg:text-[2.6rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
+       {heading}
+             </h2>
+            
+             </div>
 
         {/* 🔹 Cards & Arrows Container */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
@@ -33,24 +36,25 @@ export default function HowItWorks({ subtitle, heading, steps }: HowItWorksProps
             <div key={index} className="flex flex-col md:flex-row items-center">
               
               {/* The Card */}
-              <div className="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 w-full max-w-[300px] text-center flex flex-col items-center hover:shadow-md transition-shadow duration-300">
+              <div className="bg-white rounded-2xl py-8 px-0 borderw-full text-center flex flex-col items-center transition-shadow duration-300">
                 {/* Image */}
-                <div className="relative w-20 h-20 mb-5 rounded-full bg-pink-50 flex items-center justify-center overflow-hidden border-2 border-luxury-pink/20">
-                  <Image 
+                <div className="relative w-36 h-36 mb-5 rounded-full bg-luxury-pink-soft flex items-center justify-center overflow-hidden border-2 border-luxury-pink">
+                  <img 
                     src={step.image_url} 
-                    alt={step.title} // SEO: Dynamic alt tag based on title
-                    fill 
-                    className="object-cover"
+                    alt={step.title}
+                    width={'54'} // SEO: Dynamic alt tag based on title
+                   
+                    className="object-contain"
                   />
                 </div>
                 
                 {/* SEO Optimized Title */}
-                <h3 className="text-xl font-parkinsans font-bold text-luxury-dark mb-3">
+                <h3 className="text-xl md:text-3xl font-parkinsans font-regular text-luxury-dark mb-3">
                   {step.title}
                 </h3>
                 
                 {/* SEO Optimized Paragraph */}
-                <p className="text-gray-600 font-outfit text-sm leading-relaxed font-light">
+                <p className="text-gray-500 font-parkinsans text-sm leading-relaxed font-regular w-[85%]">
                   {step.description}
                 </p>
               </div>
@@ -59,10 +63,8 @@ export default function HowItWorks({ subtitle, heading, steps }: HowItWorksProps
               {index < steps.length - 1 && (
                 <>
                   {/* Desktop Arrow (Pointing Right) */}
-                  <div className="hidden md:flex items-center mx-6 text-luxury-pink">
-                    <svg className="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
-                    </svg>
+                  <div className="hidden md:flex items-center text-luxury-pink">
+                   <img src="/images/arrow.svg" width={'170'} alt="" />
                   </div>
                   
                   {/* Mobile Arrow (Pointing Down) */}

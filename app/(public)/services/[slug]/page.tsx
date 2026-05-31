@@ -50,9 +50,9 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
   const { content } = data
 
   return (
-    <main className="mt-20">
+    <main className="mt-25">
       {/* Section 1: Header */}
-      <ServiceHeader title={slug} />
+      {/* <ServiceHeader title={slug} /> */}
       
       {/* Section 2: Blended Hero Section */}
       <ServiceHero 
@@ -60,7 +60,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         hero_heading={content.hero_heading}
         hero_paragraph={content.hero_paragraph}
         hero_image_1_url={content.hero_image_1_url}
-        hero_image_2_url={content.hero_image_2_url}
+     
       />
 
       {/* Section 3: How It Works */}
@@ -75,6 +75,7 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         heading={content.features_heading || "Why Choose Our Specialized Cleaning?"}
         description={content.features_description || "We go above and beyond to ensure your space is truly healthy."}
         features={content.features_list || []}
+           hero_image_2_url={content.hero_image_2_url}
       />
 
       {/* Section 5: Why Choose Us (Stats) */}

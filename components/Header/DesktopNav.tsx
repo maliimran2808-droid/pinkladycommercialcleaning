@@ -66,7 +66,7 @@ export default function DesktopNav() {
 
           {item.dropdown && activeDropdown === item.label && (
             <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 dropdown-animate z-50">
-              <div className="bg-white rounded-md py-2 min-w-[220px]" style={{ border: '2px solid #E8A0B4', boxShadow: '0 10px 30px rgba(232, 160, 180, 0.2)' }}>
+              <div className="bg-white rounded-md py-2 min-w-[220px]" style={{ border: '2px solid var(--color-luxury-pink)', boxShadow: '0 10px 30px rgba(232, 160, 180, 0.2)' }}>
                 {item.dropdown.map((drop) => (
                   <Link
                     key={drop.label}

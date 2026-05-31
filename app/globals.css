@@ -2,9 +2,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-luxury-pink: #17264a;
-  --color-luxury-pink-soft: rgba(232, 160, 180, 0.1);
+  --color-luxury-pink: #128239;
+  --color-luxury-pink-soft: #77cb95;
   --color-luxury-dark: #1a1a1a;
+  --color-luxury-lite: #ffffff;
+  --color-luxury-dark: #000000;
   --shadow-subtle: 0 2px 20px rgba(0, 0, 0, 0.06);
   --shadow-pink-glow: 0 10px 30px rgba(232, 160, 180, 0.2);
   --font-parkinsans: 'ParkinSans', sans-serif;
@@ -152,4 +154,22 @@ section{
     .hero-position2{
     height: auto !important;
   }
+  .wrapping{
+  flex-wrap: wrap !important;
+  padding: 10px !important;
+  gap: 10px !important;
+}
+}
+@media screen and (max-width:650px) {
+    .padding-hero{
+    align-items: center !important;
+    text-align: center !important;
+  padding: 10px !important;
+  gap: 10px !important;
+}
+.center-btns{
+  align-items: center !important;
+  flex-direction: column !important;
+  
+}
 }

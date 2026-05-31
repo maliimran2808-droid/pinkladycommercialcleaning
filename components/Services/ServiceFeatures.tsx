@@ -9,8 +9,10 @@ interface ServiceFeaturesProps {
   description: string
   features: Feature[]
 }
-
-export default function ServiceFeatures({ heading, description, features }: ServiceFeaturesProps) {
+interface ServiceHeroProps {
+hero_image_2_url?: string
+}
+export default function ServiceFeatures({ heading, description, features, hero_image_2_url }: ServiceFeaturesProps & ServiceHeroProps) {
   return (
     <section className="w-full py-16 md:py-24 bg-white">
       <div className="max-w-[800px] mx-auto px-4">
@@ -25,6 +27,7 @@ export default function ServiceFeatures({ heading, description, features }: Serv
           {description}
         </p>
 
+       
         {/* 🔹 Dynamic Checklist */}
         <ul className="space-y-4 mb-10">
           {features.map((feature, index) => (
@@ -53,6 +56,9 @@ export default function ServiceFeatures({ heading, description, features }: Serv
           >
             Learn More
           </Link>
+        </div>
+ <div>
+          <img src={hero_image_2_url} alt="" />
         </div>
 
       </div>
