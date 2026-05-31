@@ -9,6 +9,7 @@ interface Lead {
   name: string
   email: string
   phone: string
+  address: string
   service: string
   message: string
   status: string
@@ -67,9 +68,9 @@ export default function LeadsPage() {
   }
 
   const exportToCSV = () => {
-    const headers = ['Name', 'Email', 'Phone', 'Service', 'Status', 'Date']
+    const headers = ['Name', 'Email', 'Phone', 'Address', 'Service', 'Status', 'Date']
     const rows = filteredLeads.map(lead => [
-      lead.name, lead.email, lead.phone, lead.service, lead.status, new Date(lead.created_at).toLocaleDateString()
+      lead.name, lead.email, lead.phone, lead.address, lead.service, lead.status, new Date(lead.created_at).toLocaleDateString()
     ])
     const csvContent = [headers, ...rows].map(row => row.join(',')).join('\n')
     const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' })
@@ -239,6 +240,7 @@ export default function LeadsPage() {
                         <p className="font-semibold text-luxury-dark font-outfit text-sm">{lead.name}</p>
                         <p className="text-xs text-gray-500 font-outfit mt-0.5">{lead.email}</p>
                         <p className="text-xs text-gray-400 font-outfit mt-0.5">{lead.phone}</p>
+                        <p className="text-xs text-gray-400 font-outfit mt-0.5">{lead.address}</p>
                       </div>
                     </td>
                     <td className="px-6 md:px-8 py-5">
