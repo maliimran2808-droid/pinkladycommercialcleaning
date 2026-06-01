@@ -6,6 +6,7 @@ import { faqData } from '@/components/FAQ/faqConfig'
 import FAQ from '@/components/FAQ'
 import ReviewsGrid from '@/components/Reviews/ReviewsGrid'
 import GetInTouch from '@/components/GetInTouch'
+import AnimateIn from '@/components/AnimateIn'
 // import { ReviewSummary } from '@/components/Reviews'
 export const dynamic = 'force-dynamic' // Ensures new areas show up immediately
 
@@ -33,6 +34,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
   return (<>    
   <section>
     {/* {Section 1 is here} */}
+    <AnimateIn>
      <div className='w-full mt-17 '>
         <div className='w-full flex flex-col text-center items-center justify-between gap-3'>
             <span className="text-[14px] font-batch-size font-medium uppercase tracking-widest font-parkinsans">
@@ -51,8 +53,10 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
             </Link>
         </div>
      </div>
+     </AnimateIn>
     </section>
     <section className="w-full py-16 md:py-24 bg-white">
+
           <div className="max-w-[1280px] mx-auto px-4">
             
             {/* Main Container: Image Left, Content Right */}
@@ -62,6 +66,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
             
     
               {/* 🔹 Right Side: Content */}
+              <AnimateIn>
               <div>
                    <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
             Our Core Strength
@@ -153,18 +158,22 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
                   Get a Quote
                 </Link>
               </div>
-      <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
+              </AnimateIn>
+                <AnimateIn>
+      <div className="relative w-full h:[500px] md:h-[600px] rounded-2xl overflow-hidden shadow-lg">
+      
                 <img 
                   src='/images/sanjose.jpg'
                   alt="Commercial cleaning"// SEO optimized alt tag
                   
                   className="object-cover w-full h-full"
                 />
-              </div>
+              </div></AnimateIn>
             </div>
           </div>
         </section>
           {/* 2-Column Grid */}
+          <AnimateIn>
              <div className='w-full mx-auto text-center pt-20 bg-[#f3f5f0]'>
                           <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
                     Testimonials
@@ -175,6 +184,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
                          </h2>
                 <ReviewsGrid showFirstChild={false} />
                   </div>
+                  </AnimateIn>
 
 
  <section className="w-full py-16 md:py-24 bg-white">
@@ -187,6 +197,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
             
     
               {/* 🔹 Right Side: Content */}
+              <AnimateIn>
               <div className=" md:order-last">
                    <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
             Specialized Services
@@ -276,6 +287,8 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
                   Get a Quote
                 </Link>
               </div>
+              </AnimateIn>
+              <AnimateIn>
       <div className="relative order-first w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
                 <img 
                   src='/images/bnner.jpeg'
@@ -283,7 +296,7 @@ export default async function AreaPage({ params }: { params: Promise<{ slug: str
                   
                   className="object-cover w-full h-full"
                 />
-              </div>
+              </div></AnimateIn>
             </div>
           </div>
         </section>

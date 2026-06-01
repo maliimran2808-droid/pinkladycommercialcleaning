@@ -17,3 +17,22 @@ export async function GET() {
     return NextResponse.json({ error: 'Failed to fetch team' }, { status: 500 })
   }
 }
+
+// If you had a POST handler here for adding members, keep it, 
+// but make sure it uses .from('team_members') too!
+export async function POST(req: Request) {
+  try {
+    const { name, role, photo_url } = await req.json()
+
+    const { error } = await supabaseAdmin
+      .from('team_members') // <-- MUST BE team_members
+      .insert([{ name, role, photo_url, is_active: true }])
+
+    if (error) throw error
+
+    return NextResponse.json({ success: true })
+  } catch (error) {
+    console.error('Error adding team member:', error)
+    return NextResponse.json({ error: 'Failed to add member' }, { status: 500 })
+  }
+}

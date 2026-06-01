@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import LeftOverlay from './LeftOverlay'
 import BookingForm from './BookingForm'
+import AnimateIn from '../AnimateIn'
 
 export default function Booking() {
   return (
@@ -27,7 +28,9 @@ export default function Booking() {
         <LeftOverlay/>
         
         {/* Right Container: Booking Form */}
+        <AnimateIn>
         <BookingForm />
+        </AnimateIn>
 </div>
       </div>
     </section>

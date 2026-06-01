@@ -2,6 +2,7 @@
 
 import { Icon } from 'lucide-react'
 import { TimelineStepData } from './howItWorksConfig'
+import { useState, useEffect } from 'react'
 
 interface TimelineStepProps {
   data: TimelineStepData
@@ -10,17 +11,25 @@ interface TimelineStepProps {
 export default function TimelineStep({ data }: TimelineStepProps) {
   const isRight = data.position === 'right'
   const IconComponent = data.icon
+const [isMobile, setIsMobile] = useState(false);
 
+useEffect(() => {
+  const check = () => setIsMobile(window.innerWidth < 640); // 640px = sm breakpoint
+  check();
+  window.addEventListener("resize", check);
+  return () => window.removeEventListener("resize", check);
+}, []);
   return (
     <div 
       className="w-full flex flex-col items-center text-center px-4"
-      style={{
-      
-        // Force exact row and column placement on desktop
-        gridRowStart: data.step,       // Item 1 = Row 1, Item 2 = Row 2, Item 3 = Row 3
-        gridColumnStart: isRight ? 2 : 1, // Right = Col 2, Left = Col 1
-        gridColumnEnd: isRight ? 3 : 2,
-      }}
+      style={    isMobile
+        ? {} // no grid placement on mobile → single column flow
+        : {
+            gridRowStart: data.step,
+            gridColumnStart: isRight ? 2 : 1,
+            gridColumnEnd: isRight ? 3 : 2,
+          }
+    }
     >
       {/* Custom SVG Icon with Violet Background */}
       <div 

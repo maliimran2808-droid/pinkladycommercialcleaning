@@ -223,6 +223,12 @@ section{
   padding: 10px !important;
   gap: 10px !important;
 }
+.grid-timeline{
+        gap: 30px !important;
+        display: flex !important;
+        flex-direction: column;
+
+}
 }
 @media screen and (max-width:650px) {
     .padding-hero{
