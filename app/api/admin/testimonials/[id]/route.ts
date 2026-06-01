@@ -8,7 +8,7 @@ export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: 
     const body = await req.json()
     
     const { error } = await supabaseAdmin
-      .from('reviews')
+      .from('testimonials')
       .update(body)
       .eq('id', id)
 
@@ -25,7 +25,7 @@ export async function DELETE(req: NextRequest, { params }: { params: Promise<{ i
   
   try {
     const { error } = await supabaseAdmin
-      .from('reviews')
+      .from('testimonials')
       .delete()
       .eq('id', id)
 

@@ -10,7 +10,6 @@ export async function GET() {
       .order('created_at', { ascending: false })
 
     if (error) throw error
-
     return NextResponse.json(data)
   } catch (error) {
     console.error('Error fetching testimonials:', error)

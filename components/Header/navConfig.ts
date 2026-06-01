@@ -22,8 +22,8 @@ export const navConfig: NavItem[] = [
   {
     label: 'About', href:'/about',
     dropdown: [
-      { label: 'Our Team', href: '/about/team' },
-      { label: 'Client Testimonials', href: '/about/testimonials' },
+      { label: 'Our Team', href: '/team' },
+      { label: 'Client Testimonials', href: '/client-testimonials' },
     ],
   },
   { label: 'Contact Us', href: '/contact' },

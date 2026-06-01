@@ -1,38 +1,39 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { supabaseAdmin } from '@/lib/supabase'
 
-export async function PUT(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  
+export async function PUT(req: NextRequest, context: any) {
   try {
+    const params = context.params instanceof Promise ? await context.params : context.params
+    const { id } = params
     const body = await req.json()
-    
+
     const { error } = await supabaseAdmin
-      .from('team')
+      .from('team_members')
       .update(body)
       .eq('id', id)
 
     if (error) throw error
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error updating team member:', error)
-    return NextResponse.json({ error: 'Failed to update team member' }, { status: 500 })
+    console.error('PUT crash:', error)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
 }
 
-export async function DELETE(req: NextRequest, { params }: { params: Promise<{ id: string }> }) {
-  const { id } = await params
-  
+export async function DELETE(req: NextRequest, context: any) {
   try {
+    const params = context.params instanceof Promise ? await context.params : context.params
+    const { id } = params
+
     const { error } = await supabaseAdmin
-      .from('team')
+      .from('team_members')
       .delete()
       .eq('id', id)
 
     if (error) throw error
     return NextResponse.json({ success: true })
   } catch (error) {
-    console.error('Error deleting team member:', error)
-    return NextResponse.json({ error: 'Failed to delete team member' }, { status: 500 })
+    console.error('DELETE crash:', error)
+    return NextResponse.json({ error: 'Server error' }, { status: 500 })
   }
 }
