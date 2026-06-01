@@ -6,7 +6,7 @@ export default function FooterGiftCard() {
     <div 
       className="relative rounded-4xl p-6 pt-10 border-10 border-luxury-pink  rounded-[2rem] overflow-hidden h-fit flex flex-col"
       style={{ 
-        background: 'linear-gradient(to bottom right, #f291cb, rgba(255,255,255,0))' 
+        background: 'linear-gradient(to bottom right, var(--color-luxury-pink), rgba(255,255,255,0))' 
       }}
     >
       {/* Content (70-80% width) */}

@@ -47,10 +47,8 @@ export default function WhyChooseContent() {
         <Link
           href="/quote"
          
-        className="font-parkinsans w-[fit-content] button-font-size text-sm px-7 py-3.5 rounded-full cursor-pointer text-white font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
-        style={{ backgroundColor: '#E10788' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
+        className="font-parkinsans w-[fit-content] button-font-size text-sm px-7 py-3.5 rounded-full cursor-pointer text-luxury-lite bg-luxury-pink font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+    
         >
           Get a Free Quote Now
         </Link>

@@ -32,7 +32,7 @@ export default function AccordionItem({ title, content, isOpen, onClick }: Accor
         <div className="overflow-hidden">
           <div className="px-5 pb-5">
             {/* Pink Divider Line */}
-            <div className="w-full h-[1px] bg-[#E10788] mb-4" />
+            <div className="w-full h-[1px] bg-luxury-pink mb-4" />
             {/* Content Paragraph */}
             <p className="text-gray-500 px-3 text-sm font-thin font-outfit">
               {content}

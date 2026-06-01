@@ -2,7 +2,7 @@
 
 import { useSettings } from "@/app/context/SettingsContext"
 
-export default function WhyChooseUs({ heading }: { heading: string }) {
+export default function WhyChooseUs({ heading, cards }: { heading: string, cards?: { title: string, description: string, image_url: string }[] }) {
   const { phone } = useSettings()
 
   const stats = [
@@ -12,42 +12,89 @@ export default function WhyChooseUs({ heading }: { heading: string }) {
     { stat: '99%', label: 'Client Satisfaction' },
   ]
 
+  // Only render cards that actually have content
+  const validCards = (cards || []).filter(card => card.title || card.image_url || card.description)
+
   return (
-    <section className="w-full py-16 md:py-24 bg-gray-50">
-      <div className="max-w-[1280px] mx-auto px-4">
+    <section className="w-full pt-16 md:pt-24 -mt-[6rem] mb-30">
+      <div className="max-w-[1280px] relative mx-auto bg-luxury-pink rounded-4xl md:rounded-[3rem] px-4"
+      style={
+        {
+          padding:'7.5rem 1rem 7.5rem 1rem'
+        }
+      }>
         
         {/* 🔹 SEO Optimized Heading */}
-        <h2 className="text-3xl md:text-4xl font-parkinsans font-bold text-luxury-dark leading-tight text-center mb-12">
-          {heading}
-        </h2>
+           <h2 className="text-3xl font-title-size max-w-[80%] md:max-w-[45vw] text-center text-luxury-lite mx-auto md:text-5xl lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-14 mb-[4rem]">
+       {heading}
+             </h2>
 
         {/* 🔹 Stats Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
+       
+
+        {/* 🔹 Dynamic Feature Cards */}
+        {validCards.length > 0 && (
+          <div className="grid grid-cols-1 w-full md:w-[99.5%] mx-auto sm:grid-cols-2 lg:grid-cols-4 gap-5 mb-12">
+            {validCards.map((card, index) => (
+              <div key={index}
+             className={`bg-[#f4f6f0] box-clip rounded-2xl overflow-hidden p-5 py-10 transition-all duration-300 group flex flex-col ${
+          index === 0 || index === 1 ? 'box-clip' : 'box-clip2'
+        }`}   >
+                <div className="relative h-[60px] w-[60px] flex justify-center items-center overflow-hidden rounded-[18px] mb-6 bg-luxury-lite ">
+                  {card.image_url ? (
+                    <img 
+                      src={card.image_url} 
+                      alt={card.title || 'Feature'} 
+                      className="w-fit h-9 object-cover transition-transform duration-500" 
+                    />
+                  ) : (
+                    <div className="w-full h-full flex items-center justify-center text-gray-300 text-sm font-outfit">No Image</div>
+                  )}
+                </div>
+                <div className="flex-1 flex flex-col">
+                  <h3 className="text-xl md:text-2xl font-parkinsans font-regular leading-tight text-luxury-dark mb-2">{card.title}</h3>
+                  <p className="text-gray-500 font-thin font-outfit text-medium leading-tight flex-1">{card.description}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+ <div className="grid grid-cols-1 w-full md:w-[99.5%] sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {stats.map((item, index) => (
             <div 
               key={index} 
-              className="bg-white rounded-2xl p-8 text-center border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300"
+              className="border-l border-luxury-pink-soft py-2 pl-4 text-start  transition-shadow duration-300"
             >
-              <p className="text-4xl md:text-5xl font-parkinsans font-bold text-luxury-pink mb-3">
+              <p className="text-4xl md:text-5xl font-parkinsans font-regular text-luxury-lite mb-2">
                 {item.stat}
               </p>
-              <p className="text-gray-600 font-outfit text-sm md:text-base font-medium uppercase tracking-wide">
+              <p className="text-luxury-lite font-parkinsans text-sm font-thin tracking-normal">
                 {item.label}
               </p>
             </div>
           ))}
         </div>
-
         {/* 🔹 Contact Us Button with Phone Number */}
-        <div className="text-center">
+        <div className="text-center absolute  mx-auto flex items-end justify-center rounded-t-[30px] bg-white h-[60px] w-[200px]"
+        style={{
+          left:'50%',
+          bottom:'0px',
+          transform:'translate(-50%, 0)'
+        }}
+        >
+           <p> <img src="/images/c2.svg"
+ alt="" 
+ className='absolute bottom-[0px] -left-[32px] -scale-y-100 -scale-x-100'
+ /> </p>
+<p> <img src="/images/c2.svg"
+
+alt="" className='absolute bottom-[0px]  -right-[32px] -scale-y-100 scale-x-100'/> </p>
           <a 
             href={`tel:${phone}`}
-            className="inline-flex items-center gap-3 bg-luxury-dark text-white px-8 py-4 rounded-full font-outfit font-semibold uppercase tracking-wider text-sm hover:bg-luxury-pink transition-colors duration-300 shadow-lg"
-          >
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-            </svg>
-            Contact Us: {phone || '(321) 456-7890'}
+            className="font-parkinsans w-[fit-content] text-sm px-8 nav-font py-3.5 bg-luxury-pink-soft border-luxury-pink border-1 rounded-full cursor-pointer text-luxury-dark font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+           >
+           
+            Contact Us Now
           </a>
         </div>
 

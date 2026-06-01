@@ -25,30 +25,37 @@ export default function FreeEstimate({ subtitle, heading, locations, bottomHeadi
     : ''
 
   return (
-    <section className="w-full py-16 md:py-24 bg-gray-50">
+    <section className="w-full relative pt-30 rounded-t-[4rem] mb-20"
+    style={{
+      background:"url('/images/mapbanner.webp')",
+      minHeight:'70vh',
+      backgroundPosition:'top center'
+    }}
+    >
+      <div className='w-full h-full absolute top-0 left-0 rounded-t-[4rem] bg-black/60'></div>
       <div className="max-w-[1280px] mx-auto px-4">
         
         {/* 🔹 SEO Optimized Header Block */}
-        <div className="text-center mb-12">
-          <p className="text-sm font-semibold text-luxury-pink uppercase tracking-widest mb-3 font-outfit">
-            {subtitle}
-          </p>
-          <h2 className="text-3xl md:text-4xl font-parkinsans font-bold text-luxury-dark leading-tight">
-            {heading}
-          </h2>
+        <div className="text-center mb-12 z-[200] mt-15 relative ">
+         <span className="text-[12px] md:text-[17px] font-batch-size font-medium  text-luxury-lite uppercase tracking-widest font-parkinsans mb-6">
+        {subtitle}
+      </span>
+           <h2 className="text-3xl font-title-size font-medium min-w-[40vw] text-luxury-lite mx-auto md:text-5xl lg:text-[2.6rem] font-parkinsans leading-normal font-regular mt-4 mb-5">
+       {heading}
+             </h2>
         </div>
 
         {/* 🔹 Map & Buttons Container */}
-        <div className="relative max-w-4xl mx-auto mb-16">
-          
+        <div className=" max-w-4xl h-auto z-[205] relative min-h-[310px] shadow-lg rounded-4xl bg-white grid grid-cols-1 md:grid-cols-2 -mb-[13rem] mx-auto">
+          <div>
           {/* Location Buttons (Overlapping the top of the map) */}
           {locations.length > 0 && (
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 flex flex-wrap justify-center gap-3">
+            <div className="absolute top-0 right-[10%] -translate-x-1/2 -translate-y-1/2 z-10 flex flex-wrap justify-center gap-3">
               {locations.map((loc, index) => (
                 <button
                   key={index}
                   onClick={() => setActiveLocation(index)}
-                  className={`px-6 py-2.5 rounded-full font-outfit font-semibold text-sm uppercase tracking-wider shadow-md transition-all duration-300 ${
+                  className={`px-6 py-2.5 rounded-full font-parkinsans font-regular text-sm  tracking-wider shadow-md transition-all duration-300 ${
                     activeLocation === index 
                       ? 'bg-luxury-pink text-white' 
                       : 'bg-white text-luxury-dark border border-gray-200 hover:border-luxury-pink'
@@ -61,7 +68,7 @@ export default function FreeEstimate({ subtitle, heading, locations, bottomHeadi
           )}
 
           {/* Map Container */}
-          <div className="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg border border-gray-200 bg-gray-200">
+          <div className="w-full rounded-2xl h-[100%] overflow-hidden shadow-lg">
             {mapSrc ? (
               <iframe 
                 src={mapSrc}
@@ -79,23 +86,28 @@ export default function FreeEstimate({ subtitle, heading, locations, bottomHeadi
               </div>
             )}
           </div>
-        </div>
 
-        {/* 🔹 Bottom Content & CTA */}
-        <div className="text-center max-w-2xl mx-auto">
-          <h3 className="text-2xl md:text-3xl font-parkinsans font-bold text-luxury-dark leading-tight mb-4">
-            {bottomHeading}
-          </h3>
-          <p className="text-gray-600 font-outfit text-base md:text-lg leading-relaxed font-light mb-8">
-            {bottomDescription}
-          </p>
+          </div>
+            <div className="text-start w-[80%] mx-auto flex justify-center gap-4 flex-col h-auto md:min-h-[290px]">
+                   <h3 className="text-2xl font-title-size text-luxury-dark w-full md:w-[90%] font-parkinsans leading-tight font-regular">
+    {bottomHeading}
+             </h3>
+           
+            <p className="text-gray-500 w-full md:w-[80%] font-outfit md:text-[16px] leading-tight text-start font-thin">
+             {bottomDescription}
+            </p>
+      <div className='bg-luxury-pink/60 w-full h-[1px] '></div>
           <Link 
             href="/contact" 
-            className="inline-block bg-luxury-dark text-white px-8 py-4 rounded-full font-outfit font-semibold uppercase tracking-wider text-sm hover:bg-luxury-pink transition-colors duration-300 shadow-lg"
-          >
+          className="font-parkinsans w-[fit-content] text-sm px-7.5 nav-font py-3.5 rounded-full cursor-pointer text-luxury-lite bg-luxury-pink font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+      >
             Book Cleaning
           </Link>
         </div>
+        </div>
+
+        {/* 🔹 Bottom Content & CTA */}
+      
 
       </div>
     </section>

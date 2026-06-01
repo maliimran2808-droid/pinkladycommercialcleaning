@@ -15,42 +15,37 @@ interface WhatSetsUsApartProps {
 
 export default function WhatSetsUsApart({ image_url, heading, description, features }: WhatSetsUsApartProps) {
   return (
-    <section className="w-full py-16 md:py-24 bg-white">
+    <section className="w-full min-h-screen py-16 md:py-24 bg-white">
       <div className="max-w-[1280px] mx-auto px-4">
         
         {/* Main Container: Image Left, Content Right */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           
           {/* 🔹 Left Side: Image */}
-          <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
-            <Image 
-              src={image_url}
-              alt={heading} // SEO optimized alt tag
-              fill
-              className="object-cover"
-            />
-          </div>
+        
 
           {/* 🔹 Right Side: Content */}
           <div>
+               <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
+        What Sets Us Apart
+      </span>
             {/* SEO Optimized Heading */}
-            <h2 className="text-3xl md:text-4xl font-parkinsans font-bold text-luxury-dark leading-tight mb-4">
-              {heading}
-            </h2>
-
+           <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
+       {heading}
+             </h2>
             {/* SEO Optimized Paragraph */}
-            <p className="text-gray-600 font-outfit text-base md:text-lg leading-relaxed font-light mb-8">
+            <p className="text-gray-600 w-full md:w-[99%] font-outfit md:text-[16px] leading-tight text-start font-light">
               {description}
             </p>
 
             {/* 🔹 Three Key Cards (List) */}
-            <div className="space-y-6 mb-8">
+            <div className="space-y-6 mb-8 mt-10">
               {features.map((feature, index) => (
                 <div key={index} className="flex items-start gap-4">
                   {/* Shared Image/Icon for each list item */}
-                  <div className="relative w-12 h-12 flex-shrink-0 rounded-lg overflow-hidden bg-pink-50 border border-luxury-pink/20">
+                  <div className="relative w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden">
                     <Image 
-                      src="/images/standard-icon.webp" // Shared image placeholder
+                      src="/images/tick.svg" // Shared image placeholder
                       alt={feature.title}
                       fill
                       className="object-cover p-1"
@@ -59,11 +54,11 @@ export default function WhatSetsUsApart({ image_url, heading, description, featu
                   
                   <div>
                     {/* Small Heading Tag */}
-                    <h3 className="text-lg font-parkinsans font-bold text-luxury-dark mb-1">
+                    <h3 className="text-lg md:text-2xl font-parkinsans font-regular text-luxury-dark mb-1">
                       {feature.title}
                     </h3>
                     {/* Paragraph */}
-                    <p className="text-gray-500 font-outfit text-sm leading-relaxed font-light">
+                    <p className="text-gray-500 font-outfit text-sm md:text-[16px] leading-tight font-light">
                       {feature.description}
                     </p>
                   </div>
@@ -74,12 +69,19 @@ export default function WhatSetsUsApart({ image_url, heading, description, featu
             {/* 🔹 Get a Quote Button */}
             <Link 
               href="/#get-quote" 
-              className="inline-block bg-luxury-dark text-white px-8 py-3 rounded-full font-outfit font-semibold uppercase tracking-wider text-sm hover:bg-luxury-pink transition-colors duration-300 shadow-lg"
-            >
+              className="font-parkinsans w-[fit-content] text-sm px-7.5 nav-font py-3.5 rounded-full cursor-pointer text-luxury-lite bg-luxury-pink font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+     >
               Get a Quote
             </Link>
           </div>
-
+  <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
+            <Image 
+              src={image_url}
+              alt={heading} // SEO optimized alt tag
+              fill
+              className="object-cover"
+            />
+          </div>
         </div>
       </div>
     </section>

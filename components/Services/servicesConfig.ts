@@ -12,7 +12,7 @@ export interface ServiceCardData {
 export const servicesData: ServiceCardData[] = [
   {
     id: 1,
-    title: 'House Cleaning',
+    title: 'Window Cleaning',
     icon: React.createElement(HouseIcon),
     features: [
       'Routine dusting',
@@ -24,7 +24,7 @@ export const servicesData: ServiceCardData[] = [
   },
   {
     id: 2,
-    title: 'Office Cleaning',
+    title: 'Deep Sanitization',
     icon: React.createElement(OfficeIcon),
     features: [
       'Routine dusting',
@@ -36,7 +36,7 @@ export const servicesData: ServiceCardData[] = [
   },
   {
     id: 3,
-    title: 'Airbnb Cleaning',
+    title: 'Commercial Care',
     icon: React.createElement(AirbnbIcon),
     features: [
       'Routine dusting',
@@ -48,7 +48,7 @@ export const servicesData: ServiceCardData[] = [
   },
   {
     id: 4,
-    title: 'Yacht Cleaning',
+    title: 'House Cleaning',
     icon: React.createElement(YachtIcon),
     features: [
       'Routine dusting',

@@ -9,35 +9,51 @@ export default function DesktopNav() {
   const [activeDropdown, setActiveDropdown] = useState<string | null>(null)
   const [dynamicNavConfig, setDynamicNavConfig] = useState(navConfig)
 
-  // Fetch dynamic services and inject into the "Services" dropdown
+  // Fetch dynamic services AND areas, then inject into dropdowns
   useEffect(() => {
-    const fetchServices = async () => {
+    const fetchDynamicData = async () => {
       try {
-        const res = await fetch('/api/services')
-        if (res.ok) {
-          const data = await res.json()
-          
-          // Map the services from the DB to match the dropdown format
-          const serviceDropdown = data.map((service: { label: string; value: string }) => ({
+        // 1. Fetch Services
+        const servicesRes = await fetch('/api/services')
+        let serviceDropdown = []
+        if (servicesRes.ok) {
+          const servicesData = await servicesRes.json()
+          serviceDropdown = servicesData.map((service: { label: string; value: string }) => ({
             label: service.label,
             href: `/services/${service.value}`
           }))
-
-          // Update the navConfig by replacing only the 'Services' dropdown
-          setDynamicNavConfig(prevConfig => 
-            prevConfig.map(item => 
-              item.label === 'Services' 
-                ? { ...item, dropdown: serviceDropdown } 
-                : item
-            )
-          )
         }
+
+        // 2. Fetch Areas
+        const areasRes = await fetch('/api/areas')
+        let areasDropdown = []
+        if (areasRes.ok) {
+          const areasData = await areasRes.json()
+          areasDropdown = areasData.map((area: { name: string; slug: string }) => ({
+            label: area.name,
+            href: `/areas/${area.slug}`
+          }))
+        }
+
+        // 3. Update the navConfig by replacing both 'Services' and 'Areas' dropdowns
+        setDynamicNavConfig(prevConfig => 
+          prevConfig.map(item => {
+            if (item.label === 'Services') {
+              return { ...item, dropdown: serviceDropdown }
+            }
+            if (item.label === 'Areas') {
+              return { ...item, dropdown: areasDropdown }
+            }
+            return item
+          })
+        )
+
       } catch (err) {
-        console.error('Failed to load services for nav:', err)
+        console.error('Failed to load navigation data:', err)
       }
     }
 
-    fetchServices()
+    fetchDynamicData()
   }, [])
 
   return (
@@ -53,7 +69,7 @@ export default function DesktopNav() {
           onMouseEnter={() => item.dropdown && setActiveDropdown(item.label)}
           onMouseLeave={() => setActiveDropdown(null)}
         >
-          {item.dropdown ? (
+          {item.dropdown && item.dropdown.length > 0 ? (
             <Link href={item.href || '#'} className="flex nav-font items-center gap-1 text-[15px] font-medium text-gray-800 hover:text-luxury-pink transition-colors duration-300">
               {item.label}
               <ChevronDown className={`w-4 h-4 nav-font transition-transform duration-300 ${activeDropdown === item.label ? 'rotate-180' : ''}`} />
@@ -64,7 +80,7 @@ export default function DesktopNav() {
             </Link>
           )}
 
-          {item.dropdown && activeDropdown === item.label && (
+          {item.dropdown && item.dropdown.length > 0 && activeDropdown === item.label && (
             <div className="absolute top-full left-1/2 -translate-x-1/2 pt-4 dropdown-animate z-50">
               <div className="bg-white rounded-md py-2 min-w-[220px]" style={{ border: '2px solid var(--color-luxury-pink)', boxShadow: '0 10px 30px rgba(232, 160, 180, 0.2)' }}>
                 {item.dropdown.map((drop) => (

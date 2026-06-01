@@ -15,7 +15,7 @@ export default function PricingCard({ data }: PricingCardProps) {
     <div 
       className={`relative p-8 pt-12 font-parkinsans text-center shadow-sm hover:shadow-xl transition-all duration-500 flex flex-col items-center justify-start ${data.isWide ? 'flex-[1.6]' : 'flex-1.55'}`}
       style={{ 
-        background: `linear-gradient(${data.gradient}, #e32794, #f0c5db)`,
+        background: `linear-gradient(${data.gradient}, var(--color-luxury-pink), var(--color-luxury-pink-soft) )`,
         clipPath: data.clipPath,
         height: data.height, // 🆕 Applies the exact height from config
         minHeight: data.height, // Ensures it doesn't shrink

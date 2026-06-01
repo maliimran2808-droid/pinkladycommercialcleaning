@@ -17,7 +17,7 @@ export default function HowItWorks({ subtitle, heading, steps }: HowItWorksProps
   return (
     <section className="w-full"
    >
-      <div className="max-w-[1280px] mx-auto py-14 px-4">
+      <div className="max-w-[1280px] mx-auto pt-20 px-4">
         
         {/* 🔹 SEO Optimized Header Block */}
         <div className="text-center mb-5">

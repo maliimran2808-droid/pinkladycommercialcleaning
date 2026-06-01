@@ -17,13 +17,11 @@ alt="" className='absolute top-[0px]  -right-8 scale-x-100'/> </p>
         <input
           type="email"
           placeholder="Enter your email address"
-          className="flex-1 md:w-[260px] px-6 py-3.5 rounded-full border border-r-0 border-[#E10788] text-sm focus:outline-none focus:border-luxury-pink transition-colors"
+          className="flex-1 md:w-[260px] px-6 py-3.5 rounded-full border border-r-0 border-luxury-pink text-sm focus:outline-none focus:border-luxury-pink transition-colors"
         />
         <button
-           className="font-parkinsans w-[fit-content] text-sm px-13.5 py-3.5 rounded-full cursor-pointer text-white font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
-        style={{ backgroundColor: '#E10788' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}>
+           className="font-parkinsans w-[fit-content] bg-luxury-pink text-sm px-13.5 py-3.5 rounded-full cursor-pointer text-luxury-lite font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+     >
           Subscribe
         </button>
       </div>

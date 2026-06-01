@@ -30,8 +30,8 @@ export default function ReviewCard({ data }: ReviewCardProps) {
       {/* Customer Info Row */}
       <div className="flex items-center gap-3 mt-auto">
         {/* Pink Circle with First Letter */}
-        <div className="w-14 h-14 rounded-full bg-[#fadced] flex items-center justify-center flex-shrink-0">
-          <span className="text-[#E10788] font-parkinsans font-bold text-2xl">{firstLetter}</span>
+        <div className="w-14 h-14 rounded-full bg-luxury-pink-soft flex items-center justify-center flex-shrink-0">
+          <span className="text-luxury-pink font-parkinsans font-bold text-2xl">{firstLetter}</span>
         </div>
         
         <div>

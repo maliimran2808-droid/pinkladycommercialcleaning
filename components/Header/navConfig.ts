@@ -16,11 +16,8 @@ export const navConfig: NavItem[] = [
     ],
   },
   {
-    label: 'Areas', href:'/areas',
-    dropdown: [
-      { label: 'Orlando', href: '/areas/orlando' },
-      { label: 'Vero Beach', href: '/areas/vero-beach' },
-    ],
+    label: 'Areas',
+    dropdown: [],
   },
   {
     label: 'About', href:'/about',

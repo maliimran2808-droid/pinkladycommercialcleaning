@@ -4,6 +4,36 @@ import { useState, useEffect } from 'react'
 import { useParams, useRouter } from 'next/navigation'
 import { ArrowLeft, Save, Plus, Trash2, ImagePlus, Loader2, ChevronDown } from 'lucide-react'
 
+// 🔥 FIX 1: SectionCard moved OUTSIDE the component so it doesn't get recreated on every keystroke
+function SectionCard({ id, title, children, openSections, toggleSection }: { 
+  id: string, 
+  title: string, 
+  children: React.ReactNode,
+  openSections: string[],
+  toggleSection: (id: string) => void
+}) {
+  const isOpen = openSections.includes(id)
+  return (
+    <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
+      <button 
+        type="button"
+        onClick={() => toggleSection(id)}
+        className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
+      >
+        <h2 className="text-xl md:text-2xl font-parkinsans font-bold text-luxury-dark">{title}</h2>
+        <ChevronDown className={`w-6 h-6 text-gray-400 group-hover:text-luxury-pink transition-all duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
+      </button>
+      
+      {/* 🔥 FIX 2: Use CSS to hide instead of destroying the DOM. Inputs stay alive! */}
+      <div className={`transition-all duration-300 ease-in-out ${isOpen ? 'max-h-[10000px] opacity-100' : 'max-h-0 opacity-0 overflow-hidden'}`}>
+        <div className="px-6 md:px-8 pb-8 pt-2 border-t border-gray-100">
+          {children}
+        </div>
+      </div>
+    </div>
+  )
+}
+
 export default function ServicePageEditor() {
   const { serviceId } = useParams()
   const router = useRouter()
@@ -12,7 +42,6 @@ export default function ServicePageEditor() {
   const [saving, setSaving] = useState(false)
   const [feedback, setFeedback] = useState<{ type: 'success' | 'error'; message: string } | null>(null)
   
-  // 🔹 Accordion State: Tracks which sections are open (empty = all closed)
   const [openSections, setOpenSections] = useState<string[]>([])
 
   const toggleSection = (id: string) => {
@@ -81,45 +110,24 @@ export default function ServicePageEditor() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(content)
       })
+      const data = await res.json() // Read the response
       if (res.ok) {
         setFeedback({ type: 'success', message: '✅ All changes saved successfully!' })
       } else {
-        setFeedback({ type: 'error', message: '❌ Failed to save changes.' })
+        // Show the ACTUAL error from the API
+        setFeedback({ type: 'error', message: `❌ ${data.error || 'Failed to save changes.'}` })
       }
-    } catch { 
+    } catch (err) { 
       setFeedback({ type: 'error', message: '❌ Network error.' }) 
     } finally { 
       setSaving(false) 
-      setTimeout(() => setFeedback(null), 3000) 
+      setTimeout(() => setFeedback(null), 4000) 
     }
   }
 
-  // Premium Input Classes
   const inputClass = "w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-luxury-pink focus:border-transparent transition-all text-sm font-outfit text-gray-800"
   const textareaClass = `${inputClass} resize-none`
   const labelClass = "text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2 block font-outfit"
-
-  // 🔹 Reusable Accordion Wrapper Component
-  const SectionCard = ({ id, title, children }: { id: string, title: string, children: React.ReactNode }) => {
-    const isOpen = openSections.includes(id)
-    return (
-      <div className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow duration-300 overflow-hidden">
-        <button 
-          onClick={() => toggleSection(id)}
-          className="w-full flex items-center justify-between p-6 md:p-8 text-left group"
-        >
-          <h2 className="text-xl md:text-2xl font-parkinsans font-bold text-luxury-dark">{title}</h2>
-          <ChevronDown className={`w-6 h-6 text-gray-400 group-hover:text-luxury-pink transition-all duration-300 ${isOpen ? 'rotate-180' : 'rotate-0'}`} />
-        </button>
-        
-        {isOpen && (
-          <div className="px-6 md:px-8 pb-8 pt-2 border-t border-gray-100 animate-fadeIn">
-            {children}
-          </div>
-        )}
-      </div>
-    )
-  }
 
   if (loading) {
     return (
@@ -131,7 +139,7 @@ export default function ServicePageEditor() {
 
   return (
     <div className="w-full max-w-5xl mx-auto pb-20">
-      {/* 🔹 Premium Header */}
+      
       <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mb-10 gap-4">
         <div>
           <button onClick={() => router.back()} className="text-sm text-gray-400 hover:text-luxury-pink mb-3 flex items-center gap-2 transition-colors group font-outfit">
@@ -149,7 +157,6 @@ export default function ServicePageEditor() {
         </button>
       </div>
 
-      {/* Feedback Banner */}
       {feedback && (
         <div className={`mb-8 p-4 rounded-xl text-sm font-medium font-outfit transition-all ${feedback.type === 'success' ? 'bg-green-50 text-green-700 border border-green-100' : 'bg-red-50 text-red-700 border border-red-100'}`}>
           {feedback.message}
@@ -159,7 +166,7 @@ export default function ServicePageEditor() {
       <div className="space-y-6">
         
         {/* 🔹 HERO SECTION */}
-        <SectionCard id="hero" title="Hero Section">
+        <SectionCard id="hero" title="Hero Section" openSections={openSections} toggleSection={toggleSection}>
           <div className="space-y-6">
             <div>
               <label className={labelClass}>Heading</label>
@@ -193,7 +200,7 @@ export default function ServicePageEditor() {
         </SectionCard>
 
         {/* 🔹 HOW IT WORKS SECTION */}
-        <SectionCard id="howItWorks" title="How It Works">
+        <SectionCard id="howItWorks" title="How It Works" openSections={openSections} toggleSection={toggleSection}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <label className={labelClass}>Subtitle</label>
@@ -230,7 +237,7 @@ export default function ServicePageEditor() {
         </SectionCard>
 
         {/* 🔹 FEATURES SECTION */}
-        <SectionCard id="features" title="Features Checklist">
+        <SectionCard id="features" title="Features Checklist" openSections={openSections} toggleSection={toggleSection}>
           <div className="space-y-6 mb-6">
             <div>
               <label className={labelClass}>Heading</label>
@@ -257,15 +264,91 @@ export default function ServicePageEditor() {
         </SectionCard>
 
         {/* 🔹 WHY CHOOSE US SECTION */}
-        <SectionCard id="whyChooseUs" title="Why Choose Us (Stats)">
-          <div>
-            <label className={labelClass}>Heading</label>
-            <input type="text" value={content.why_choose_us_heading || ''} onChange={(e) => handleChange('why_choose_us_heading', e.target.value)} className={inputClass} />
+        <SectionCard id="whyChooseUs" title="Why Choose Us (Stats & Cards)" openSections={openSections} toggleSection={toggleSection}>
+          <div className="space-y-6">
+            <div>
+              <label className={labelClass}>Section Heading</label>
+              <input type="text" value={content.why_choose_us_heading || ''} onChange={(e) => handleChange('why_choose_us_heading', e.target.value)} className={inputClass} />
+            </div>
+            
+            <div className="pt-4 border-t border-gray-100 space-y-6">
+              <label className="text-xs font-semibold text-gray-500 uppercase tracking-wider block">Feature Cards (Up to 4)</label>
+              {[0, 1, 2, 3].map((index) => {
+                const card = (content.why_choose_us_cards && content.why_choose_us_cards[index]) || {}
+                return (
+                  <div key={index} className="p-5 bg-gray-50 rounded-xl border border-gray-200 space-y-4">
+                    <p className="text-sm font-bold text-luxury-dark font-outfit">Card {index + 1}</p>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                      <div>
+                        <label className="text-xs font-medium text-gray-500 mb-1 block">Title</label>
+                        <input 
+                          type="text" 
+                          value={card.title || ''} 
+                          onChange={(e) => {
+                            const cards = [...(content.why_choose_us_cards || Array(4).fill({}))]
+                            if (!cards[index]) cards[index] = { title: '', description: '', image_url: '' }
+                            cards[index] = { ...cards[index], title: e.target.value }
+                            handleChange('why_choose_us_cards', cards)
+                          }}
+                          className={inputClass}
+                          placeholder={`Card ${index + 1} Title`}
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs font-medium text-gray-500 mb-1 block">Image</label>
+                        <div className="flex items-center gap-3 mt-1">
+                          {card.image_url && <img src={card.image_url} alt={`Card ${index+1}`} className="h-12 w-12 rounded-lg object-cover border" />}
+                          <label className="px-4 py-2 text-xs font-semibold bg-luxury-dark text-white rounded-lg cursor-pointer hover:bg-luxury-pink transition-colors">
+                            Upload
+                            <input 
+                              type="file" 
+                              accept="image/*" 
+                              className="hidden" 
+                              onChange={async (e) => {
+                                const file = e.target.files?.[0]
+                                if (!file) return
+                                const formData = new FormData()
+                                formData.append('file', file)
+                                try {
+                                  const res = await fetch('/api/upload-team-photo', { method: 'POST', body: formData })
+                                  const data = await res.json()
+                                  if (res.ok && data.url) {
+                                    const cards = [...(content.why_choose_us_cards || Array(4).fill({}))]
+                                    if (!cards[index]) cards[index] = { title: '', description: '', image_url: '' }
+                                    cards[index] = { ...cards[index], image_url: data.url }
+                                    handleChange('why_choose_us_cards', cards)
+                                  }
+                                } catch (err) { console.error(err) }
+                              }}
+                            />
+                          </label>
+                        </div>
+                      </div>
+                    </div>
+                    <div>
+                      <label className="text-xs font-medium text-gray-500 mb-1 block">Description</label>
+                      <textarea 
+                        rows={2}
+                        value={card.description || ''} 
+                        onChange={(e) => {
+                          const cards = [...(content.why_choose_us_cards || Array(4).fill({}))]
+                          if (!cards[index]) cards[index] = { title: '', description: '', image_url: '' }
+                          cards[index] = { ...cards[index], description: e.target.value }
+                          handleChange('why_choose_us_cards', cards)
+                        }}
+                        className={`${inputClass} resize-none`}
+                        placeholder="Write a short paragraph..."
+                      />
+                    </div>
+                  </div>
+                )
+              })}
+            </div>
           </div>
         </SectionCard>
 
         {/* 🔹 WHAT SETS US APART SECTION */}
-        <SectionCard id="setsApart" title="What Sets Us Apart">
+        <SectionCard id="setsApart" title="What Sets Us Apart" openSections={openSections} toggleSection={toggleSection}>
           <div className="space-y-6 mb-6">
             <div>
               <label className={labelClass}>Heading</label>
@@ -312,7 +395,7 @@ export default function ServicePageEditor() {
         </SectionCard>
 
         {/* 🔹 OUR SERVICES (CROSS-SELL) SECTION */}
-        <SectionCard id="ourServices" title="Our Services (Cross-Sell Cards)">
+        <SectionCard id="ourServices" title="Our Services (Cross-Sell Cards)" openSections={openSections} toggleSection={toggleSection}>
           <div className="mb-6">
             <label className={labelClass}>Heading</label>
             <input type="text" value={content.our_services_heading || ''} onChange={(e) => handleChange('our_services_heading', e.target.value)} className={inputClass} />
@@ -338,7 +421,7 @@ export default function ServicePageEditor() {
         </SectionCard>
 
         {/* 🔹 FAQ SECTION */}
-        <SectionCard id="faqs" title="FAQs">
+        <SectionCard id="faqs" title="FAQs" openSections={openSections} toggleSection={toggleSection}>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
             <div>
               <label className={labelClass}>Subtitle</label>
@@ -373,7 +456,7 @@ export default function ServicePageEditor() {
         </SectionCard>
 
         {/* 🔹 FREE ESTIMATE & MAP SECTION */}
-        <SectionCard id="estimate" title="Free Estimate & Map">
+        <SectionCard id="estimate" title="Free Estimate & Map" openSections={openSections} toggleSection={toggleSection}>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
             <div>
               <label className={labelClass}>Subtitle</label>

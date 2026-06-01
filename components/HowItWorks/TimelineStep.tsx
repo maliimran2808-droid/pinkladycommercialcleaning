@@ -24,8 +24,8 @@ export default function TimelineStep({ data }: TimelineStepProps) {
     >
       {/* Custom SVG Icon with Violet Background */}
       <div 
-        className="w-22 relative h-22 rounded-3xl flex items-center justify-center mb-3" 
-        style={{ backgroundColor: '#fadced' }}
+        className="w-22 relative h-22 bg-luxury-pink-soft rounded-3xl flex items-center justify-center mb-3" 
+     
       
       >
         <img src="/images/star.svg" width={'27'}  className='absolute top-[-9] right-[-5]' alt="commercial cleaning" />

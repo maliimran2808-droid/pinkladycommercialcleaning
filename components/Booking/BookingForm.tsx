@@ -83,22 +83,21 @@ export default function BookingForm() {
         </div>
 
         {/* Submit Button */}
+        <div className='w-full flex items-center justify-center'>
         <button
           type="submit"
-           className="font-parkinsans w-[fit-content] px-7 py-2.5 rounded-full cursor-pointer text-white font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
-        style={{ backgroundColor: '#E10788' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
+           className="font-parkinsans w-[fit-content] px-7 py-2.5 rounded-full bg-luxury-pink cursor-pointer text-luxury-lite font-semibold capitalize tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+
         >
           I'd like a quote
-        </button>
+        </button></div>
       </form>
 
       {/* Bottom Text & Phone */}
       <div className="text-center font-parkinsans mt-6">
         <p className="text-gray-900 font-parkinsans text-sm mb-3">If you have any questions, contact our office at</p>
       <a href={`tel:${phone}`} className="inline-flex items-center gap-2 text-luxury-dark font-semibold hover:text-luxury-pink transition-colors">
-  <div className='bg-pink-100 w-10 h-10 rounded-full flex items-center justify-center'><Phone  size={18} /></div>
+  <div className='bg-luxury-pink-soft w-10 h-10 rounded-full flex items-center justify-center'><Phone  size={18} /></div>
   <span>{phone || '+ 1 (346) 565-3599'}</span>
 </a>
       </div>

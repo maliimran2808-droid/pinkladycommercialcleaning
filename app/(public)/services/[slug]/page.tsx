@@ -1,3 +1,4 @@
+export const dynamic = 'force-dynamic'
 import { supabaseAdmin } from '@/lib/supabase'
 import ServiceHeader from '@/components/Services/ServiceHeader'
 import ServiceHero from '@/components/Services/ServiceHero'
@@ -9,6 +10,9 @@ import OurServices from '@/components/Services/OurServices'
 import FAQ from '@/components/Services/FAQ'
 import FreeEstimate from '@/components/Services/FreeEstimate'
 import { notFound } from 'next/navigation'
+import Reviews from '@/components/Reviews'
+import ReviewsGrid from '@/components/Reviews/ReviewsGrid'
+import ReviewSummary from '@/components/Reviews/ReviewSummary'
 
 // Fetch data on the server
 async function getServiceData(slug: string) {
@@ -79,7 +83,10 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
       />
 
       {/* Section 5: Why Choose Us (Stats) */}
-      <WhyChooseUs heading={content.why_choose_us_heading || "Florida's Most Trusted Cleaning Professionals"} />
+     <WhyChooseUs 
+  heading={content.why_choose_us_heading || 'Why Choose Us'} 
+  cards={content.why_choose_us_cards} 
+/>
 
       {/* Section 6: What Sets Us Apart */}
       <WhatSetsUsApart 
@@ -94,8 +101,16 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         heading={content.our_services_heading || "Here is What We Can Do For You"}
         services={content.our_services_cards || []}
       />
-
-      {/* Section 8: FAQs */}
+  <div className='w-full mx-auto text-center pt-20 bg-[#f3f5f0]'>
+              <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
+        Testimonials
+      </span>
+            {/* SEO Optimized Heading */}
+           <h2 className="text-3xl font-title-size min-w-[40vw] md:max-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 -mb-6">
+       Empowering Thousands of Users and Enterprises
+             </h2>
+    <ReviewsGrid showFirstChild={false} />
+      </div>{/* Section 8: FAQs */}
       <FAQ 
         subtitle={content.faq_subtitle || "FAQ"}
         heading={content.faq_heading || "Frequently Asked Questions"}

@@ -33,7 +33,7 @@ const { phone } = useSettings()
   return (
     <>
       <header
-        className="fixed top-0 left-[50%] header-edit bg-white py-12 px-6 rounded-b-[30px] w-[94.8%] z-[1000]"
+        className="fixed top-0 left-[50%] header-edit bg-white py-12 px-6 rounded-b-[30px] w-[94.8%] z-[999999999]"
         style={{
           height: '72px',
           fontFamily: 'var(--font-parkinsans)',

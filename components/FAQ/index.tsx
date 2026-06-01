@@ -38,7 +38,7 @@ export default function FAQ() {
       <h2 className="text-3xl w-[40vw] font-title-size text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-5">
         Cleaning Tips & Hacks
       </h2>
-      <Link href="/blog" className="text-black bg-pink-200 border-1 border-pink-600 py-3 rounded-full px-6 font-medium text-sm hover:underline">
+      <Link href="/blog" className="text-black bg-luxury-pink-soft border-1 border-luxury-pink py-3 rounded-full px-6 font-medium text-sm hover:underline">
         Read Our Blog
       </Link>
     </div>

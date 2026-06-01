@@ -8,7 +8,7 @@ import ReviewSummary from './ReviewSummary'
 import ReviewTopAwards from './ReviewTopAwards'
 
 
-export default function ReviewsGrid() {
+export default function ReviewsGrid({showFirstChild = true}) {
   const [reviews, setReviews] = useState<ReviewData[]>([])
   const [loading, setLoading] = useState(true)
 
@@ -43,11 +43,11 @@ export default function ReviewsGrid() {
     }
     }>
 
-          <ReviewSummary />
+          {showFirstChild && <ReviewSummary />}
       {/* The Summary Badge sits slightly on top of this container */}
       
 
-        <ReviewTopAwards />
+       <ReviewTopAwards />
 
 
 
@@ -64,10 +64,8 @@ export default function ReviewsGrid() {
           href="https://bark.com"
           target="_blank"
           rel="noopener noreferrer"
-         className="font-parkinsans w-[fit-content] text-sm px-7.5 py-3.5 rounded-full cursor-pointer text-white font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
-        style={{ backgroundColor: '#E10788' }}
-        onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
-        onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#E10788')}
+         className="font-parkinsans w-[fit-content] bg-luxury-pink text-sm px-7.5 py-3.5 rounded-full cursor-pointer text-luxury-lite font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
+
         >
           View Our Reviews on Bark
         </Link>

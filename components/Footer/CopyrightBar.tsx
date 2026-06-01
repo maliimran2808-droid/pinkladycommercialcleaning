@@ -28,7 +28,7 @@ export default function CopyrightBar() {
       </div>
 
       {/* Pink Divider */}
-      <div className="w-full h-[1px] bg-pink-400 mb-6" />
+      <div className="w-full h-[1px] bg-luxury-pink mb-6" />
 
       {/* Copyright Text */}
       <div className="flex flex-col md:flex-row items-center justify-center gap-1 text-center md:text-left">

@@ -3,9 +3,9 @@ import { Star } from 'lucide-react'
 export default function ReviewSummary() {
   return (
    
-    <div className="relative clippath-shape w-[400px] rounded-b-3xl pb-5 mx-auto z-10 flex justify-center items-start mb-0 md:mb-8"
+    <div className="relative clippath-shape w-[400px] bg-luxury-pink rounded-b-3xl pb-5 mx-auto z-10 flex justify-center items-start mb-0 md:mb-8"
     style={{
-          backgroundColor: '#E10788',
+
           top: '-2px', 
     }} >
 
@@ -21,17 +21,17 @@ alt="" className='absolute top-[1.3px] -right-8 scale-x-100'/> </p>
         {/* 5 Pink Stars */}
         <div className=" flex items-center justify-center bg-white px-11 py-2.5 rounded-full gap-3 mb-1">
           <img src='/images/barktransparentlogo.png' width="45" alt="Star" />
-          <div className=' flex items-center gap-3 justify-center text-center'>
+          <div className=' flex items-center gap-1 justify-center text-center'>
           {[1, 2, 3, 4, 5].map((i) => (
-            <Star key={i} size={12} className="fill-luxury-pink bg-pink-200 text-luxury-pink" />
+            <div className='bg-luxury-pink-soft w-5 flex items-center justify-center h-5'><Star key={i} size={12} className="fill-luxury-pink  text-luxury-pink" /></div>
           ))}</div>
         </div>
 
         {/* Exceptional Text */} 
-        <h3 className="text-lg text-center font-regular text-white font-parkinsans ">Exceptional 5 Rating</h3>
+        <h3 className="text-lg text-center font-regular text-luxury-lite font-parkinsans ">Exceptional 5 Rating</h3>
         
         {/* Rating Score */}
-        <p className="text-white text-sm font-regular font-parkinsans">
+        <p className="text-luxury-lite text-sm font-regular font-parkinsans">
           Rating Score 5.0 of 5
         </p>
     
