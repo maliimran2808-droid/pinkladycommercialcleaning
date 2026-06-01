@@ -8,9 +8,9 @@ export default function HeroCard() {
   const { hero_heading } = useSettings() // <-- Add this
 const { phone } = useSettings() 
   return (
-    <div className="w-full hero-card max-w-[63vw] mx-auto px-4">
+    <div className="w-full hero-card md:max-w-[63vw] mx-auto px-0 md:px-4">
       <div 
-        className="bg-white/80 backdrop-blur-lg box-clip border border-white/40 rounded-[3rem] p-8 md:p-10 transition-transform duration-700 hover:rotate-0"
+        className="bg-white/80 backdrop-blur-lg box-clip border border-white/40 rounded-[3rem] py-12 px-4 md:p-10 transition-transform duration-700 hover:rotate-0"
         style={{ transform: 'rotate(0deg)' }}
       >
         <div className='w-[90%] mx-auto'>

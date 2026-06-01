@@ -17,7 +17,7 @@ export default function HeroBackground() {
         alt="Luxury Commercial Cleaning"
         fill
         priority
-        className="object-cover object-center"
+        className="object-cover object-center sm:object-right"
         quality={100}
       />
       {/* Subtle overlay to ensure text readability over any image */}

@@ -11,7 +11,7 @@ export default function Hero() {
       <HeroBackground />
       
       {/* Glass Card Layer (Centered) */}
-      <div ref={animRef} className="relative z-10 w-full hero-position sm:mt-20 flex items-center justify-center">
+      <div ref={animRef} className="relative z-10 w-full hero-position flex items-center justify-center">
         <HeroCard />
       </div>
     </section>
