@@ -6,8 +6,9 @@ import { useState, useEffect } from 'react'
 import { ReviewData } from './reviewsConfig'
 import ReviewSummary from './ReviewSummary'
 import ReviewTopAwards from './ReviewTopAwards'
-
-
+// import { useScrollStagger } from '@/lib/useScrollStagger'
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
+import AnimateIn from '../AnimateIn'
 export default function ReviewsGrid({showFirstChild = true}) {
   const [reviews, setReviews] = useState<ReviewData[]>([])
   const [loading, setLoading] = useState(true)
@@ -52,14 +53,19 @@ export default function ReviewsGrid({showFirstChild = true}) {
 
 
       {/* 3x3 Grid */}
-        <div className="grid grid-cols-1 grid-change md:grid-cols-3 gap-6 mb-12">
+    
+        <div className="grid review-card grid-cols-1 grid-change md:grid-cols-3 gap-6 mb-12">
       {reviews.map((review) => (
+       <AnimateIn>
         <ReviewCard key={review.id} data={review} />
+   </AnimateIn>
       ))}
     </div>
+    
 
       {/* Center Button */}
       <div className="flex justify-center">
+        <AnimateIn>
         <Link
           href="https://bark.com"
           target="_blank"
@@ -69,6 +75,7 @@ export default function ReviewsGrid({showFirstChild = true}) {
         >
           View Our Reviews on Bark
         </Link>
+        </AnimateIn>
       </div>
     </div>
   )

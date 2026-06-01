@@ -1,6 +1,9 @@
+'use client'
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
 export default function OurProcess() {
+  const animRef = useScrollAnimation()
   return (
-    <div className="text-center mb-16">
+    <div ref={animRef} className="text-center mb-16">
       <span className="text-[11px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         Our process
       </span>

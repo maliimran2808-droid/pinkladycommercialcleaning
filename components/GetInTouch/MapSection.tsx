@@ -1,5 +1,6 @@
 import { LocationData } from './locationsConfig'
 import FloatingSvg from './FloatingSvg'
+import AnimateIn from '../AnimateIn'
 
 interface MapSectionProps {
   location: LocationData
@@ -7,6 +8,7 @@ interface MapSectionProps {
 
 export default function MapSection({ location }: MapSectionProps) {
   return (
+    <AnimateIn>
     <div className="relative w-full map-size h-[400px] md:h-[550px] rounded-2xl overflow-hidden shadow-xl group">
       {/* Google Map Embed */}
       <iframe
@@ -22,6 +24,6 @@ export default function MapSection({ location }: MapSectionProps) {
 
       {/* Floating Rotating SVG */}
       <FloatingSvg />
-    </div>
+    </div></AnimateIn>
   )
 }

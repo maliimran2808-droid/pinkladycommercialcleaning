@@ -37,14 +37,14 @@ export default function CopyrightBar() {
           <span>Copyright {currentYear} - Pink Ladies Commercial Cleaning Services</span>
         </div>
         <div className="text-gray-500 text-[16px]">
-          | Developed & Marketing by Morgan with{' '}
+          | Developed & Marketing by{' '}
           <a 
-            href="https://animakermedia.com" 
+            href="https://weblinxmedia.online" 
             target="_blank" 
             rel="noopener noreferrer" 
             className="text-luxury-pink font-semibold hover:underline"
           >
-            Animaker Media
+            Weblinx Media
           </a>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { Phone, Mail } from 'lucide-react'
 import { LocationData } from './locationsConfig'
 import { useSettings } from '@/app/context/SettingsContext'
+import AnimateIn from '../AnimateIn'
 interface ContactInfoProps {
   location: LocationData
 }
@@ -9,6 +10,7 @@ export default function ContactInfo({ location }: ContactInfoProps) {
   const { phone, email, office_hours } = useSettings()
 
   return (
+    <AnimateIn>
     <div className="flex flex-col justify-center h-full py-8">
       {/* Small Label */}
       <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
@@ -56,6 +58,6 @@ Ready to experience the cleansing difference? Book our service today, and we wil
           Contact Us
         </a>
       </div>
-    </div>
+    </div></AnimateIn>
   )
 }

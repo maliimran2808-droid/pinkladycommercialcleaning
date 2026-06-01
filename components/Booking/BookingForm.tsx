@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Phone } from 'lucide-react'
 import { serviceOptions } from './bookingConfig'
 import {useSettings} from '@/app/context/SettingsContext'
+import AnimateIn from '../AnimateIn'
 export default function BookingForm() {
   const [formData, setFormData] = useState({
     name: '',
@@ -24,6 +25,7 @@ export default function BookingForm() {
 
   return (
     <div className="bg-white p-8 md:p-12">
+      <AnimateIn>
       <div className='w-full items-center justify-center flex flex-col text-center'>
       {/* Top Label */}
       <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
@@ -34,11 +36,12 @@ export default function BookingForm() {
       <h2 className="text-3xl font-title-size md:max-w-[90%] md:text-[2.55rem] font-parkinsans font-regular mb-5">
         Get Your Estimate & Book Now
       </h2>
-</div>
+</div></AnimateIn>
       {/* Paragraph */}
       
 
       {/* Form */}
+      <AnimateIn>
       <form onSubmit={(e) => e.preventDefault()} className="space-y-5 font-outfit">
         
         {/* Row 1: Name & Email */}
@@ -92,8 +95,9 @@ export default function BookingForm() {
           I'd like a quote
         </button></div>
       </form>
-
+</AnimateIn>
       {/* Bottom Text & Phone */}
+      <AnimateIn>
       <div className="text-center font-parkinsans mt-6">
         <p className="text-gray-900 font-parkinsans text-sm mb-3">If you have any questions, contact our office at</p>
       <a href={`tel:${phone}`} className="inline-flex items-center gap-2 text-luxury-dark font-semibold hover:text-luxury-pink transition-colors">
@@ -101,6 +105,7 @@ export default function BookingForm() {
   <span>{phone || '+ 1 (346) 565-3599'}</span>
 </a>
       </div>
+      </AnimateIn>
     </div>
   )
 }

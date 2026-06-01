@@ -1,9 +1,11 @@
+'use client'
 import Image from 'next/image'
 import { companyLogos } from './reviewsConfig'
-
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
 export default function ReviewsIntro() {
+  const animRef = useScrollAnimation()
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center mb-16">
+    <div ref={animRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center mb-16">
       {/* Left Side: Image */}
       <div className="relative w-full overflow-hidden shadow-xl group">
         <img

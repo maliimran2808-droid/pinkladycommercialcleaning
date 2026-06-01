@@ -5,6 +5,7 @@ import LocationTabs from './LocationTabs'
 import ContactInfo from './ContactInfo'
 import MapSection from './MapSection'
 import { locationsData } from './locationsConfig'
+import AnimateIn from '../AnimateIn'
 
 export default function GetInTouch() {
   const [activeLocationId, setActiveLocationId] = useState(locationsData[0].id)
@@ -16,11 +17,12 @@ export default function GetInTouch() {
       <div className="max-w-[1280px] mx-auto relative">
         
         {/* Floating Tabs (Positioned 50% above container) */}
+        <AnimateIn>
         <LocationTabs 
           locations={locationsData} 
           activeId={activeLocationId} 
           onSelect={setActiveLocationId} 
-        />
+        /></AnimateIn>
 
         {/* Main Container */}
         <div className=" rounded-4xl p-8 md:p-12 pt-16 md:pt-20 grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center"

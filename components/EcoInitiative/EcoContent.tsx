@@ -1,9 +1,11 @@
+'use client'
 import { Check } from 'lucide-react'
 import { ecoFeatures } from './ecoConfig'
-
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
 export default function EcoContent() {
+  const animRef = useScrollAnimation()
   return (
-<div className="flex flex-col overflow-hidden justify-center h-full py-8">
+<div ref={animRef} className="flex flex-col overflow-hidden justify-center h-full py-8">
       {/* Small Label */}
         <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Why us

@@ -1,6 +1,9 @@
+'use client'
 import { Star } from 'lucide-react'
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
 
 export default function ReviewSummary() {
+  const animRef = useScrollAnimation()
   return (
    
     <div className="relative clippath-shape w-[400px] bg-luxury-pink rounded-b-3xl pb-5 mx-auto z-10 flex justify-center items-start mb-0 md:mb-8"
@@ -17,7 +20,7 @@ export default function ReviewSummary() {
 
 alt="" className='absolute top-[1.3px] -right-8 scale-x-100'/> </p>
             
-      <div className=" rounded-2xl text-center mt-[-1.9rem] px-10 py-2 ">
+      <div ref={animRef} className=" rounded-2xl text-center mt-[-1.9rem] px-10 py-2 ">
         {/* 5 Pink Stars */}
         <div className=" flex items-center justify-center bg-white px-11 py-2.5 rounded-full gap-3 mb-1">
           <img src='/images/barktransparentlogo.png' width="45" alt="Star" />

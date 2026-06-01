@@ -4,6 +4,7 @@ import FooterServices from './FooterServices'
 import FooterCompany from './FooterCompany'
 import FooterGiftCard from './FooterGiftCard'
 import CopyrightBar from './CopyrightBar'
+import AnimateIn from '../AnimateIn'
 
 export default function Footer() {
   return (
@@ -18,27 +19,37 @@ export default function Footer() {
         <div className="grid grid-cols-1 grid-fix md:grid-cols-12 gap-8 md:gap-6 mb-0">
           {/* Card 1: 35% (4/12 cols) */}
           <div className="md:col-span-4">
+            <AnimateIn>
             <FooterBrand />
+            </AnimateIn>
           </div>
 
           {/* Card 2: ~15% (2/12 cols) */}
           <div className="md:col-span-2">
+            <AnimateIn>
             <FooterServices />
+            </AnimateIn>
           </div>
 
           {/* Card 3: ~15% (2/12 cols) */}
           <div className="md:col-span-2">
+            <AnimateIn>
             <FooterCompany />
+            </AnimateIn>
           </div>
 
           {/* Card 4: 35% (4/12 cols) */}
           <div className="md:col-span-4">
+            <AnimateIn>
             <FooterGiftCard />
+            </AnimateIn>
           </div>
         </div>
 
         {/* Bottom: Social Icons & Copyright */}
+    
         <CopyrightBar />
+       
 
       </div>
     </footer>

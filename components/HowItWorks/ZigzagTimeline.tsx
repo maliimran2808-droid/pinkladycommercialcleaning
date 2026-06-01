@@ -3,8 +3,11 @@
 import Link from 'next/link'
 import TimelineStep from './TimelineStep'
 import { timelineStepsData } from './howItWorksConfig'
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
+import AnimateIn from '../AnimateIn'
 
 export default function ZigzagTimeline() {
+  const animRef = useScrollAnimation()
   return (
     <>
     <div className="relative mt-5">
@@ -16,16 +19,18 @@ export default function ZigzagTimeline() {
       />
 
       {/* STRICT 2 COLUMNS on Desktop, 1 Column on Mobile -> Creates 3 Rows */}
-      <div className="relative z-10 grid py-7 gap-y-5">
+      <AnimateIn>
+      <div  className="relative z-10 grid py-7 gap-y-5">
         {timelineStepsData.map((step) => (
           <TimelineStep key={step.id} data={step} />
         ))}
       </div>
+      </AnimateIn>
 
       {/* Center Button */}
 
     </div>
-          <div className="flex justify-center mt-5 ">
+          <div  className="flex justify-center mt-5 ">
         <Link
           href="/quote"
        

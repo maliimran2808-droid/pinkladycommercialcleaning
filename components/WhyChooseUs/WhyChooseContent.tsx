@@ -4,16 +4,16 @@ import { useState } from 'react'
 import Link from 'next/link'
 import AccordionItem from './AccordionItem'
 import { accordionData } from './whyChooseConfig'
-
+import { useScrollAnimation } from '@/lib/useScrollAnimation'
 export default function WhyChooseContent() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
-
+const animRef = useScrollAnimation()
   const handleToggle = (index: number) => {
     setOpenIndex(openIndex === index ? null : index)
   }
 
   return (
-    <div className="flex flex-col overflow-hidden justify-center h-full py-8">
+    <div ref={animRef} className="flex flex-col overflow-hidden justify-center h-full py-8">
       {/* Small Label */}
       <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Why choose us

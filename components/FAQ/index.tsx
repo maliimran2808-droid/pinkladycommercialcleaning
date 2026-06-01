@@ -1,6 +1,7 @@
 import Link from 'next/dist/client/link'
 import FAQItem from './FAQItem'
 import { faqData } from './faqConfig'
+import AnimateIn from '../AnimateIn'
 
 export default function FAQ() {
   return (
@@ -9,6 +10,7 @@ export default function FAQ() {
       <div className="max-w-[1280px] mx-auto px-6 md:px-12">
         
         {/* Center Header */}
+        <AnimateIn>
         <div className="text-center mb-16">
          <span className="text-[11px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         FAQ
@@ -17,11 +19,14 @@ export default function FAQ() {
         Frequently Asked Questions
       </h2>
         </div>
+        </AnimateIn>
 
         {/* 2-Column Grid */}
         <div className="grid grid-cols-1 grid-change md:grid-cols-2 gap-6 md:gap-8">
           {faqData.map((item) => (
+            <AnimateIn>
             <FAQItem key={item.id} data={item} />
+            </AnimateIn>
           ))}
         </div>
 
@@ -31,17 +36,18 @@ export default function FAQ() {
 
     </section>
           <div>
+            <AnimateIn>
              <div className="text-center mb-16">
       <span className="text-[11px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         From Our Blog
       </span>
-      <h2 className="text-3xl w-[40vw] font-title-size text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-5">
+      <h2 className="text-3xl w-[40vw] font-title-size text-black mx-auto md:text-5xl lg:text-[2.4rem] font-parkinsans leading-11 font-regular mt-3 mb-8">
         Cleaning Tips & Hacks
       </h2>
       <Link href="/blog" className="text-black bg-luxury-pink-soft border-1 border-luxury-pink py-3 rounded-full px-6 font-medium text-sm hover:underline">
         Read Our Blog
       </Link>
-    </div>
+    </div></AnimateIn>
           </div>
     </>
   )
