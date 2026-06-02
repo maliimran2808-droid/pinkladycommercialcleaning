@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import AnimateIn from '../AnimateIn'
 
 interface FAQItem {
   question: string
@@ -27,17 +28,21 @@ export default function FAQ({ subtitle, heading, description, faqs }: FAQProps) 
         
         {/* 🔹 SEO Optimized Header Block */}
         <div className="text-center mb-12">
+          <AnimateIn delay={0.1}>
                <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         {subtitle}
-      </span>
+      </span></AnimateIn>
             {/* SEO Optimized Heading */}
+            <AnimateIn delay={0.2}>
            <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
        {heading}
-             </h2>
+             </h2></AnimateIn>
+             <AnimateIn delay={0.3}>
             {/* SEO Optimized Paragraph */}
             <p className="text-gray-600 w-full md:w-[99%] font-outfit md:text-[16px] leading-tight text-center font-light">
               {description}
             </p>
+          </AnimateIn>
         </div>
 
         {/* 🔹 2-Column Grid for FAQs */}
@@ -46,6 +51,7 @@ export default function FAQ({ subtitle, heading, description, faqs }: FAQProps) 
             const isOpen = openIndex === index
 
             return (
+              <AnimateIn delay={ index * 0.2}>
               <div 
                 key={index} 
                 className="border border-gray-200 bg-[#f3f5f0] rounded-[30px] py-10 px-5 cursor-pointer hover:border-luxury-pink/50 transition-colors duration-300"
@@ -76,6 +82,7 @@ export default function FAQ({ subtitle, heading, description, faqs }: FAQProps) 
                 </div>
 
               </div>
+              </AnimateIn>
             )
           })}
         </div>

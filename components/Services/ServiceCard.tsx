@@ -25,6 +25,7 @@ export default function ServiceCard({ data }: ServiceCardProps) {
       {/* Middle: Feature List */}
       <ul className="space-y-4 mb-1 flex-grow">
         {data.features.map((feature, index) => (
+          
           <li key={index} className="flex items-center mb-2.5 gap-2">
             <div className="w-[fit-content] flex items-center justify-start flex-shrink-0">
               <Check size={13} className="text-luxury-pink" strokeWidth={3} />

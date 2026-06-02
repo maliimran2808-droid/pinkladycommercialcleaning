@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import AnimateIn from '../AnimateIn'
 
 interface ServiceHeroProps {
   title: string
@@ -16,19 +17,21 @@ export default function ServiceHero({ title, hero_heading, hero_paragraph, hero_
     <section className="relative min-h-[80vh] w-[96%] rounded-4xl mx-auto flex items-center overflow-hidden py-16 md:py-24">
       
       {/* 🔹 Blurred Background Image */}
-      <div className="absolute inset-0 z-0">
-        <Image
+     
+      <div className="absolute w-full inset-0 z-0">
+        <AnimateIn className="w-full h-full" delay={0.4}>
+         <img
           src={hero_image_1_url || "/images/bannerservice.jpg"} 
            alt={`${formattedTitle} showcase 1`}
-          fill
-          className="object-cover object-top-right h-full opacity-100"
-        />
+          
+          className="object-cover object-top-right rounded-4xl w-full h-full opacity-100"
+        /></AnimateIn>
         {/* <div className="absolute inset-0 bg-white/50"></div> */}
       </div>
 
       {/* 🔹 Content Container */}
       <div className="relative z-10  max-w-[1280px] mx-auto px-4 w-full grid grid-cols-1 md:grid-cols-2 gap-1 padding-hero items-center">
-        
+        <AnimateIn delay={0.8}>
         {/* Left Side: Text & CTA */}
         <div className="space-y-6 md:min-w-[40rem] bg-gray-50  box-clip border border-white/40 rounded-[3rem] px-8 py-15">
           <h2 className="text-3xl md:text-4xl m-0 mb-3 font-parkinsans font-regular text-luxury-dark leading-tight">
@@ -85,7 +88,7 @@ export default function ServiceHero({ title, hero_heading, hero_paragraph, hero_
 
 
         </div>
-
+</AnimateIn>
         {/* Right Side: Blended Images */}
         
       </div>

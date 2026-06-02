@@ -241,6 +241,7 @@ export default function LeadsPage() {
                         <p className="text-xs text-gray-500 font-outfit mt-0.5">{lead.email}</p>
                         <p className="text-xs text-gray-400 font-outfit mt-0.5">{lead.phone}</p>
                         <p className="text-xs text-gray-400 font-outfit mt-0.5">{lead.address}</p>
+                         {lead.message && <p className="text-xs text-gray-400 font-outfit mt-1 italic">💬 {lead.message.substring(0, 60)}{lead.message.length > 60 ? '...' : ''}</p>}
                       </div>
                     </td>
                     <td className="px-6 md:px-8 py-5">

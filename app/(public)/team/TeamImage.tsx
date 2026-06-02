@@ -5,6 +5,7 @@ import Image from 'next/image'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Leaf1, Leaf2, Leaf3 } from '@/components/EcoInitiative/LeafIcons'
+import AnimateIn from '@/components/AnimateIn'
 
 gsap.registerPlugin(ScrollTrigger)
 
@@ -60,16 +61,16 @@ export default function EcoImage() {
 
   return (
     <div ref={containerRef} className="relative w-full h-[400px] md:h-[450px] lg:h-[450px]  group">
-      <Image
+    <AnimateIn>  <img
        src="/images/bannerteam.webp"    alt="Green eco cleaning"
-        fill
-        priority
+        
+        
         className="object-cover rounded-4xl transition-transform duration-700 ease-out"
-        quality={100}
-      />
+        // quality={100}
+      /></AnimateIn>
   
       {/* Floating Leaves - Top Left Corner */}
-      <div className="absolute top-4 left-4 md:top-8 md:left-8 z-10 pointer-events-none">
+      <div className="absolute top-4 left-40 md:top-8 md:left-8 z-10 pointer-events-none">
         {/* Leaf 1 */}
         <div ref={leaf1Ref} className="absolute w-[max-content] -top-15 -left-10">
           <img src="/images/firstleaf.webp" width={'38px'} alt="Commercial Cleaning" />

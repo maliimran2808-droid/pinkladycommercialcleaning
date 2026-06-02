@@ -4,7 +4,7 @@ export default function ServiceHeader({ title }: { title: string }) {
 
   return (
     <section className="w-full py-16 md:py-20 bg-white">
-      <div className="max-w-[1280px] mx-auto px-4 text-center">
+      <div className="max-w-[1280px] mx-auto  px-4 text-center">
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-parkinsans font-normal text-luxury-dark leading-tight capitalize">
           {formattedTitle}
         </h1>

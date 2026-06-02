@@ -1,4 +1,5 @@
 import Image from 'next/image'
+import AnimateIn from '../AnimateIn'
 
 interface Step {
   image_url: string
@@ -21,18 +22,20 @@ export default function HowItWorks({ subtitle, heading, steps }: HowItWorksProps
         
         {/* 🔹 SEO Optimized Header Block */}
         <div className="text-center mb-5">
+          <AnimateIn>
            <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         {subtitle}
-      </span>
-           <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto md:text-5xl lg:text-[2.6rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
+      </span></AnimateIn>
+       <AnimateIn delay={0.3}>    <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto md:text-5xl lg:text-[2.6rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
        {heading}
              </h2>
-            
+</AnimateIn>            
              </div>
 
         {/* 🔹 Cards & Arrows Container */}
         <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-0">
           {steps.map((step, index) => (
+          <AnimateIn delay={ index * 0.2}>
             <div key={index} className="flex flex-col md:flex-row items-center">
               
               {/* The Card */}
@@ -76,6 +79,7 @@ export default function HowItWorks({ subtitle, heading, steps }: HowItWorksProps
                 </>
               )}
             </div>
+            </AnimateIn>
           ))}
         </div>
 

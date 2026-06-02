@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 
 export default function ServicesPage() {
   return (
-    <div className="w-full mt-7 md:mt-3 py-20 md:py-28 bg-white">
-      <div className="max-w-[1280px] mx-auto">
+    <div className="w-full mt-7 md:mt-3 bg-white">
+      <div className="max-w-[1280px]  pt-20 md:pt-28 mx-auto">
         
         {/* Header Section */}
         <div className="text-center mb-5">

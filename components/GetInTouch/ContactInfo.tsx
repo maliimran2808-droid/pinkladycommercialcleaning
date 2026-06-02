@@ -13,32 +13,32 @@ export default function ContactInfo({ location }: ContactInfoProps) {
     <AnimateIn>
     <div className="flex flex-col justify-center h-full py-8">
       {/* Small Label */}
-      <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
+      <AnimateIn delay={0.3}><span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Get In Touch
-      </span>
+      </span></AnimateIn>
 
       {/* Large Heading */}
-      <h2 className="text-3xl font-title-size max-w-[80%] md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
+      <AnimateIn delay={0.4}><h2 className="text-3xl font-title-size max-w-[80%] md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
         Choose Pink Ladies, Choose Quality
-      </h2>
+      </h2></AnimateIn>
 
       {/* Paragraph */}
-      <p className="text-gray-500 font-para-size md:text-medium font-thin font-outfit mb-8">
+      <AnimateIn delay={0.5}><p className="text-gray-500 font-para-size md:text-medium font-thin font-outfit mb-8">
 Ready to experience the cleansing difference? Book our service today, and we will handle the rest!      </p>
-
+</AnimateIn>
       {/* Office Hours */}
-      <div className="mb-2 font-outfit">
+      <AnimateIn delay={0.4}><div className="mb-2 font-outfit">
   <h4 className="text-[16px] text-gray-500 font-para-size font-thin">Our office is open</h4>
   <p className="text-[16px] text-gray-500 font-para-size font-thin">{office_hours || 'Monday to Saturday, 9 AM to 4 PM'}</p>
-</div>
+</div></AnimateIn>
 
       {/* Dynamic Address */}
-      <div className="mb-8">
+      <AnimateIn delay={0.5}><div className="mb-8">
         <p className="text-[16px] text-gray-500 font-para-size font-thin">{location.address}</p>
-      </div>
+      </div></AnimateIn>
 
       {/* Phone & Email */}
-      <div className="space-y-4 mb-8">
+      <AnimateIn delay={0.6}><div className="space-y-4 mb-8">
   <div className="flex items-center gap-4">
     <Phone size={18} className="text-gray-500" />
     <a href={`tel:${phone}`} className="text-[16px] text-gray-500 font-para-size font-thin">{phone || '(321) 456-7890'}</a>
@@ -47,7 +47,7 @@ Ready to experience the cleansing difference? Book our service today, and we wil
     <Mail size={18} className="text-gray-500" />
     <a href={`mailto:${email}`} className="text-[16px] text-gray-500 font-para-size font-thin">{email || 'info@pinkladies.com'}</a>
   </div>
-</div>
+</div></AnimateIn>
       {/* Contact Button */}
       <div>
         <a

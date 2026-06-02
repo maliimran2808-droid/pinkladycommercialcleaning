@@ -5,6 +5,7 @@ import Link from 'next/link'
 import AccordionItem from './AccordionItem'
 import { accordionData } from './whyChooseConfig'
 import { useScrollAnimation } from '@/lib/useScrollAnimation'
+import AnimateIn from '../AnimateIn'
 export default function WhyChooseContent() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
 const animRef = useScrollAnimation()
@@ -13,25 +14,28 @@ const animRef = useScrollAnimation()
   }
 
   return (
-    <div ref={animRef} className="flex flex-col overflow-hidden justify-center h-full py-8">
+    <div  className="flex flex-col overflow-hidden justify-center h-full py-8">
       {/* Small Label */}
+      <AnimateIn>
       <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Why choose us
-      </span>
+      </span></AnimateIn>
 
       {/* Large Heading */}
+      <AnimateIn delay={0.23}>
       <h2 className="text-2xl font-title-size md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
         Sparkling Commercial Cleaning Services in Florida
-      </h2>
+      </h2></AnimateIn>
 
-      {/* Paragraph */}
+      {/* Paragraph */}<AnimateIn delay={0.3}>
       <p className="text-gray-500 font-para-size md:text-medium font-thin font-outfit mb-8">
         Do you want to step into an office that keeps your mood fresh all day? At Pink Ladies Commercial Cleaning Services, we create a comfortable environment in your commercial spaces by providing high grade cleaning services.
-      </p>
+      </p></AnimateIn>
 
       {/* Accordions */}
       <div className="space-y-4 mb-10">
         {accordionData.map((item, index) => (
+          <AnimateIn delay={index*0.2}>
           <AccordionItem
             key={index}
             title={item.title}
@@ -39,11 +43,12 @@ const animRef = useScrollAnimation()
             isOpen={openIndex === index}
             onClick={() => handleToggle(index)}
           />
-        ))}
+      </AnimateIn>  ))}
       </div>
 
       {/* CTA Button */}
       <div>
+        <AnimateIn delay={0.2}>
         <Link
           href="/quote"
          
@@ -51,7 +56,7 @@ const animRef = useScrollAnimation()
     
         >
           Get a Free Quote Now
-        </Link>
+        </Link></AnimateIn>
       </div>
     </div>
   )

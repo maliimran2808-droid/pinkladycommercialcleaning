@@ -16,8 +16,8 @@ export default function Services() {
 </div>
         {/* Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {servicesData.map((service) => (
-            <AnimateIn>
+          {servicesData.map((service, index) => (
+            <AnimateIn delay={index * 0.2}>
             <ServiceCard key={service.id} data={service} />
             </AnimateIn>
           ))}

@@ -6,7 +6,7 @@ export default function ReviewSummary() {
   const animRef = useScrollAnimation()
   return (
    
-    <div className="relative clippath-shape w-[400px] bg-luxury-pink rounded-b-3xl pb-5 mx-auto z-10 flex justify-center items-start mb-0 md:mb-8"
+    <div className="relative clippath-shape w-[250px] md:w-[400px] bg-luxury-pink rounded-b-3xl pb-5 mx-auto z-10 flex justify-center items-start mb-0 md:mb-8"
     style={{
 
           top: '-2px', 

@@ -10,10 +10,10 @@ const { phone } = useSettings()
   return (
     <div className="w-full hero-card md:max-w-[63vw] mx-auto px-0 md:px-4">
       <div 
-        className="bg-white/80 backdrop-blur-lg box-clip border border-white/40 rounded-[3rem] py-12 px-4 md:p-10 transition-transform duration-700 hover:rotate-0"
+        className="bg-white/95 backdrop-blur-lg box-clip  border border-white/40 rounded-[3rem] py-12 px-4 md:p-12 transition-transform duration-700 hover:rotate-0"
         style={{ transform: 'rotate(0deg)' }}
       >
-        <div className='w-[90%] mx-auto'>
+        <div className='w-full md:w-[90%] mx-auto'>
         {/* Top Badge */}
         <div className="flex items-center justify-center gap-2 mb-4">
           <span className="text-sm font-outfit font-regular text-gray-700 tracking-normal">Vetted Cleaners 5</span>

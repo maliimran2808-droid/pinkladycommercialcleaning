@@ -6,7 +6,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 
 gsap.registerPlugin(ScrollTrigger)
 
-export default function AnimateIn({ children, className = '' }: { children: ReactNode, className?: string }) {
+interface AnimateInProps {
+  children: ReactNode
+  className?: string
+  delay?: number // 🔹 NEW: Delay in seconds (e.g., 0.1, 0.2, 0.3)
+}
+
+export default function AnimateIn({ children, className = '', delay = 0 }: AnimateInProps) {
   const ref = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
@@ -16,15 +22,16 @@ export default function AnimateIn({ children, className = '' }: { children: Reac
     // Set initial state
     gsap.set(el, { opacity: 0, y: 40 })
 
-    // Create animation
+    // Create animation with the delay
     const anim = gsap.to(el, {
       opacity: 1,
       y: 0,
       duration: 0.8,
+      delay: delay, // 🔹 Applies your delay here
       ease: 'power3.out',
       scrollTrigger: {
         trigger: el,
-        start: 'top 72%', // Triggers when 85% of the viewport hits the element
+        start: 'top 85%',
         toggleActions: 'play none none none',
       },
     })
@@ -33,7 +40,7 @@ export default function AnimateIn({ children, className = '' }: { children: Reac
       anim.scrollTrigger?.kill()
       anim.kill()
     }
-  }, [])
+  }, [delay]) // 🔹 Re-run if delay changes
 
   return (
     <div ref={ref} className={className}>

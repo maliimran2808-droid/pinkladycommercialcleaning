@@ -62,7 +62,7 @@ const { phone } = useSettings()
   {phone || '+ 1 (346) 565-3599'}
 </a>
             <Link
-              href="/quote"
+              href="/contact"
       
         className="font-parkinsans w-[fit-content] text-sm px-7.5 nav-font py-3.5 rounded-full cursor-pointer text-white bg-luxury-pink font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
 

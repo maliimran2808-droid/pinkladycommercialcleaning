@@ -69,10 +69,10 @@ export default function EcoImage() {
       />
   
       {/* Floating Leaves - Top Left Corner */}
-      <div className="absolute top-4 left-4 md:top-8 md:left-8 z-10 pointer-events-none">
+      <div className="absolute top-4 left-45 md:top-8 md:left-8 z-10 pointer-events-none">
         {/* Leaf 1 */}
         <div ref={leaf1Ref} className="absolute w-[max-content] -top-15 -left-10">
-          <img src="/images/firstleaf.webp" width={'38px'} alt="Commercial Cleaning" />
+          <img src="/images/firstleaf.webp" width={'38px'}  alt="Commercial Cleaning" />
         </div>
 
         {/* Leaf 2 */}

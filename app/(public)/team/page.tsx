@@ -53,25 +53,25 @@ Meet the people behind our success          </p>
       {/* 🔹 SECTION 2: Intro + Team Cards */}
       <section className="w-full py-16 md:py-24">
         <div className="max-w-[1280px] mx-auto px-4 py-20">
-          <AnimateIn>
+        
             <div className="text-center mb-16">
-               <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
+                <AnimateIn delay={0.2}> <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
         Meet Us
-      </span>
-               <h1 className="text-4xl md:text-5xl lg:text-5xl w-[95%] md:w-[60%] mx-auto font-regular font-parkinsans text-luxury-dark leading-tight">
+      </span></AnimateIn>
+             <AnimateIn delay={0.3}> <h1 className="text-4xl md:text-5xl lg:text-5xl w-[95%] md:w-[60%] mx-auto font-regular font-parkinsans text-luxury-dark leading-tight">
              Get to know the faces that make it all happen
-          </h1>
-          <p className="text-gray-600 text-medium max-w-2xl font-thin mx-auto leading-relaxed">
+          </h1></AnimateIn> 
+        <AnimateIn delay={0.4}> <p className="text-gray-600 text-medium max-w-2xl font-thin mx-auto leading-relaxed">
  Meet our talented team members who work together to bring your vision to life.
                    </p>
-           
+           </AnimateIn>
             </div>
-          </AnimateIn>
+          
 
           {members.length > 0 ? (
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
               {members.map((member: any, index: number) => (
-                <AnimateIn key={member.id}>
+                <AnimateIn key={member.id} delay={index * 0.2 }>
                   <div className="group relative bg-white border border-luxury-pink rounded-4xl py-8 text-center transition-all duration-500 hover:bg-luxury-pink hover:border-luxury-pink shadow-sm hover:shadow-xl cursor-pointer">
                     
                     {/* Profile Image */}

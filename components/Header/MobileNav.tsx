@@ -1,8 +1,8 @@
 'use client'
 
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { ChevronDown } from 'lucide-react'
+import { ChevronDown, X } from 'lucide-react'
 import { navConfig } from './navConfig'
 
 interface MobileNavProps {
@@ -12,49 +12,133 @@ interface MobileNavProps {
 
 export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
   const [openAccordion, setOpenAccordion] = useState<string | null>(null)
+  const [dynamicNavConfig, setDynamicNavConfig] = useState(navConfig)
+  const [isClosing, setIsClosing] = useState(false)
 
-  if (!isOpen) return null
+  // 🔹 Fetch dynamic services and areas
+  useEffect(() => {
+    const fetchDynamicData = async () => {
+      try {
+        const [servicesRes, areasRes] = await Promise.all([
+          fetch('/api/services'),
+          fetch('/api/areas')
+        ])
+
+        let serviceDropdown = []
+        if (servicesRes.ok) {
+          const servicesData = await servicesRes.json()
+          serviceDropdown = servicesData.map((s: { label: string; value: string }) => ({
+            label: s.label,
+            href: `/services/${s.value}`
+          }))
+        }
+
+        let areasDropdown = []
+        if (areasRes.ok) {
+          const areasData = await areasRes.json()
+          areasDropdown = areasData.map((a: { name: string; slug: string }) => ({
+            label: a.name,
+            href: `/areas/${a.slug}`
+          }))
+        }
+
+        setDynamicNavConfig(prevConfig => 
+          prevConfig.map(item => {
+            if (item.label === 'Services') return { ...item, dropdown: serviceDropdown }
+            if (item.label === 'Areas') return { ...item, dropdown: areasDropdown }
+            return item
+          })
+        )
+      } catch (err) {
+        console.error('Failed to load mobile nav data:', err)
+      }
+    }
+
+    fetchDynamicData()
+  }, [])
+
+  // Reset accordion when menu closes
+  useEffect(() => {
+    if (!isOpen) {
+      setOpenAccordion(null)
+      setIsClosing(false)
+    }
+  }, [isOpen])
+
+  // 🔹 Smooth close: slides back to right, THEN closes after animation
+  const handleSmoothClose = () => {
+    setIsClosing(true)
+    setTimeout(() => {
+      onClose()
+    }, 500) // Match the slide-out animation duration
+  }
+
+  // Whether panel should be visible (open or currently closing)
+  const isVisible = isOpen || isClosing
+  // Whether panel should slide in or out
+  const isSlideIn = isOpen && !isClosing
 
   return (
-    <div className="fixed inset-0 z-[999] md:hidden">
+    <div className={`fixed inset-0 z-[999] md:hidden transition-opacity duration-500 ${isVisible ? 'opacity-100 visible' : 'opacity-0 invisible'}`}>
+      
       {/* Backdrop */}
-      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" onClick={onClose} />
+      <div className={`absolute inset-0 bg-black/40 backdrop-blur-sm transition-opacity duration-500 ${isSlideIn ? 'opacity-100' : 'opacity-0'}`} onClick={handleSmoothClose} />
 
-      {/* Luxury Panel */}
-      <div className="absolute top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl slide-in-right flex flex-col">
-        <div className="flex-1 overflow-y-auto py-24 px-8">
-          {navConfig.map((item, index) => (
-            <div key={item.label} className="mb-6 fade-up" style={{ animationDelay: `${index * 0.05}s` }}>
-              {item.dropdown ? (
+      {/* Luxury Panel - Slides from right */}
+      <div className={`absolute top-0 right-0 h-full w-full max-w-sm bg-white shadow-2xl flex flex-col transition-transform duration-500 ease-in-out ${isSlideIn ? 'translate-x-0' : 'translate-x-full'}`}>
+        
+        {/* Close Button */}
+        <div className="flex justify-end p-6 pb-0">
+          <button onClick={handleSmoothClose} className="p-2 text-gray-400 hover:text-luxury-dark hover:bg-gray-50 rounded-full transition-colors">
+            <X size={24} />
+          </button>
+        </div>
+
+        {/* Navigation Links */}
+        <div className="flex-1 overflow-y-auto py-8 px-8">
+          {dynamicNavConfig.map((item) => (
+            <div key={item.label} className="mb-5">
+              {item.dropdown && item.dropdown.length > 0 ? (
                 <div>
-                  <button
-                    className="flex w-full items-center justify-between text-xl font-semibold text-luxury-dark border-b border-gray-100 pb-3"
-                    onClick={() => setOpenAccordion(openAccordion === item.label ? null : item.label)}
-                  >
-                    {item.label}
-                    <ChevronDown className={`w-5 h-5 text-luxury-pink transition-transform duration-300 ${openAccordion === item.label ? 'rotate-180' : ''}`} />
-                  </button>
+                  <div className="flex items-center justify-between border-b border-gray-100 pb-4">
+                    {/* 🔹 Clickable Link for the main page (e.g., /services) */}
+                    <Link
+                      href={item.href || '#'}
+                      onClick={handleSmoothClose}
+                      className="text-xl font-parkinsans font-regular text-luxury-dark hover:text-luxury-pink transition-colors duration-200"
+                    >
+                      {item.label}
+                    </Link>
+
+                    {/* 🔹 Chevron toggles the dropdown only */}
+                    <button
+                      onClick={() => setOpenAccordion(openAccordion === item.label ? null : item.label)}
+                      className="p-1 hover:bg-gray-50 rounded-full transition-colors"
+                    >
+                      <ChevronDown className={`w-5 h-5 text-luxury-pink transition-transform duration-300 ${openAccordion === item.label ? 'rotate-180' : 'rotate-0'}`} />
+                    </button>
+                  </div>
                   
-                  {openAccordion === item.label && (
-                    <div className="mt-3 pl-4 space-y-3 border-l-2 border-luxury-pink">
+                  <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openAccordion === item.label ? 'max-h-[500px] opacity-100 mt-3' : 'max-h-0 opacity-0'}`}>
+                    <div className="pl-4 space-y-3 border-l-2 border-luxury-pink">
                       {item.dropdown.map((drop) => (
                         <Link
                           key={drop.label}
                           href={drop.href}
-                          onClick={onClose}
-                          className="block text-base font-medium text-gray-600 hover:text-luxury-pink transition-colors"
+                          onClick={handleSmoothClose}
+                          className="block text-base font-parkinsans font-regular text-gray-600 hover:text-luxury-pink hover:translate-x-1 transition-all duration-200"
                         >
                           {drop.label}
                         </Link>
                       ))}
                     </div>
-                  )}
+                  </div>
                 </div>
               ) : (
                 <Link
                   href={item.href || '#'}
-                  onClick={onClose}
-                  className="block text-xl font-semibold text-luxury-dark border-b border-gray-100 pb-3 hover:text-luxury-pink transition-colors"
+                  onClick={handleSmoothClose}
+                  className="block text-lg font-parkinsans font-regular text-luxury-dark border-b border-gray-100 pb-4 hover:text-luxury-pink transition-colors duration-200"
                 >
                   {item.label}
                 </Link>
@@ -63,17 +147,14 @@ export default function MobileNav({ isOpen, onClose }: MobileNavProps) {
           ))}
         </div>
 
-        {/* Bottom CTA */}
-        <div className="p-8 border-t border-gray-100">
+        {/* Bottom CTA Button */}
+        <div className="p-8 border-t border-gray-100 bg-gray-50/50">
           <Link
-            href="/quote"
-            onClick={onClose}
-            className="block w-full py-4 text-center text-white font-semibold uppercase tracking-widest rounded-sm transition-colors duration-300"
-            style={{ backgroundColor: '#1a1a1a' }}
-            onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#E8A0B4')}
-            onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#1a1a1a')}
+            href="/contact"
+            onClick={handleSmoothClose}
+            className="block w-full py-4 text-center bg-luxury-pink text-white font-parkinsans font-regular tracking-widest text-sm rounded-full hover:bg-luxury-pink transition-colors duration-300 shadow-md"
           >
-            Get Quote
+            Get a Quote
           </Link>
         </div>
       </div>

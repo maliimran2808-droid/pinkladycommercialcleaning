@@ -8,7 +8,7 @@ interface LocationTabsProps {
 
 export default function LocationTabs({ locations, activeId, onSelect }: LocationTabsProps) {
   return (
-    <div className="absolute -top-7 left-1/2 -translate-x-1/2 z-20 flex items-center gap-4">
+    <div className="relative md:absolute -top-7 left-1/2 -translate-x-1/2 z-20 flex flex-wrap items-center gap-4">
       {locations.map((loc) => (
         <button
           key={loc.id}

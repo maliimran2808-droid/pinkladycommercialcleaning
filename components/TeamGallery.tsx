@@ -68,15 +68,15 @@ export default function TeamGallery() {
       <div className="max-w-[1280px] mx-auto px-4">
        <AnimateIn>
                   <div className="text-center mb-16">
-                     <span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
+                     <AnimateIn delay={0.2}><span className="text-[13px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-3">
               Gallery
-            </span>
-                     <h1 className="text-4xl md:text-5xl lg:text-5xl w-[95%] md:w-[60%] mx-auto font-regular font-parkinsans text-luxury-dark leading-tight">
+            </span></AnimateIn>
+                     <AnimateIn delay={0.3}><h1 className="text-4xl md:text-5xl lg:text-5xl w-[95%] md:w-[60%] mx-auto font-regular font-parkinsans text-luxury-dark leading-tight">
                    Our Work In Action
-                </h1>
-                <p className="text-gray-600 text-medium max-w-2xl font-thin mx-auto leading-relaxed">
+                </h1></AnimateIn>
+                <AnimateIn delay={0.4}><p className="text-gray-600 text-medium max-w-2xl font-thin mx-auto leading-relaxed">
 A glimpse into the spaces we transform and the teams that make it happen.
-                         </p>
+                         </p></AnimateIn>
                  
                   </div>
                 </AnimateIn>
@@ -84,6 +84,7 @@ A glimpse into the spaces we transform and the teams that make it happen.
         {/* Random Masonry-style Grid */}
         <div ref={containerRef} className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
           {galleryImages.map((img, i) => (
+            <AnimateIn delay={i * 0.1}>
             <div
               key={i}
               ref={(el) => { if (el) imagesRef.current[i] = el }}
@@ -97,7 +98,7 @@ A glimpse into the spaces we transform and the teams that make it happen.
                 className="w-full h-full object-cover transition-transform duration-700"
               />
             </div>
-          ))}
+        </AnimateIn>  ))}
         </div>
       </div>
     </section>

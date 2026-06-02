@@ -1,5 +1,6 @@
 import Image from 'next/image'
 import Link from 'next/link'
+import AnimateIn from '../AnimateIn'
 
 interface Feature {
   title: string
@@ -26,21 +27,24 @@ export default function WhatSetsUsApart({ image_url, heading, description, featu
 
           {/* 🔹 Right Side: Content */}
           <div>
+            <AnimateIn>
                <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         What Sets Us Apart
-      </span>
+      </span></AnimateIn>
             {/* SEO Optimized Heading */}
+            <AnimateIn delay={0.2}>
            <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
        {heading}
-             </h2>
-            {/* SEO Optimized Paragraph */}
+             </h2></AnimateIn>
+            {/* SEO Optimized Paragraph */} <AnimateIn delay={0.3}>
             <p className="text-gray-600 w-full md:w-[99%] font-outfit md:text-[16px] leading-tight text-start font-light">
               {description}
-            </p>
+            </p></AnimateIn>
 
             {/* 🔹 Three Key Cards (List) */}
             <div className="space-y-6 mb-8 mt-10">
               {features.map((feature, index) => (
+                 <AnimateIn delay={0.2 +index * 0.2}>
                 <div key={index} className="flex items-start gap-4">
                   {/* Shared Image/Icon for each list item */}
                   <div className="relative w-10 h-10 flex-shrink-0 rounded-lg overflow-hidden">
@@ -63,25 +67,28 @@ export default function WhatSetsUsApart({ image_url, heading, description, featu
                     </p>
                   </div>
                 </div>
+              </AnimateIn>
               ))}
             </div>
 
             {/* 🔹 Get a Quote Button */}
+            <AnimateIn delay={0.3}>
             <Link 
               href="/#get-quote" 
               className="font-parkinsans w-[fit-content] text-sm px-7.5 nav-font py-3.5 rounded-full cursor-pointer text-luxury-lite bg-luxury-pink font-medium  tracking-normal transition-all duration-300 hover:shadow-lg transform hover:scale-[1.0]"
      >
               Get a Quote
-            </Link>
-          </div>
+            </Link></AnimateIn>
+          </div> <AnimateIn delay={0.16}>
   <div className="relative w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
-            <Image 
+   
+            <img 
               src={image_url}
               alt={heading} // SEO optimized alt tag
-              fill
-              className="object-cover"
+              
+              className="object-cover rounded-3xl"
             />
-          </div>
+          </div></AnimateIn>
         </div>
       </div>
     </section>

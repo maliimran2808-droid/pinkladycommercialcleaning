@@ -75,20 +75,18 @@ export default function HeroForm() {
   // 🎉 SUCCESS STATE
   if (isSubmitted) {
     return (
-      <div className="w-full mt-8 p-8 bg-white border border-gray-100 rounded-xl text-center shadow-sm">
-        <div className="text-4xl mb-4">✨</div>
-        <h3 className="text-2xl font-bold text-luxury-dark mb-2">Thank You!</h3>
-        <p className="text-gray-600 text-base mb-4">
-          Your quote request has been received. We’ll reach out to you shortly.
-        </p>
-        <p className="text-sm text-gray-400 font-medium">Typical response time: Under 24 hours</p>
+     <div className="bg-white rounded-4xl p-8 md:p-12 flex flex-col items-center justify-center text-center">
+        <div className="text-5xl mb-4 w-full flex items-center justify-center"><img src="/images/tick.svg" width={'90'} alt="" /></div>
+        <h3 className="text-2xl font-parkinsans font-bold text-luxury-dark mb-2">Thank You!</h3>
+        <p className="text-gray-600 font-parkinsans w-full md:w-[80%]">Your booking request has been received. We’ll reach out to you shortly.</p>
+        <p className="text-sm text-gray-500 font-parkinsans mt-3">Typical response time: Under 24 hours</p>
       </div>
     )
   }
 
   // 📝 FORM STATE
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className="w-full mt-8">
+    <form onSubmit={handleSubmit(onSubmit)} className="w-[80%] mx-auto md:w-full mt-8">
       <fieldset disabled={isSubmitting} className="space-y-0">
         {/* Row 1: Name, Email, Phone */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">

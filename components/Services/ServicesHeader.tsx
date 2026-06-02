@@ -3,7 +3,7 @@ import { useScrollAnimation } from '@/lib/useScrollAnimation'
 export default function ServicesHeader() {
   const animRef = useScrollAnimation()
   return (
-    <div ref={animRef} className="text-center mb-16">
+    <div ref={animRef} className="text-center pt-15 mb-16">
       <span className="text-[11px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         Services
       </span>

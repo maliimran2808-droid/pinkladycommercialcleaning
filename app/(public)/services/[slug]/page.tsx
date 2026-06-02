@@ -13,6 +13,7 @@ import { notFound } from 'next/navigation'
 import Reviews from '@/components/Reviews'
 import ReviewsGrid from '@/components/Reviews/ReviewsGrid'
 import ReviewSummary from '@/components/Reviews/ReviewSummary'
+import AnimateIn from '@/components/AnimateIn'
 
 // Fetch data on the server
 async function getServiceData(slug: string) {
@@ -102,13 +103,14 @@ export default async function ServiceDetailPage({ params }: { params: Promise<{ 
         services={content.our_services_cards || []}
       />
   <div className='w-full mx-auto text-center pt-20 bg-[#f3f5f0]'>
+    <AnimateIn>
               <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         Testimonials
-      </span>
-            {/* SEO Optimized Heading */}
+      </span></AnimateIn>
+           <AnimateIn delay={0.2}> {/* SEO Optimized Heading */}
            <h2 className="text-3xl font-title-size min-w-[40vw] md:max-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 -mb-6">
        Empowering Thousands of Users and Enterprises
-             </h2>
+             </h2></AnimateIn>
     <ReviewsGrid showFirstChild={false} />
       </div>{/* Section 8: FAQs */}
       <FAQ 

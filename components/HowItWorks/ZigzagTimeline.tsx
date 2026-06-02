@@ -20,17 +20,19 @@ export default function ZigzagTimeline() {
 
       {/* STRICT 2 COLUMNS on Desktop, 1 Column on Mobile -> Creates 3 Rows */}
       <AnimateIn>
-    <div className="relative z-10 grid grid-timeline grid-cols-2  py-7 gap-y-5">
-  {timelineStepsData.map((step) => (
+    <div className="">
+  {timelineStepsData.map((step, index) => (
+    <AnimateIn delay={index * 0.2} className='relative z-10 grid grid-timeline grid-cols-2  py-7 gap-y-5'>
     <TimelineStep key={step.id} data={step} />
-  ))}
+  </AnimateIn>))}
 </div>
       </AnimateIn>
 
       {/* Center Button */}
 
     </div>
-          <div  className="flex justify-center mt-5 ">
+          <div  className="flex justify-center mt-5 mb-5 md:mb-13 ">
+            <AnimateIn delay={0.15}>
         <Link
           href="/quote"
        
@@ -38,7 +40,7 @@ export default function ZigzagTimeline() {
   
             >
           Book Your Service
-        </Link>
+        </Link></AnimateIn>
       </div>
     </>
   )

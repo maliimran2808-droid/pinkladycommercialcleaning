@@ -17,7 +17,7 @@ export default function GetInTouch() {
       <div className="max-w-[1280px] mx-auto relative">
         
         {/* Floating Tabs (Positioned 50% above container) */}
-        <AnimateIn>
+        <AnimateIn delay={0.2}>
         <LocationTabs 
           locations={locationsData} 
           activeId={activeLocationId} 
@@ -32,8 +32,9 @@ export default function GetInTouch() {
           <ContactInfo location={activeLocation} />
           
           {/* Right Side: Map & SVG */}
+          <AnimateIn>
           <MapSection location={activeLocation} />
-
+</AnimateIn>
         </div>
       </div>
     </section>

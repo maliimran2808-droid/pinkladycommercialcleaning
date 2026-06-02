@@ -1,6 +1,7 @@
 import { ArrowRight } from 'lucide-react'
 import Image from 'next/image'
 import Link from 'next/link'
+import AnimateIn from '../AnimateIn'
 
 interface ServiceCard {
   image_url: string
@@ -24,17 +25,19 @@ export default function OurServices({ heading, services }: OurServicesProps) {
    >
         <div className='w-full text-center'>
         {/* 🔹 SEO Optimized Main Heading */}
+        <AnimateIn delay={0.1}>
              <span className="text-[12px] font-batch-size font-medium uppercase tracking-widest font-parkinsans mb-6">
         our services
-      </span>
-            {/* SEO Optimized Heading */}
-           <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 mb-5">
+      </span></AnimateIn>
+            {/* SEO Optimized Heading */}<AnimateIn delay={0.2}>
+           <h2 className="text-3xl font-title-size min-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 mb-8">
        {heading || "Here Is What We Can Do For Your Workspace"}
-             </h2>
+             </h2></AnimateIn>
 </div>
         {/* 🔹 4-Card Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid  grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {services.map((service, index) => (
+              <AnimateIn delay={ index * 0.2}>
             <article 
               key={index} 
               className="rounded-4xl overflow-hidden p-3 transition-shadow duration-300 flex flex-col group"
@@ -76,7 +79,7 @@ export default function OurServices({ heading, services }: OurServicesProps) {
                 </div>
               </div>
             </article>
-          ))}
+        </AnimateIn>  ))}
         </div>
 
       </div>
