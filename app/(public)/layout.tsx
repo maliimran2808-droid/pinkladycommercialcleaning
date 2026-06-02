@@ -2,6 +2,7 @@ import { Metadata } from 'next'
 import { supabaseAdmin } from '@/lib/supabase'
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import ScrollToTop from '@/components/ScrollToTop'
 
 export async function generateMetadata(): Promise<Metadata> {
   try {
@@ -29,6 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
  <>
+ <ScrollToTop />
       <Header />
       <main>{children}</main>
       <Footer />

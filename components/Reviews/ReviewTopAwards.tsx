@@ -15,14 +15,7 @@ export default function ReviewsGrid() {
                     <p className='leading-tight font-playfair m-0 p-0 text-white text-[20px] mt-3'>Pink Ladies Commercial Cleaning Services</p>
                 </div>
             </div>
-            <div className='max-w-[253px] items-center flex flex-col p-1 min-h-[150px] bg-[#223445]'>
-                <div className='w-full bg-green-500  h-[75px]'>
-                    <img src="/images/reviewrightimage.png" className='object-contain w-65' alt="" />
-                </div>
-                <div className='w-full text-center items-center'>
-                    <p className='leading-tight font-playfair m-0 p-0 text-white text-[20px] mt-3'>Pink Ladies Commercial Cleaning Services</p>
-                </div>
-            </div>
+          
            
         </div>
     </div>

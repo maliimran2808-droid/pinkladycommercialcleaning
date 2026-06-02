@@ -20,7 +20,7 @@ export default async function ClientTestimonials() {
           </span>
           </div>
                 {/* SEO Optimized Heading */}
-               <h2 className="text-3xl font-title-size min-w-[40vw] md:max-w-[40vw] text-black mx-auto lg:text-[2.5rem] font-parkinsans leading-11 font-regular mt-4 -mb-6">
+               <h2 className="text-3xl font-title-size min-w-[40vw] md:max-w-[40vw] text-black mx-auto lg:text-[2.5rem] px-3 md:px-0 font-parkinsans text-center font-regular mt-4 -mb-6">
            Empowering Thousands of Users and Enterprises
                  </h2>
         <ReviewsGrid showFirstChild={false} />
