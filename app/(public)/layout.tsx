@@ -30,7 +30,7 @@ export async function generateMetadata(): Promise<Metadata> {
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
  <>
- <ScrollToTop />
+
       <Header />
       <main>{children}</main>
       <Footer />
