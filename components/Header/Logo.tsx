@@ -14,7 +14,7 @@ export default function Logo() {
     <Link href="/" className="flex-shrink-0 text-2xl font-bold tracking-wider">
       <img 
         src={logoSrc} 
-        width="80" 
+        width="110" 
         alt={altText} 
         className="transition-all duration-300" 
       />

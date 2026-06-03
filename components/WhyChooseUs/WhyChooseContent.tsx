@@ -23,13 +23,13 @@ const animRef = useScrollAnimation()
 
       {/* Large Heading */}
       <AnimateIn delay={0.23}>
-      <h2 className="text-2xl font-title-size md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
-        Sparkling Commercial Cleaning Services in Florida
+      <h2 className="text-2xl font-title-size md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5 mt-3">
+        Sparkling Commercial Cleaning Services in San Francisco
       </h2></AnimateIn>
 
       {/* Paragraph */}<AnimateIn delay={0.3}>
       <p className="text-gray-500 font-para-size md:text-medium font-thin font-outfit mb-8">
-        Do you want to step into an office that keeps your mood fresh all day? At Pink Ladies Commercial Cleaning Services, we create a comfortable environment in your commercial spaces by providing high grade cleaning services.
+        Do you want to step into an office that keeps your mood fresh all day? At Elsa's House Cleaning, we create a comfortable environment in your commercial spaces by providing high grade cleaning services.
       </p></AnimateIn>
 
       {/* Accordions */}

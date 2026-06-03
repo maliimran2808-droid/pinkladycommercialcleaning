@@ -19,8 +19,13 @@ const outfit = Outfit({
 })
 
 export const metadata: Metadata = {
-  title: 'Pink Ladies | Luxury Commercial Cleaning',
+  title: "Elsa's House Cleaning | Luxury Commercial Cleaning",
   description: 'Premium cleaning services',
+   icons: {
+    icon: '/images/else2.png', // Points to /public/custom-icon.png
+    shortcut: '/images/shortcut-icon.png',
+    apple: '/apple-icon.png',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

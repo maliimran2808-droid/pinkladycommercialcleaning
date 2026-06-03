@@ -15,9 +15,10 @@ export async function generateMetadata(): Promise<Metadata> {
     const settings = (data?.value || {}) as Record<string, string>
 
     return {
-      title: settings.meta_title || 'Pink Ladies | Luxury Commercial Cleaning',
+      title: settings.meta_title || "Elsa's House Cleaning | Luxury Commercial Cleaning",
       description: settings.meta_description || 'Premium cleaning services',
       keywords: settings.meta_keywords ? settings.meta_keywords.split(',').map((k) => k.trim()) : [],
+   
     }
   } catch (error) {
     return {

@@ -5,11 +5,11 @@ import { useScrollAnimation } from '@/lib/useScrollAnimation'
 export default function ReviewsIntro() {
   const animRef = useScrollAnimation()
   return (
-    <div ref={animRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16 items-center mb-16">
+    <div ref={animRef} className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-10 items-center mb-16">
       {/* Left Side: Image */}
       <div className="relative w-full overflow-hidden shadow-xl group">
         <img
-       src="/images/reviewsimage.webp" alt="Happy customer service team"
+       src="https://s3-media0.fl.yelpcdn.com/bphoto/X_eRQMgLDiZH2TeDmM83cg/o.jpg" alt="Happy customer service team"
           
           
           className="object-contain transition-transform rounded-3xl duration-700 ease-out "
@@ -19,7 +19,7 @@ export default function ReviewsIntro() {
 
       {/* Right Side: Text & Logos */}
       <div className="flex flex-col items-end">
-        <div className='w-full md:w-[80%] size-adjust margin-set' style={{marginRight:'3rem'}}>
+        <div className='w-full md:w-[90%] size-adjust margin-set' style={{marginRight:'3rem'}}>
        <span className="text-[13px] font-batch-size font-medium text-luxury-lite uppercase tracking-widest font-parkinsans mb-5">
         Reviews
         </span>

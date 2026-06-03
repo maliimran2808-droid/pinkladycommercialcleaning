@@ -2,8 +2,8 @@
 @import "tailwindcss";
 
 @theme {
-  --color-luxury-pink: #128239;
-  --color-luxury-pink-soft: #77cb95;
+  --color-luxury-pink: #00b6fd;
+  --color-luxury-pink-soft: #baecff;
   --color-luxury-dark: #1a1a1a;
   --color-luxury-lite: #ffffff;
   --color-luxury-dark: #000000;
@@ -50,6 +50,7 @@
 }
 .slide-in-right {
   animation: slide-in-right 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+
 }
 
 /* Fade in items */

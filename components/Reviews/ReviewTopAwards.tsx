@@ -12,7 +12,7 @@ export default function ReviewsGrid() {
                     <img src="/images/reviewleftimage.png" className='object-contain w-65' alt="" />
                 </div>
                 <div className='w-full text-center items-center'>
-                    <p className='leading-tight font-playfair m-0 p-0 text-white text-[20px] mt-3'>Pink Ladies Commercial Cleaning Services</p>
+                    <p className='leading-tight font-playfair m-0 p-0 text-white text-[20px] mt-3'>Elsa's Housing Cleaning Services</p>
                 </div>
             </div>
           

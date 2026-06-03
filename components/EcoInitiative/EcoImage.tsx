@@ -59,13 +59,12 @@ export default function EcoImage() {
   }, [])
 
   return (
-    <div ref={containerRef} className="relative w-full h-[400px] md:h-[450px] lg:h-[450px]  group">
-      <Image
-       src="/images/whyus.webp"    alt="Green eco cleaning"
-        fill
-        priority
-        className="object-cover rounded-4xl transition-transform duration-700 ease-out"
-        quality={100}
+    <div ref={containerRef} className="relative w-full h-[400px] md:h-[450px] lg:h-[500px]  group">
+      <img
+       src="https://s3-media0.fl.yelpcdn.com/bphoto/7HqnRa6dXKN_FNX4TQmG_w/o.jpg"    alt="Green eco cleaning"
+        
+        
+        className="object-cover rounded-4xl w-full h-full rounded-3xl transition-transform duration-700 ease-out"
       />
   
       {/* Floating Leaves - Top Left Corner */}

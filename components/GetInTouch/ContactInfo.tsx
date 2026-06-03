@@ -18,7 +18,7 @@ export default function ContactInfo({ location }: ContactInfoProps) {
       </span></AnimateIn>
 
       {/* Large Heading */}
-      <AnimateIn delay={0.4}><h2 className="text-3xl font-title-size max-w-[80%] md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
+      <AnimateIn delay={0.4}><h2 className="text-3xl font-title-size max-w-[80%] md:text-4xl lg:text-4xl font-parkinsans font-regular mt-3 mb-5">
         Choose Pink Ladies, Choose Quality
       </h2></AnimateIn>
 

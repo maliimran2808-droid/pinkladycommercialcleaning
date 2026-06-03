@@ -13,12 +13,12 @@ export default function EcoContent() {
 
       {/* Large Heading */}
       <h2 className="text-3xl font-title-size md:text-4xl lg:text-4xl font-parkinsans font-regular mb-5">
-        Green Commercial Cleaning Initiative by Pink Ladies
+        Green Commercial Cleaning Initiative by Elsa's House Cleaning
       </h2>
 
       {/* Paragraph */}
       <p className="text-gray-500 font-para-size size-adjust w-[82%] md:text-medium font-thin font-outfit mb-4">
-        At Pink Ladies Commercial Cleaning, we are committed to providing safe and non-toxic cleaning services. Clearing should not harm the environment but benefit it. All of the products and processes are chosen carefully to support a green clean in Flordia.</p>
+        At Elsa's House Cleaning, we are committed to providing safe and non-toxic cleaning services. Clearing should not harm the environment but benefit it. All of the products and processes are chosen carefully to support a green clean in San Francisco.</p>
 
 
       {/* Feature List */}
